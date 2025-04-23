@@ -1,0 +1,30 @@
+/* App.css */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');body,
+html {
+  font-family: "Playfair Display", serif;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f0f0f0;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #964B00;
+  /* Kestane kahverengisi */
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #7a3d00;
+  /* Hover’da biraz daha koyusu */
+}
+
+/* Firefox için destek */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #964B00 #f0f0f0;
+}
