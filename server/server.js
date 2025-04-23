@@ -22,7 +22,7 @@ const cargoRoutes = require("./routes/cargo");//cargo routes dahil ettik
 const subscribeRoutes = require("./routes/subscribe");//subscribe routes dahil ettik
 
 const corsOptions = {
-  origin: "http://localhost:5173", // frontendin çalıştığı adres http://localhost:5173
+  origin: "https://www.barscarf.com/", // frontendin çalıştığı adres http://localhost:5173
   methods: ["GET", "POST", "PUT", "DELETE"], // Sadece GET, POST, PUT, DELETE izin verilir
 };
 app.use(cors(corsOptions));
