@@ -24,15 +24,9 @@ const cargoRoutes = require("./routes/cargo");
 const subscribeRoutes = require("./routes/subscribe");
 
 const corsOptions = {
-<<<<<<< HEAD
-  origin: "http://localhost:5173", // Frontend adresi
+  origin: "https://www.barscarf.com/", // Frontend adresi
   methods: ["GET", "POST", "PUT", "DELETE"],
-=======
-  origin: "https://www.barscarf.com/", // frontendin çalıştığı adres http://localhost:5173
-  methods: ["GET", "POST", "PUT", "DELETE"], // Sadece GET, POST, PUT, DELETE izin verilir
->>>>>>> a1659f1bd65847f32d4194680d558eaf02a547a7
-};
-
+}
 // Helmet güvenliğini ekle
 app.use(helmet());
 
