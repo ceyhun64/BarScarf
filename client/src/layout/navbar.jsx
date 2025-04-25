@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux"; // Redux'dan `useSelector`'ı import ediyoruz
+import { useSelector } from "react-redux";
 import image from "../../public/favicon/f8f539a0-6734-42b3-aabe-c35eb4378771.png";
+import Menu from "./menu"; // Menü bileşeni eklendi
 
 export default function Navbar() {
   const navigate = useNavigate();
   const [userName, setUserName] = useState(null);
 
-  // Redux'tan cart verisini alıyoruz
   const { cart } = useSelector((state) => state.cart);
-  const cartItemCount = cart.length; // Sepetteki ürün sayısını alıyoruz
+  const cartItemCount = cart.length;
 
   useEffect(() => {
     const getUserName = () => {
@@ -22,17 +22,20 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav className="bg-white shadow-sm py-3">
+    <nav className="bg-white shadow-sm py-3" style={{maxWidth: "100%"}}>
       <div className="container d-flex flex-column flex-md-row align-items-center justify-content-between gap-3">
-        {/* Logo */}
-        <Link to="/" className="d-flex align-items-center">
-          <img src={image} alt="Logo" width="200" height="60" />
-        </Link>
+        {/* Sol Menü + Logo */}
+        <div className="d-flex align-items-center gap-2">
+          <Menu />
+          <Link to="/" className="d-flex align-items-center">
+            <img src={image} alt="Logo" width="200" height="60" />
+          </Link>
+        </div>
 
-        {/* Arama ve Sağ Menü - birlikte */}
+        {/* Arama ve Sağ Menü */}
         <div className="d-flex align-items-center justify-content-between w-100 flex-wrap gap-3">
           {/* Arama Kutusu */}
-          <div className="flex-grow-1 position-relative" style={{ maxWidth: "300px"  }}>
+          <div className="flex-grow-1 position-relative" style={{ maxWidth: "300px" }}>
             <input
               type="text"
               className="form-control ps-5 py-2"
@@ -56,12 +59,10 @@ export default function Navbar() {
 
           {/* İkonlar */}
           <div className="d-flex align-items-center gap-3">
-            {/* Favoriler */}
             <Link to="/favorites" className="text-decoration-none me-1" style={{ color: "#D3AF37", fontSize: "1.3rem" }}>
               <i className="bi bi-heart-fill"></i>
             </Link>
 
-            {/* Sepet */}
             <Link to="/cart" className="position-relative text-decoration-none me-1" style={{ color: "#D3AF37", fontSize: "1.3rem" }}>
               <i className="bi bi-cart-fill"></i>
               {cartItemCount > 0 && (
@@ -79,7 +80,6 @@ export default function Navbar() {
               )}
             </Link>
 
-            {/* Oturum */}
             <Link
               to={userName ? "/user" : "/login"}
               className="d-flex align-items-center text-decoration-none"
@@ -92,6 +92,5 @@ export default function Navbar() {
         </div>
       </div>
     </nav>
-
   );
 }

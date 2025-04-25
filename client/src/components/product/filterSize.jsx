@@ -23,7 +23,7 @@ export default function SizeFilter() {
 
     return (
         <div className="position-relative mb-3" style={{ minWidth: "180px" }}>
-            <label className="form-label mb-1 fw-semibold">BEDEN</label>
+            <label className="form-label mb-1 fw-semibold">ÖLÇÜ</label>
 
             <div
                 onClick={() => setIsOpen(!isOpen)}
@@ -63,7 +63,7 @@ export default function SizeFilter() {
                         onMouseEnter={(e) => e.currentTarget.style.backgroundColor = "#f8f9fa"}
                         onMouseLeave={(e) => e.currentTarget.style.backgroundColor = selectedSize === "" ? "#f1f1f1" : "white"}
                     >
-                        Tüm Bedenler
+                        Tüm Ölçüler
                     </li>
 
                     {sizes.map(size => (

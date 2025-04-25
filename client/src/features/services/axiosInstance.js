@@ -1,7 +1,8 @@
 // src/api/axiosInstance.js
 import axios from 'axios';
 
-const API_URL = "http://127.0.0.1:3000/api"; // API URL'inizi burada ayarlayın
+const API_URL = `${import.meta.env.VITE_API_URL}/auth`;
+console.log(API_URL);
 
 const axiosInstance = axios.create({
     baseURL: API_URL,//baseUrl belirliyoruz

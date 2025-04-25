@@ -9,22 +9,25 @@ export default function Whatsapp() {
         <button
             onClick={handleClick}
             style={{
-                position: 'fixed',  // Sabit konumda olacak
-                bottom: '40px',     // Alt kısımdan 30px uzaklık
-                left: '40px',      // Sol kısımdan 30px uzaklık
-                width: '50px',      // Butonun genişliği
-                height: '50px',     // Butonun yüksekliği
-                backgroundColor: '#25D366', // Butonun rengi
-                color: '#white',     // İkonun rengi, WhatsApp yeşili
-                border: 'none',      // Kenarlık yok
-                borderRadius: '50%', // Tam daire şekli için borderRadius %50
-                fontSize: '24px',    // Font boyutu
-                cursor: 'pointer',   // Farenin el simgesi olması için
-                boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', // Gölgelendirme efekti
-                transition: 'background-color 0.3s', // Buton üzerine gelince renk değişimi
-                zIndex: 9999,        // Butonu en üstte tutmak için
+                position: 'fixed',
+                bottom: '40px',
+                left: '40px',
+                width: '50px',
+                height: '50px',
+                backgroundColor: '#25D366',
+                border: 'none',
+                borderRadius: '50%',
+                cursor: 'pointer',
+                boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+                transition: 'background-color 0.3s',
+                zIndex: 9999,
+                display: 'flex',           // Flexbox eklendi
+                alignItems: 'center',      // Dikeyde ortala
+                justifyContent: 'center',  // Yatayda ortala
+                padding: 0,                // Varsayılan padding kaldırıldı
             }}>
             <i className="bi bi-whatsapp" style={{ color: 'white', fontSize: '28px' }}></i>
         </button>
+
     );
 }

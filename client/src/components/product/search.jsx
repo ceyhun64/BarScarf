@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import Card from "./card";
-import Navbar from "../../layout/navbar";
 import { getProductsByNameThunk } from "../../features/thunks/productThunk";
 
 export default function Search() {
@@ -42,7 +41,7 @@ export default function Search() {
     };
 
     return (<>
-        <Navbar />
+
         <div className="container mt-2">
             <div className="search">
                 <form
