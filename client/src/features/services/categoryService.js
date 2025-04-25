@@ -1,6 +1,6 @@
 import axios from 'axios';
 import axiosInstance from './axiosInstance';
-const API_URL = `${import.meta.env.production.VITE_API_URL}/category`;
+const API_URL = `${import.meta.env.VITE_API_PRODUCTION_URL}/category`;
 
 export const getCategories = async () => {
     try {

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = `${import.meta.env.production.VITE_API_URL}/color-size`;
+const API_URL = `${import.meta.env.VITE_API_PRODUCTION_URL}/color-size`;
 
 export const getSizes = async () => {
     try {

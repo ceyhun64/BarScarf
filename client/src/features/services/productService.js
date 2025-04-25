@@ -1,7 +1,7 @@
 import axios from 'axios';
 import axiosInstance from './axiosInstance';
 
-const API_URL = `${import.meta.env.production.VITE_API_URL}/product`;
+const API_URL = `${import.meta.env.VITE_API_PRODUCTION_URL}/product`;
 
 export const getProducts = async () => {
   try {
