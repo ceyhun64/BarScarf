@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import OrderDetails from '../../components/admin/orderDetails';
 
 export default function OrderDetailsPage() {
