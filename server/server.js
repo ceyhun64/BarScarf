@@ -24,7 +24,7 @@ const cargoRoutes = require("./routes/cargo");
 const subscribeRoutes = require("./routes/subscribe");
 
 const corsOptions = {
-  origin: "https://www.barscarf.com/", // Frontend adresi
+  origin: "https://www.barscarf.com", // Frontend adresi
   methods: ["GET", "POST", "PUT", "DELETE"],
 }
 // Helmet güvenliğini ekle
