@@ -235,7 +235,7 @@ async function populate() {
     { productId: 9, categoryId: 2 },
     { productId: 10, categoryId: 3 },
 
-  ]);
+  ], { ignoreDuplicates: true });
 
   await ProductSubCategory.bulkCreate([
     { productId: 1, subCategoryId: 1 },
