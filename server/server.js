@@ -7,6 +7,7 @@ const rateLimit = require("express-rate-limit");
 const path = require("path");
 
 const sequelize = require("./data/db");
+const User = require("./models/user");
 
 // Routes
 const productRoutes = require("./routes/product");
