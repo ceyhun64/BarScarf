@@ -28,7 +28,8 @@ const subscribeRoutes = require("./routes/subscribe");
 const corsOptions = {
   origin: "https://www.barscarf.com", // Frontend adresi
   methods: ["GET", "POST", "PUT", "DELETE"],
-}
+};
+
 // Helmet güvenliğini ekle
 app.use(helmet());
 
@@ -58,10 +59,18 @@ app.use("/api/color-size", colorSizeRoutes);
 app.use("/api/payment", paymentRoutes);
 app.use("/api/cargo", cargoRoutes);
 app.use("/api/subscribe", subscribeRoutes);
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
+// React build dosyasını statik olarak sunma
+app.use(express.static(path.join(__dirname, "build")));
+
+// Tüm istekleri React'in index.html dosyasına yönlendirme
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "build", "index.html"));
+});
 
 (async () => {
-  await sequelize.sync();  // Veritabanını sıfırlama
+  await sequelize.sync(); // Veritabanını sıfırlama
 
   // Tek bir admin kullanıcısını veritabanına ekleyin
   const existingAdmin = await User.findOne({ where: { isAdmin: 1 } });
@@ -71,8 +80,8 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
     await User.create({
       name: process.env.ADMIN_NAME,
       email: process.env.ADMIN_EMAIL,
-      password: await bcrypt.hash(process.env.ADMIN_PASSWORD, 10),  // Şifreyi hash'liyoruz
-      isAdmin: 1
+      password: await bcrypt.hash(process.env.ADMIN_PASSWORD, 10), // Şifreyi hash'liyoruz
+      isAdmin: 1,
     });
     console.log("Admin kullanıcısı başarıyla eklendi.");
   } else {
