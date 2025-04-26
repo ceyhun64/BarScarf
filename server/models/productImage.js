@@ -8,7 +8,7 @@ const ProductImage = sequelize.define("productImages", {
     allowNull: false,
     get() {
       const rawValue = this.getDataValue("imageUrl");
-      return rawValue ? `${process.env.DB_URL || "http://localhost:3000"}${rawValue}` : null;
+      return rawValue ? `${process.env.BASE_URL || "http://localhost:3000"}${rawValue}` : null;
     },
   },
 }, {
