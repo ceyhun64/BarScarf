@@ -5,6 +5,7 @@ const app = express();
 const helmet = require("helmet");
 const rateLimit = require("express-rate-limit");
 const path = require("path");
+const bcrypt = require("bcrypt");
 
 const sequelize = require("./data/db");
 const User = require("./models/user");
