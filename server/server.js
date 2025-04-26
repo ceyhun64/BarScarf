@@ -60,7 +60,7 @@ app.use("/api/subscribe", subscribeRoutes);
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 (async () => {
-  await sequelize.sync();  // Veritabanını sıfırlama
+  await sequelize.sync({force:true});  // Veritabanını sıfırlama
 
   // Tek bir admin kullanıcısını veritabanına ekleyin
   const existingAdmin = await User.findOne({ where: { isAdmin: 1 } });
