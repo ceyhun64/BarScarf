@@ -4,6 +4,8 @@ const cors = require("cors");
 const app = express();
 const helmet = require("helmet");
 const rateLimit = require("express-rate-limit");
+const path = require("path");
+
 
 const sequelize = require("./data/db");
 const dummyData = require("./data/dummy-data");
@@ -56,7 +58,7 @@ app.use("/api/color-size", colorSizeRoutes);
 app.use("/api/payment", paymentRoutes);
 app.use("/api/cargo", cargoRoutes);
 app.use("/api/subscribe", subscribeRoutes);
-app.use('/uploads', express.static('uploads'));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 (async () => {
   await sequelize.sync({ force: true });  // Veritabanını sıfırlama
