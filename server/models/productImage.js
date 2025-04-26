@@ -1,6 +1,7 @@
 // models/productImage.js
 const { DataTypes } = require("sequelize");
 const sequelize = require("../data/db");
+require("dotenv").config();
 
 const ProductImage = sequelize.define("productImages", {
   imageUrl: {
