@@ -68,12 +68,15 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
   if (!existingAdmin) {
     // Eğer admin yoksa, admin kullanıcısını ekleyelim
-    await User.create({
-      name: process.env.ADMIN_NAME,
-      email: process.env.ADMIN_EMAIL,
-      password: await bcrypt.hash(process.env.ADMIN_PASSWORD, 10),  // Şifreyi hash'liyoruz
-      isAdmin: 1
-    });
+    await User.create(
+      {
+        name: process.env.ADMIN_NAME,
+        email: process.env.ADMIN_EMAIL,
+        password: await bcrypt.hash(process.env.ADMIN_PASSWORD, 10),
+        isAdmin: 1
+      }
+    );
+
     console.log("Admin kullanıcısı başarıyla eklendi.");
   } else {
     console.log("Admin kullanıcısı zaten mevcut.");
