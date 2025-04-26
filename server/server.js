@@ -62,7 +62,6 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 (async () => {
   await sequelize.sync();  // Veritabanını sıfırlama
-  await dummyData();
 })();
 
 const PORT = process.env.PORT || 3000;
