@@ -5,10 +5,8 @@ const app = express();
 const helmet = require("helmet");
 const rateLimit = require("express-rate-limit");
 const path = require("path");
-const bcrypt = require("bcrypt");
 
 const sequelize = require("./data/db");
-const dummyData = require("./data/dummy-data");
 const User = require("./models/user");
 
 // Routes
@@ -63,26 +61,25 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 (async () => {
   await sequelize.sync();  // Veritabanını sıfırlama
-  await dummyData();  // Dummy verileri oluşturma
 
-  // // Tek bir admin kullanıcısını veritabanına ekleyin
-  // const existingAdmin = await User.findOne({ where: { isAdmin: 1 } });
+  // Tek bir admin kullanıcısını veritabanına ekleyin
+  const existingAdmin = await User.findOne({ where: { isAdmin: 1 } });
 
-  // if (!existingAdmin) {
-  //   // Eğer admin yoksa, admin kullanıcısını ekleyelim
-  //   await User.create(
-  //     {
-  //       name: process.env.ADMIN_NAME,
-  //       email: process.env.ADMIN_EMAIL,
-  //       password: await bcrypt.hash(process.env.ADMIN_PASSWORD, 10),
-  //       isAdmin: 1
-  //     }
-  //   );
+  if (!existingAdmin) {
+    // Eğer admin yoksa, admin kullanıcısını ekleyelim
+    await User.create(
+      {
+        name: process.env.ADMIN_NAME,
+        email: process.env.ADMIN_EMAIL,
+        password: process.env.ADMIN_PASSWORD,
+        isAdmin: 1
+      }
+    );
 
-  //   console.log("Admin kullanıcısı başarıyla eklendi.");
-  // } else {
-  //   console.log("Admin kullanıcısı zaten mevcut.");
-  // }
+    console.log("Admin kullanıcısı başarıyla eklendi.");
+  } else {
+    console.log("Admin kullanıcısı zaten mevcut.");
+  }
 })();
 
 const PORT = process.env.PORT || 3000;
