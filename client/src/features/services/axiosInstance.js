@@ -1,7 +1,7 @@
 // src/api/axiosInstance.js
 import axios from 'axios';
 
-const API_URL = `${import.meta.env.VITE_API_PRODUCTION_URL}/auth`;
+const API_URL = `${import.meta.env.VITE_API_PRODUCTION_URL}`; // API URL'inizi burada ayarlayın
 
 const axiosInstance = axios.create({
     baseURL: API_URL,//baseUrl belirliyoruz
