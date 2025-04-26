@@ -198,6 +198,14 @@ async function populate() {
     }
   ]);
 
+  await Size.bulkCreate([
+    { name: "90x90" },
+    { name: "140x140" },
+    { name: "132x132" },
+    { name: "100x100" },
+    { name: "110x110" },
+    { name: "120x120" },
+  ]);
 
   // Ürün resimleri
   await ProductImage.bulkCreate([
@@ -235,7 +243,7 @@ async function populate() {
     { productId: 9, categoryId: 2 },
     { productId: 10, categoryId: 3 },
 
-  ], { ignoreDuplicates: true });
+  ])
 
   await ProductSubCategory.bulkCreate([
     { productId: 1, subCategoryId: 1 },
@@ -253,16 +261,6 @@ async function populate() {
     { productId: 8, subCategoryId: 7 },
     { productId: 9, subCategoryId: 8 },
     { productId: 10, subCategoryId: 8 },
-  ]);
-
-
-  await Size.bulkCreate([
-    { name: "90x90" },
-    { name: "140x140" },
-    { name: "132x132" },
-    { name: "100x100" },
-    { name: "110x110" },
-    { name: "120x120" },
   ]);
 
   await ProductSize.bulkCreate([
