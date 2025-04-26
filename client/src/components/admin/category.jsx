@@ -39,12 +39,12 @@ export default function Categories() {
 
     const handleCategoryNameChange = (e) => setCategoryName(e.target.value);
 
-    const handleAddCategory = () => {
+    const handleAddCategory = async () => {
         const isDuplicate = categories.some(cat => cat.name.toLowerCase() === categoryName.toLowerCase());
         if (isDuplicate || !categoryName.trim()) return;
 
         const categoryData = { name: categoryName };
-        dispatch(createCategoryThunk(categoryData)).unwrap();
+        await dispatch(createCategoryThunk(categoryData)).unwrap();
         setTimeout(() => {
             dispatch(clearAlert());
             dispatch(getCategoriesThunk());
