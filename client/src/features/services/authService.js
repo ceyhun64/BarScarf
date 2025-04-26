@@ -3,17 +3,23 @@ import axiosInstance from './axiosInstance';
 
 
 const API_URL = `${import.meta.env.VITE_API_PRODUCTION_URL}/auth`;
+console.log("API_URL:", API_URL);
 
 //login api isteği
 export const login = async (email, password) => {
     try {
-        const res = await axios.post(`${API_URL}/login`, { email, password });//email ve password alıyoruz kullanıcıdan
+        const res = await axios.post(`${API_URL}/login`, { email, password });
         return res; // Başarılı yanıtı döndürüyoruz
     } catch (error) {
+        // Error'dan veri alırken kontrol ekleyelim
         console.error("API'den veri çekerken hata oluştu:", error);
-        throw error.response?.data?.message || 'Bir hata oluştu';
+        
+        // Hata mesajını güvenli bir şekilde almak
+        const errorMessage = error.response?.data?.message || 'Bir hata oluştu';
+        throw new Error(errorMessage);
     }
 };
+
 
 export const logout = async () => {
     try {
