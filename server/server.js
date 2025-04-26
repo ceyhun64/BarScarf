@@ -59,7 +59,7 @@ app.use("/api/subscribe", subscribeRoutes);
 app.use('/uploads', express.static('uploads'));
 
 (async () => {
-  await sequelize.sync({ force: false });  // Veritabanını sıfırlama
+  await sequelize.sync({ force: true });  // Veritabanını sıfırlama
   await dummyData();
 })();
 
