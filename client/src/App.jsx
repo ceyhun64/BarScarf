@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import './App.css'; // Veya stil dosyanın adı neyse
-import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter  as Router, Routes, Route } from 'react-router-dom';
 import LoginPage from './pages/login';
 import HomePage from './pages/home';
 import RegisterPage from './pages/register';
