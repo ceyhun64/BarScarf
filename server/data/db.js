@@ -3,23 +3,17 @@ require("dotenv").config(); //.env dosyasını dahil ettik
 const Sequelize = require("sequelize"); //sequelize kütüphanesini dahil ettik
 
 //sequelize nesnesi oluşturuyoruz
-const sequelize = new Sequelize(
-  process.env.DB_NAME, //db'nin içindeki veritabanı adı
-  process.env.DB_USER, //db'nin içindeki kullanıcı adı
-  process.env.DB_PASSWORD, //db'nin içindeki şifre
-  {
-    dialect: "mysql", //veritabanının dilini belirtiyoruz
-    host: process.env.DB_HOST, //veritabanının host adresi
-    logging: false
-  }
-);
+const sequelize = new Sequelize(process.env.DB_URL, {
+  dialect: "mysql", //veritabanının dilini belirtiyoruz
+  logging: false
+});
 
 async function connect() {
   try {
     await sequelize.authenticate(); //veritabanı bağlantısını test eder(true ise bir şey olmaz false ise hata fırlatılır)
-    console.log("veritabanı bağlantısı kuruldu");
+    console.log("Veritabanı bağlantısı kuruldu");
   } catch (error) {
-    console.log("veritabanı bağlantısı kurulamadı", error);
+    console.log("Veritabanı bağlantısı kurulamadı", error);
   }
 }
 
