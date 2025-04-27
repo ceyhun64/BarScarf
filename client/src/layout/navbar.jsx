@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import image from "../../public/favicon/f8f539a0-6734-42b3-aabe-c35eb4378771.png";
 import Menu from "./menu"; // Menü bileşeni eklendi
+import './Navbar.css'; // CSS dosyasını import et
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav className="bg-white shadow-sm py-3" style={{maxWidth: "100%"}}>
+    <nav className="bg-white shadow-sm py-3" style={{ maxWidth: "100%" }}>
       <div className="container d-flex flex-column flex-md-row align-items-center justify-content-between gap-3">
         {/* Sol Menü + Logo */}
         <div className="d-flex align-items-center gap-2">
@@ -35,7 +36,14 @@ export default function Navbar() {
         {/* Arama ve Sağ Menü */}
         <div className="d-flex align-items-center justify-content-between w-100 flex-wrap gap-3">
           {/* Arama Kutusu */}
-          <div className="flex-grow-1 position-relative" style={{ maxWidth: "300px" }}>
+          <div
+            className="flex-grow-1 position-relative"
+            style={{
+              maxWidth: "300px",
+              flexBasis: "100%",
+              marginBottom: "10px",
+            }}
+          >
             <input
               type="text"
               className="form-control ps-5 py-2"
@@ -53,17 +61,29 @@ export default function Navbar() {
             />
             <i
               className="bi bi-search position-absolute top-50 start-0 translate-middle-y ms-3"
-              style={{ pointerEvents: "none", color: "#D3AF37", fontSize: "1.1rem" }}
+              style={{
+                pointerEvents: "none",
+                color: "#D3AF37",
+                fontSize: "1.1rem",
+              }}
             ></i>
           </div>
 
           {/* İkonlar */}
           <div className="d-flex align-items-center gap-3">
-            <Link to="/favorites" className="text-decoration-none me-1" style={{ color: "#D3AF37", fontSize: "1.3rem" }}>
+            <Link
+              to="/favorites"
+              className="text-decoration-none me-1"
+              style={{ color: "#D3AF37", fontSize: "1.3rem" }}
+            >
               <i className="bi bi-heart-fill"></i>
             </Link>
 
-            <Link to="/cart" className="position-relative text-decoration-none me-1" style={{ color: "#D3AF37", fontSize: "1.3rem" }}>
+            <Link
+              to="/cart"
+              className="position-relative text-decoration-none me-1"
+              style={{ color: "#D3AF37", fontSize: "1.3rem" }}
+            >
               <i className="bi bi-cart-fill"></i>
               {cartItemCount > 0 && (
                 <span
@@ -91,6 +111,36 @@ export default function Navbar() {
           </div>
         </div>
       </div>
+
+      {/* Mobil Görünüm İçin Stil ve Düzenlemeler */}
+      <div
+        style={{
+          "@media (max-width: 768px)": {
+            ".container": {
+              flexDirection: "column",
+            },
+            ".flex-wrap": {
+              flexDirection: "column",
+              width: "100%",
+            },
+            ".flex-grow-1": {
+              maxWidth: "none",
+            },
+            ".d-flex": {
+              display: "flex",
+              justifyContent: "space-between",
+              width: "100%",
+            },
+            ".form-control": {
+              width: "100%",
+              fontSize: "1rem",
+            },
+            ".bi-heart-fill, .bi-cart-fill, .bi-person-fill": {
+              fontSize: "1.5rem",
+            },
+          },
+        }}
+      ></div>
     </nav>
   );
 }
