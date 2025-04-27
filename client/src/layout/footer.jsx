@@ -58,14 +58,24 @@ export default function Footer() {
           </div>
         </div>
       </div>
+
       <div className="text-center mb-4 mt-5">
-        <img src={image} alt="Payment" style={{ width: "500px", height: "auto" }} />
+        <img
+          src={image}
+          alt="Payment"
+          style={{
+            width: "100%",      // Görselin genişliğini %100 yapıyoruz
+            maxWidth: "500px",  // Maksimum genişlik 500px olacak
+            height: "auto",     // Yükseklik orantılı olarak ayarlanacak
+            objectFit: "contain" // Görselin kesilmesini engellemek için
+          }}
+        />
       </div>
       {/* Alt Bilgi ve Çizgi Ayırıcı */}
       <div className="border-top mt-3 pt-3">
         <div className="text-center">
           <p style={{ color: "#B38B00" }}>
-          © 2025 Barscarf.com Tüm Hakları Saklıdır. | Powered by  <a href="https://bionluk.com/ceyhunturkmen" target="_blank" style={{ color: "#964B00", textDecoration: "none", fontWeight: "bold" }}>Ceyhun Türkmen</a>
+            © 2025 Barscarf.com Tüm Hakları Saklıdır. | Powered by  <a href="https://bionluk.com/ceyhunturkmen" target="_blank" style={{ color: "#964B00", textDecoration: "none", fontWeight: "bold" }}>Ceyhun Türkmen</a>
           </p>
         </div>
       </div>
