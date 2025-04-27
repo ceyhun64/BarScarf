@@ -112,35 +112,7 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobil Görünüm İçin Stil ve Düzenlemeler */}
-      <div
-        style={{
-          "@media (max-width: 768px)": {
-            ".container": {
-              flexDirection: "column",
-            },
-            ".flex-wrap": {
-              flexDirection: "column",
-              width: "100%",
-            },
-            ".flex-grow-1": {
-              maxWidth: "none",
-            },
-            ".d-flex": {
-              display: "flex",
-              justifyContent: "space-between",
-              width: "100%",
-            },
-            ".form-control": {
-              width: "100%",
-              fontSize: "1rem",
-            },
-            ".bi-heart-fill, .bi-cart-fill, .bi-person-fill": {
-              fontSize: "1.5rem",
-            },
-          },
-        }}
-      ></div>
+      
     </nav>
   );
 }
