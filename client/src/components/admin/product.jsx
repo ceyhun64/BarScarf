@@ -12,7 +12,7 @@ export default function Products() {
     const navigate = useNavigate();
     const { categories } = useSelector((state) => state.category);
     const { products } = useSelector((state) => state.product);
-    console.log("products", products);  
+    console.log("products", products);
 
     useEffect(() => {
         dispatch(getCategoriesThunk());
@@ -45,8 +45,8 @@ export default function Products() {
         <div className="container mt-5 mb-5">
             <div className="row">
                 <Link className="fs-2 mb-4 d-block text-decoration-none text-dark" to="/admin/products">
-                                    <img src={image} alt="Logo" width="200" height="60" className="mb-2" />
-                                </Link>
+                    <img src={image} alt="Logo" width="200" height="60" className="mb-2" />
+                </Link>
                 <AdminSidebar />
                 <div className="col-md-9">
                     <h2 className="text-center mb-4">Ürün Yönetimi</h2>
@@ -82,40 +82,56 @@ export default function Products() {
                             <p>Toplam Ürün: <strong>{products.length}</strong></p>
                             <div className="table-responsive">
 
-                            <table className="table table-striped table-bordered table-hover">
-                                <thead >
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Resim</th>
-                                        <th>Ad</th>
-                                        <th>Fiyat</th>
-                                        <th>Renk</th>
-                                        <th>Stok</th>
-                                        <th>İşlemler</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {products?.map((product) => (
-                                        <tr key={product.id}>
-                                            <td>{product.id}</td>
-                                            <td>
-                                                <img 
-                                                src={product.mainImage}
-                                            alt={product.name} style={{ width: '70px', height: '90px' }} /></td>
-                                            <td>{product.name}</td>
-                                            <td>{product.price} TL</td>
-                                            <td>{product.color}</td>
-                                            <td>{product.stock}</td>
-                                            <td>
-                                                <button className="btn btn-sm me-2" onClick={() => handleUpdate(product.id)}><img style={{ width: "20px", height: "20px" }} src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAABG0lEQVR4nO2VPUpDQRSFPwPp09hFCy1dgbgICUljk8WomEItJLiLlEEQBFNkBdlESIJaiCH6DJGr58ElkC5zsZgDw8y8ucx35s7Pg6ysNDoBBkABzIEecECQWsAXsALegU+1Z8BhBLwQ8AaoAjXgQd96UfApsOvGzMQC+AB2UsNnqkfORFXbYVtTSQnvCDpaM3Gr/nNqeClvYqraVn9MANybKLejUPzW1HRX7XpDzKXGv4GzDN+Gmjnt5AMXeNVa7pHpbojppHpkTBNNbuUFaBAIr2vyV+BJ7aUzkRRuOhXgUf/uC5eJbmq46VyQq9/en4kyE8nhpr5A9zJhmXiLgpvGbrW+TCLg++4ADoE7oA0cEaQasBcFy/oX+gHC8pMH0EF+PAAAAABJRU5ErkJggg==" alt="edit--v1" /></button>
-                                                <button className="btn" onClick={() => handleDelete(product.id)}>
-                                                    <i className="bi bi-trash-fill"></i>
-                                                </button>
-                                            </td>
+                                <table className="table table-striped table-bordered table-hover">
+                                    <thead >
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Resim</th>
+                                            <th>Ad</th>
+                                            <th>Fiyat</th>
+                                            <th>Renk</th>
+                                            <th>Stok</th>
+                                            <th>İşlemler</th>
                                         </tr>
-                                    ))}
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        {products?.map((product) => (
+                                            <tr key={product.id}>
+                                                <td>{product.id}</td>
+                                                <td>
+                                                    <img
+                                                        src={product.mainImage} // Direkt tam URL
+                                                        alt={product.name}
+                                                        style={{ width: '70px', height: '90px', objectFit: 'cover' }}
+                                                    />
+                                                </td>
+                                                <td>{product.name}</td>
+                                                <td>{product.price} TL</td>
+                                                <td>{product.color}</td>
+                                                <td>{product.stock}</td>
+                                                <td>
+                                                    <button
+                                                        className="btn btn-sm me-2"
+                                                        onClick={() => handleUpdate(product.id)}
+                                                    >
+                                                        <img
+                                                            style={{ width: "20px", height: "20px" }}
+                                                            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAABG0lEQVR4nO2VPUpDQRSFPwPp09hFCy1dgbgICUljk8WomEItJLiLlEEQBFNkBdlESIJaiCH6DJGr58ElkC5zsZgDw8y8ucx35s7Pg6ysNDoBBkABzIEecECQWsAXsALegU+1Z8BhBLwQ8AaoAjXgQd96UfApsOvGzMQC+AB2UsNnqkfORFXbYVtTSQnvCDpaM3Gr/nNqeClvYqraVn9MANybKLejUPzW1HRX7XpDzKXGv4GzDN+Gmjnt5AMXeNVa7pHpbojppHpkTBNNbuUFaBAIr2vyV+BJ7aUzkRRuOhXgUf/uC5eJbmq46VyQq9/en4kyE8nhpr5A9zJhmXiLgpvGbrW+TCLg++4ADoE7oA0cEaQasBcFy/oX+gHC8pMH0EF+PAAAAABJRU5ErkJggg=="
+                                                            alt="edit"
+                                                        />
+                                                    </button>
+                                                    <button
+                                                        className="btn"
+                                                        onClick={() => handleDelete(product.id)}
+                                                    >
+                                                        <i className="bi bi-trash-fill"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+
+                                </table>
                             </div>
                         </div>
                     </div>
