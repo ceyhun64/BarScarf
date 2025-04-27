@@ -22,17 +22,19 @@ const paymentRoutes = require("./routes/payment");
 const cargoRoutes = require("./routes/cargo");
 const subscribeRoutes = require("./routes/subscribe");
 
-// CORS ayarları
 const corsOptions = {
   origin: [
     "https://www.barscarf.com",
     "https://barscarf-11.onrender.com",
     "https://bar-scarf-iqzh.vercel.app"
   ],
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS", // OPTIONS metodu eklenmeli
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
   credentials: true, // Çerezler için
+  allowedHeaders: "Content-Type, Authorization, Origin, Accept,x-auth-token", // İzin verilen başlıklar
 };
-app.use(cors(corsOptions)); // Tüm API'ler için global CORS
+
+app.use(cors(corsOptions)); // CORS yapılandırmasını kullan
+
 
 // Güvenlik Başlıkları (Helmet)
 app.use(helmet());
