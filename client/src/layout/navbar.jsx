@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import image from "../../public/favicon/f8f539a0-6734-42b3-aabe-c35eb4378771.png";
 import Menu from "./menu"; // Menü bileşeni eklendi
-import "./navbar.css"
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -26,15 +25,15 @@ export default function Navbar() {
     <nav className="bg-white shadow-sm py-3" style={{ maxWidth: "100%" }}>
       <div className="container d-flex flex-column flex-md-row align-items-center justify-content-between gap-3">
         {/* Sol Menü + Logo */}
-        <div className="d-flex align-items-center gap-2 justify-content-center w-100">
+        <div className="d-flex align-items-center gap-2">
           <Menu />
-          <Link to="/" className="d-flex align-items-center justify-content-center">
+          <Link to="/" className="d-flex align-items-center">
             <img src={image} alt="Logo" width="200" height="60" />
           </Link>
         </div>
 
         {/* Arama ve Sağ Menü */}
-        <div className="d-flex flex-column align-items-center justify-content-center w-100 gap-3">
+        <div className="d-flex align-items-center justify-content-between w-100 flex-wrap gap-3">
           {/* Arama Kutusu */}
           <div
             className="flex-grow-1 position-relative"
@@ -70,7 +69,7 @@ export default function Navbar() {
           </div>
 
           {/* İkonlar */}
-          <div className="d-flex flex-wrap justify-content-center gap-3">
+          <div className="d-flex align-items-center gap-3">
             <Link
               to="/favorites"
               className="text-decoration-none me-1"
@@ -111,6 +110,8 @@ export default function Navbar() {
           </div>
         </div>
       </div>
+
+      
     </nav>
   );
 }
