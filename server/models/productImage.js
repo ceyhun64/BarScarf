@@ -9,7 +9,7 @@ const ProductImage = sequelize.define("productImages", {
     allowNull: false,
     get() {
       const rawValue = this.getDataValue("imageUrl");
-      return rawValue ? `${process.env.BASE_URL || "https://barscarf-11.onrender.com"}${rawValue}` : null;
+      return rawValue ? `${process.env.BASE_URL || "https://barscarf-11.onrender.com/server"}${rawValue}` : null;
     },
   },
 }, {
