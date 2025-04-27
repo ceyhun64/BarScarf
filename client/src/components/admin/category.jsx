@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCategoriesThunk, createCategoryThunk, deleteCategoryThunk, getAllSubCategoriesThunk, createSubCategoryThunk, deleteSubCategoryThunk, updateCategoryThunk, } from '../../features/thunks/categoryThunk';
+import { getCategoriesThunk, createCategoryThunk, deleteCategoryThunk, getAllSubCategoriesThunk, createSubCategoryThunk, deleteSubCategoryThunk, } from '../../features/thunks/categoryThunk';
 import AdminSidebar from './adminSideBar';
 import { Link } from 'react-router-dom';
 import { clearAlert } from '../../features/slices/categorySlice';

@@ -24,6 +24,7 @@ import AdminUsers from './pages/admin/users';
 import AdminOrders from './pages/admin/orders';
 import AdminOrderDetailsPage from './pages/admin/orderDetails';
 import AdminCategories from './pages/admin/categories';
+import AdminCategoryCreate from './pages/admin/categoryCreate';
 import AdminCategoryEdit from './pages/admin/categoryEdit';
 import AdminSubCategoryEditPage from './pages/admin/subCategoryEdit';
 import AdminProductCreate from './pages/admin/productCreate';
@@ -75,6 +76,7 @@ export default function App() {
           <Route path="/admin/orders" element={<AdminOrders />} />
           <Route path="/admin/order/:id" element={<AdminOrderDetailsPage />} />
           <Route path="/admin/categories" element={<AdminCategories />} />
+          <Route path="/admin/category/create" element={<AdminCategoryCreate />} />
           <Route path="/admin/category/:id" element={<AdminCategoryEdit />} />
           <Route path="/admin/subcategory/:id" element={<AdminSubCategoryEditPage />} />
           <Route path="/admin/products/create" element={<AdminProductCreate />} />
