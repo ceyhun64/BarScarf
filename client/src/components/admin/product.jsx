@@ -6,7 +6,6 @@ import { useNavigate, Link } from 'react-router-dom';
 import AdminSidebar from './adminSideBar';
 import image from '../../../public/favicon/f8f539a0-6734-42b3-aabe-c35eb4378771.png';
 
-
 export default function Products() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -22,7 +21,6 @@ export default function Products() {
         dispatch(getProductsThunk());
     }, [dispatch]);
 
-
     const handleDelete = (productId) => {
         dispatch(deleteProductThunk(productId));
         setTimeout(() => {
@@ -37,8 +35,6 @@ export default function Products() {
     const handleCategory = (category) => {
         dispatch(getProductsByCategoryThunk(category));
     };
-
-
 
     // İlk 4 kategori "cinsiyet", diğerleri normal kategori olarak ayrılıyor
     return (
@@ -130,7 +126,6 @@ export default function Products() {
                                             </tr>
                                         ))}
                                     </tbody>
-
                                 </table>
                             </div>
                         </div>
