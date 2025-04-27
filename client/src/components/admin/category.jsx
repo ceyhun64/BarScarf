@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCategoriesThunk, deleteCategoryThunk, getAllSubCategoriesThunk, deleteSubCategoryThunk } from '../../features/thunks/categoryThunk';
 import AdminSidebar from './adminSideBar';
@@ -10,11 +10,18 @@ export default function Categories() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { categories, subCategories, alert } = useSelector((state) => state.category);
+    const [isLoading, setIsLoading] = useState(true); // Veri yüklenip yüklenmediğini kontrol etmek için
 
     useEffect(() => {
         const fetchData = async () => {
-            await dispatch(getCategoriesThunk()).unwrap();
-            await dispatch(getAllSubCategoriesThunk()).unwrap();
+            try {
+                await dispatch(getCategoriesThunk()).unwrap();
+                await dispatch(getAllSubCategoriesThunk()).unwrap();
+                setIsLoading(false); // Veriler başarıyla yüklendiğinde loading'i false yapıyoruz
+            } catch (error) {
+                console.error("Veri yüklenirken hata oluştu:", error);
+                setIsLoading(false); // Yükleme hatası olsa da loading'i false yapıyoruz
+            }
         };
         fetchData();
     }, [dispatch]);
@@ -40,6 +47,10 @@ export default function Categories() {
     const handleNavigateToCreatePage = () => {
         navigate('/admin/category/create');
     };
+
+    if (isLoading) {
+        return <div className="container mt-5 mb-5 text-center"><h3>Yükleniyor...</h3></div>;
+    }
 
     return (
         <div className="container mt-5 mb-5">
