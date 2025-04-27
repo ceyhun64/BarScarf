@@ -24,13 +24,15 @@ const paymentRoutes = require("./routes/payment");
 const cargoRoutes = require("./routes/cargo");
 const subscribeRoutes = require("./routes/subscribe");
 
+// CORS ayarlarını buradaki gibi tek bir yerde yapıyoruz
 const corsOptions = {
-  origin: ["https://www.barscarf.com", "https://barscarf-11.onrender.com"], // Birden fazla URL
+  origin: ["https://www.barscarf.com", "https://barscarf-11.onrender.com"], // İzin verilen origin'ler
   methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true, // Eğer gerekli ise, çerez gönderimine izin ver
+  credentials: true, // Eğer çerez gönderimine izin verilecekse
 }
 
-app.use(cors(corsOptions)); // Bu zaten CORS başlıklarını ekler.
+app.use(cors(corsOptions));  // Tüm API'ler için global CORS yapılandırması
+
 
 // Helmet güvenliğini ekle
 app.use(helmet());
@@ -42,9 +44,6 @@ const limiter = rateLimit({
 });
 
 app.use(limiter); // Rate limit middleware'i
-
-// CORS ayarları
-app.use(cors(corsOptions));
 
 // API Routes
 app.use(express.json());
