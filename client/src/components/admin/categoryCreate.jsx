@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createCategoryThunk, createSubCategoryThunk } from '../../features/thunks/categoryThunk';
+import { createCategoryThunk, createSubCategoryThunk, getCategoriesThunk, getAllSubCategoriesThunk } from '../../features/thunks/categoryThunk';
 import { Link } from 'react-router-dom';
 import AdminSidebar from './adminSideBar';
 import { clearAlert } from '../../features/slices/categorySlice';
@@ -14,6 +14,13 @@ export default function CategoryAndSubCategoryAddPage() {
     const [subCategoryName, setSubCategoryName] = useState('');
     const [selectedCategoryId, setSelectedCategoryId] = useState('');
 
+    useEffect(() => {
+        const fetchData = async () => {
+            await dispatch(getCategoriesThunk()).unwrap();
+            await dispatch(getAllSubCategoriesThunk()).unwrap();
+        };
+        fetchData();
+    }, [dispatch]);
 
     // Yeni Kategori Ekle
     const handleAddCategory = async () => {
