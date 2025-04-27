@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import image from "../../public/favicon/f8f539a0-6734-42b3-aabe-c35eb4378771.png";
 import Menu from "./menu"; // Menü bileşeni eklendi
-import './Navbar.css'; // CSS dosyasını import et
+import './navbar.css'; // CSS dosyasını import et
 
 export default function Navbar() {
   const navigate = useNavigate();
