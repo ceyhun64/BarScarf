@@ -1,7 +1,8 @@
-// models/productImage.js
 const { DataTypes } = require("sequelize");
 const sequelize = require("../data/db");
 require("dotenv").config();
+
+const BASE_URL = process.env.BASE_URL || "https://barscarf-11.onrender.com";
 
 const ProductImage = sequelize.define("productImages", {
   imageUrl: {
@@ -9,7 +10,14 @@ const ProductImage = sequelize.define("productImages", {
     allowNull: false,
     get() {
       const rawValue = this.getDataValue("imageUrl");
-      return rawValue ? `${process.env.BASE_URL || "https://barscarf-11.onrender.com"}${rawValue}` : null;
+      if (!rawValue) return null;
+      
+      // Eğer zaten tam URL değilse başına BASE_URL ekle
+      if (rawValue.startsWith("http")) {
+        return rawValue;
+      }
+      
+      return `${BASE_URL}${rawValue.startsWith("/") ? "" : "/"}${rawValue}`;
     },
   },
 }, {
@@ -17,4 +25,3 @@ const ProductImage = sequelize.define("productImages", {
 });
 
 module.exports = ProductImage;
-

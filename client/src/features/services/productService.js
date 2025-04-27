@@ -67,7 +67,6 @@ export const getProductsByName = async (name) => {
 export const getProductsByColor = async (color) => {
   try {
     const res = await axios.get(`${API_URL}/color/${color}`)
-    console.log("getproductsbycolor service :", res.data.products);
     return res
   } catch (error) {
     console.error("Ürün verisi çekilemedi: ", error);
