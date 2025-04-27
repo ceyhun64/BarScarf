@@ -36,19 +36,24 @@ export default function Products() {
         dispatch(getProductsByCategoryThunk(category));
     };
 
-    // İlk 4 kategori "cinsiyet", diğerleri normal kategori olarak ayrılıyor
     return (
         <div className="container mt-5 mb-5">
             <div className="row">
                 <Link className="fs-2 mb-4 d-block text-decoration-none text-dark" to="/admin/products">
                     <img src={image} alt="Logo" width="200" height="60" className="mb-2" />
                 </Link>
-                <AdminSidebar />
-                <div className="col-md-9">
+                {/* Admin Sidebar */}
+                <div className="col-md-3 col-12">
+                    <AdminSidebar />
+                </div>
+
+                {/* Ürün Yönetimi */}
+                <div className="col-md-9 col-12">
                     <h2 className="text-center mb-4">Ürün Yönetimi</h2>
+
                     {/* Filtreleme ve Yeni Ürün Ekle Butonu */}
                     <div className="card shadow-lg p-4 mb-2">
-                        <div className="d-flex align-items-center justify-content-between">
+                        <div className="d-flex align-items-center justify-content-between flex-wrap">
                             {/* Kategoriye Göre Filtreleme */}
                             <div className="btn-group">
                                 <button className="btn btn-outline-dark dropdown-toggle" data-bs-toggle="dropdown">
@@ -66,7 +71,7 @@ export default function Products() {
                             </div>
 
                             {/* Yeni Ürün Ekleme Butonu */}
-                            <Link to={"/admin/products/create"} className="btn btn-dark">
+                            <Link to={"/admin/products/create"} className="btn btn-dark mt-2 mt-sm-0">
                                 <i className="bi bi-arrow-right me-1"></i> Yeni Ürün Ekle
                             </Link>
                         </div>
@@ -77,9 +82,8 @@ export default function Products() {
                         <div className="card-body">
                             <p>Toplam Ürün: <strong>{products.length}</strong></p>
                             <div className="table-responsive">
-
                                 <table className="table table-striped table-bordered table-hover">
-                                    <thead >
+                                    <thead>
                                         <tr>
                                             <th>ID</th>
                                             <th>Resim</th>
@@ -96,7 +100,7 @@ export default function Products() {
                                                 <td>{product.id}</td>
                                                 <td>
                                                     <img
-                                                        src={product.mainImage} // Direkt tam URL
+                                                        src={product.mainImage}
                                                         alt={product.name}
                                                         style={{ width: '70px', height: '90px', objectFit: 'cover' }}
                                                     />
@@ -133,6 +137,6 @@ export default function Products() {
 
                 </div>
             </div>
-        </div >
+        </div>
     );
 }

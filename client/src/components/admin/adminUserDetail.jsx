@@ -9,7 +9,6 @@ import image from '../../../public/favicon/f8f539a0-6734-42b3-aabe-c35eb4378771.
 export default function AdminUserDetail() {
     const dispatch = useDispatch();
     const { id } = useParams();
-    console.log(" ud id:", id);
 
     // Kullanıcı detaylarını store'dan çekiyoruz
     const { userDetails } = useSelector((state) => state.userDetails);
