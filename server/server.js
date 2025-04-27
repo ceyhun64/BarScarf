@@ -1,11 +1,50 @@
 require("dotenv").config();
 const express = require("express");
+const app = express();
 const cors = require("cors");
 const helmet = require("helmet");
 const rateLimit = require("express-rate-limit");
 const path = require("path");
 const sequelize = require("./data/db");
 const User = require("./models/user");
+
+// Middlewares
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'https://www.barscarf.com'); // Frontend'inizin domain'ini buraya ekleyin
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE'); // İzin verilen HTTP metotları
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization'); // İzin verilen başlıklar
+  next(); // Bir sonraki middleware'e geçiş
+});
+
+//cors ayarları
+const corsOptions = {
+  origin: [
+    "https://www.barscarf.com",
+    "https://barscarf-11.onrender.com",
+    "https://bar-scarf-iqzh.vercel.app"
+  ],
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
+  credentials: true, // Çerezler için
+  allowedHeaders: "Content-Type, Authorization, Origin, Accept,x-auth-token", // İzin verilen başlıklar
+};
+
+app.use(cors(corsOptions)); // CORS yapılandırmasını kullan
+
+// Güvenlik Başlıkları (Helmet)
+app.use(
+  helmet({
+    crossOriginResourcePolicy: false, // Cross-origin resource policy'yi devre dışı bırak
+  })
+);
+
+// Rate Limiter
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+  standardHeaders: true, // Geriye X-RateLimit-* başlıklarını ekler
+  legacyHeaders: false, // Geriye RateLimit-* başlıklarını eklemez
+});
+app.use(limiter);
 
 // Routes
 const productRoutes = require("./routes/product");
@@ -22,43 +61,12 @@ const paymentRoutes = require("./routes/payment");
 const cargoRoutes = require("./routes/cargo");
 const subscribeRoutes = require("./routes/subscribe");
 
-const corsOptions = {
-  origin: [
-    "https://www.barscarf.com",
-    "https://barscarf-11.onrender.com",
-    "https://bar-scarf-iqzh.vercel.app"
-  ],
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
-  credentials: true, // Çerezler için
-  allowedHeaders: "Content-Type, Authorization, Origin, Accept,x-auth-token", // İzin verilen başlıklar
-};
-
-app.use(cors(corsOptions)); // CORS yapılandırmasını kullan
-
-
-// Güvenlik Başlıkları (Helmet)
-app.use(helmet());
-app.use(
-  helmet.crossOriginResourcePolicy({
-    policy: "cross-origin", //  "same-site" veya "cross-origin"
-  })
-);
-
-// Rate Limiter
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 100,
-  standardHeaders: true, // Geriye X-RateLimit-* başlıklarını ekler
-  legacyHeaders: false, // Geriye RateLimit-* başlıklarını eklemez
-});
-app.use(limiter);
+// Statik Dosyalar (Resimler)
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // Express Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true })); // Form verisi için
-
-// Statik Dosyalar (Resimler)
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // Routes
 app.use("/api/product", productRoutes);
