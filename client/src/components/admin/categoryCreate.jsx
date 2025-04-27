@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createCategoryThunk, createSubCategoryThunk, getCategoriesThunk, getAllSubCategoriesThunk, clearAlert } from '../../features/thunks/categoryThunk';
+import { createCategoryThunk, createSubCategoryThunk, clearAlert } from '../../features/thunks/categoryThunk';
 import { Link } from 'react-router-dom';
 import AdminSidebar from './adminSideBar';
 import image from '../../../public/favicon/f8f539a0-6734-42b3-aabe-c35eb4378771.png';
@@ -13,14 +13,6 @@ export default function CategoryAndSubCategoryAddPage() {
     const [subCategoryName, setSubCategoryName] = useState('');
     const [selectedCategoryId, setSelectedCategoryId] = useState('');
 
-    // Kategorileri al
-    useEffect(() => {
-        const fetchData = async () => {
-            await dispatch(getCategoriesThunk()).unwrap();
-            await dispatch(getAllSubCategoriesThunk()).unwrap();
-        };
-        fetchData();
-    }, [dispatch]);
 
     // Yeni Kategori Ekle
     const handleAddCategory = async () => {
@@ -31,10 +23,8 @@ export default function CategoryAndSubCategoryAddPage() {
         await dispatch(createCategoryThunk(categoryData)).unwrap();
         setTimeout(() => {
             dispatch(clearAlert());
-            dispatch(getCategoriesThunk());
-            dispatch(getAllSubCategoriesThunk()); // alt kategorileri de yenile
             setCategoryName('');
-        })
+        }, 1000);
     };
 
     // Yeni Alt Kategori Ekle
@@ -50,11 +40,9 @@ export default function CategoryAndSubCategoryAddPage() {
             await dispatch(createSubCategoryThunk(subCategoryData)).unwrap();
             setTimeout(() => {
                 dispatch(clearAlert());
-                dispatch(getCategoriesThunk());
-                dispatch(getAllSubCategoriesThunk());
                 setSubCategoryName('');
                 setSelectedCategoryId('');
-            })
+            }, 1000);
         } catch (error) {
             console.error("Alt kategori eklenirken hata:", error);
         }
