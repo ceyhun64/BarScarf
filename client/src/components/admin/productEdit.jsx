@@ -173,11 +173,6 @@ export default function ProductEditForm() {
                 <AdminSidebar />
                 <div className="col-md-9">
                     <h2 className="text-center mb-4">Ürün Güncelle</h2>
-                    {alert?.message && (
-                        <div className={`alert alert-${alert?.type}`} role="alert">
-                            {alert?.message}
-                        </div>
-                    )}
 
                     <div className="card shadow-lg p-4">
                         <form onSubmit={handleUpdateProduct}>
@@ -371,6 +366,13 @@ export default function ProductEditForm() {
                             </div>
                         </form>
                     </div>
+
+                    {alert?.message && (
+                        <div className={`alert alert-${alert?.type}`} role="alert">
+                            {alert?.message}
+                        </div>
+                    )}
+
                 </div>
             </div>
         </div>

@@ -172,16 +172,6 @@ export default function ProductCreateForm() {
                 <AdminSidebar />
                 <div className="col-md-9">
                     <h2 className="text-center mb-4">Ürün Yönetimi</h2>
-                    {alert?.message && (
-                        <div className={`alert alert-${alert?.type}`} role="alert">
-                            {alert?.message}
-                        </div>
-                    )}
-                    {errorMessage && (
-                        <div className="alert alert-danger" role="alert">
-                            {errorMessage}
-                        </div>
-                    )}
 
                     <div className="card shadow-lg p-4">
                         <h2 className="text-center mb-4 fw-bold text-dark">Yeni Ürün Oluştur</h2>
@@ -384,6 +374,16 @@ export default function ProductCreateForm() {
                             </div>
                         </form>
                     </div>
+                    {alert?.message && (
+                        <div className={`alert alert-${alert?.type}`} role="alert">
+                            {alert?.message}
+                        </div>
+                    )}
+                    {errorMessage && (
+                        <div className="alert alert-danger" role="alert">
+                            {errorMessage}
+                        </div>
+                    )}
                 </div>
             </div>
         </div>
