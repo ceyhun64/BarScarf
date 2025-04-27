@@ -1,8 +1,9 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createCategoryThunk, createSubCategoryThunk, clearAlert } from '../../features/thunks/categoryThunk';
+import { createCategoryThunk, createSubCategoryThunk } from '../../features/thunks/categoryThunk';
 import { Link } from 'react-router-dom';
 import AdminSidebar from './adminSideBar';
+import { clearAlert } from '../../features/slices/categorySlice';
 import image from '../../../public/favicon/f8f539a0-6734-42b3-aabe-c35eb4378771.png';
 
 
