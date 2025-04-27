@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useParams,Link } from 'react-router-dom';
+import { useNavigate, useParams, Link } from 'react-router-dom';
 import {
     updateProductThunk,
     getProductByIdThunk
@@ -10,7 +10,6 @@ import { getSizesThunk } from '../../features/thunks/colorsizeThunk';
 import { clearAlert } from '../../features/slices/productSlice';
 import AdminSidebar from './adminSideBar';
 import image from '../../../public/favicon/f8f539a0-6734-42b3-aabe-c35eb4378771.png';
-
 
 export default function ProductEditForm() {
     const dispatch = useDispatch();
@@ -99,7 +98,7 @@ export default function ProductEditForm() {
         if (field === 'color') {
             setFormData((prevFormData) => ({
                 ...prevFormData,
-                [field]: value, 
+                [field]: value,
             }));
         } else {
             const id = Number(value);
@@ -119,7 +118,7 @@ export default function ProductEditForm() {
             const imageArray = Array.from(files);
             setFormData({
                 ...formData,
-                images: imageArray, 
+                images: imageArray,
             });
         }
     };
@@ -168,9 +167,9 @@ export default function ProductEditForm() {
     return (
         <div className="container mt-5 mb-5">
             <div className="row">
-            <Link className="fs-2 mb-4 d-block text-decoration-none text-dark" to="/admin/products">
-                                <img src={image} alt="Logo" width="200" height="60" className="mb-2" />
-                            </Link>
+                <Link className="fs-2 mb-4 d-block text-decoration-none text-dark" to="/admin/products">
+                    <img src={image} alt="Logo" width="200" height="60" className="mb-2" />
+                </Link>
                 <AdminSidebar />
                 <div className="col-md-9">
                     <h2 className="text-center mb-4">Ürün Güncelle</h2>
@@ -322,7 +321,7 @@ export default function ProductEditForm() {
                                     <label className="form-label fw-bold">Bedenler</label>
                                     <div className="d-flex flex-wrap">
                                         {sizes.map((size) => (
-                                            <div key={size.id} style={{ margin: '5px', position: 'relative' }}>
+                                            <div key={size.id} style={{ position: 'relative' }}>
                                                 <input
                                                     type="checkbox"
                                                     value={size.id}
@@ -333,20 +332,13 @@ export default function ProductEditForm() {
                                                 />
                                                 <label
                                                     htmlFor={`size-${size.id}`}
+                                                    className={`px-3 py-2 rounded-pill border fw-medium shadow-sm ${formData.sizeIds.includes(size.id) ? 'bg-dark text-white' : 'bg-light text-dark'
+                                                        }`}
                                                     style={{
-                                                        display: 'flex',
-                                                        alignItems: 'center',
-                                                        justifyContent: 'center',
-                                                        width: '40px',
-                                                        height: '40px',
-                                                        backgroundColor: formData.sizeIds.includes(size.id) ? '#000' : '#f0f0f0',
-                                                        color: formData.sizeIds.includes(size.id) ? '#fff' : '#000',
-                                                        borderRadius: '50%',
-                                                        border: formData.sizeIds.includes(size.id) ? '3px solid black' : '1px solid #ccc',
                                                         cursor: 'pointer',
-                                                        fontWeight: 'bold',
-                                                        textTransform: 'uppercase',
-                                                        fontSize: '14px',
+                                                        transition: 'all 0.2s ease-in-out',
+                                                        transform: formData.sizeIds.includes(size.id) ? 'scale(1.05)' : 'scale(1)',
+                                                        userSelect: 'none',
                                                     }}
                                                 >
                                                     {size.name}

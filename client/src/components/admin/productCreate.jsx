@@ -8,7 +8,6 @@ import { clearAlert } from '../../features/slices/productSlice';
 import AdminSidebar from './adminSideBar';
 import image from '../../../public/favicon/f8f539a0-6734-42b3-aabe-c35eb4378771.png';
 
-
 export default function ProductCreateForm() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
