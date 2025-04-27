@@ -29,9 +29,12 @@ export default function CategoryAndSubCategoryAddPage() {
 
         const categoryData = { name: categoryName };
         await dispatch(createCategoryThunk(categoryData)).unwrap();
-        dispatch(getCategoriesThunk());
-        dispatch(getAllSubCategoriesThunk()); // alt kategorileri de yenile
-        setCategoryName('');
+        setTimeout(() => {
+            dispatch(clearAlert());
+            dispatch(getCategoriesThunk());
+            dispatch(getAllSubCategoriesThunk()); // alt kategorileri de yenile
+            setCategoryName('');
+        })
     };
 
     // Yeni Alt Kategori Ekle
@@ -45,10 +48,13 @@ export default function CategoryAndSubCategoryAddPage() {
 
         try {
             await dispatch(createSubCategoryThunk(subCategoryData)).unwrap();
-            dispatch(getCategoriesThunk());
-            dispatch(getAllSubCategoriesThunk());
-            setSubCategoryName('');
-            setSelectedCategoryId('');
+            setTimeout(() => {
+                dispatch(clearAlert());
+                dispatch(getCategoriesThunk());
+                dispatch(getAllSubCategoriesThunk());
+                setSubCategoryName('');
+                setSelectedCategoryId('');
+            })
         } catch (error) {
             console.error("Alt kategori eklenirken hata:", error);
         }
@@ -143,7 +149,7 @@ export default function CategoryAndSubCategoryAddPage() {
                     </div>
 
                     {/* Kategori Listesi */}
-                    <Link to="/admin/categories" className="btn btn-secondary">Kategori Listele</Link>
+                    <Link to="/admin/categories" className="btn btn-secondary">Kategoriler</Link>
                 </div>
             </div>
         </div>
