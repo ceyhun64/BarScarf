@@ -1,21 +1,24 @@
+/* Navbar'ın Mobil Uyumluluğu */
 @media (max-width: 768px) {
     .container {
       flex-direction: column;
     }
   
-    .flex-wrap {
+    .d-flex.align-items-center {
       flex-direction: column;
-      width: 100%;
+      justify-content: center;
     }
   
-    .flex-grow-1 {
-      max-width: none;
+    .d-flex.flex-column {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
   
-    .d-flex {
-      display: flex;
-      justify-content: space-between;
-      width: 100%;
+    .d-flex.flex-wrap {
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
     }
   
     .form-control {
@@ -27,6 +30,26 @@
     .bi-cart-fill,
     .bi-person-fill {
       font-size: 1.5rem;
+    }
+  
+    .d-none.d-sm-inline {
+      display: inline;
+    }
+  
+    .position-relative {
+      margin-bottom: 10px;
+    }
+  
+    /* Logo altındaki Menü ve Arama kutusunu ayırmak için */
+    .d-flex.align-items-center.gap-2 {
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+  
+    /* Menü ve Arama kutusu */
+    .form-control {
+      margin-bottom: 10px;
     }
   }
   
