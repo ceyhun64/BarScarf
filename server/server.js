@@ -1,11 +1,9 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-const app = express();
 const helmet = require("helmet");
 const rateLimit = require("express-rate-limit");
 const path = require("path");
-
 const sequelize = require("./data/db");
 const User = require("./models/user");
 
@@ -24,29 +22,43 @@ const paymentRoutes = require("./routes/payment");
 const cargoRoutes = require("./routes/cargo");
 const subscribeRoutes = require("./routes/subscribe");
 
-// CORS ayarlarını buradaki gibi tek bir yerde yapıyoruz
+// CORS ayarları
 const corsOptions = {
-  origin: ["https://www.barscarf.com", "https://barscarf-11.onrender.com"], // İzin verilen origin'ler
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true, // Eğer çerez gönderimine izin verilecekse
-}
+  origin: [
+    "https://www.barscarf.com",
+    "https://barscarf-11.onrender.com",
+    "https://bar-scarf-iqzh.vercel.app"
+  ],
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS", // OPTIONS metodu eklenmeli
+  credentials: true, // Çerezler için
+};
+app.use(cors(corsOptions)); // Tüm API'ler için global CORS
 
-app.use(cors(corsOptions));  // Tüm API'ler için global CORS yapılandırması
-
-
-// Helmet güvenliğini ekle
+// Güvenlik Başlıkları (Helmet)
 app.use(helmet());
+app.use(
+  helmet.crossOriginResourcePolicy({
+    policy: "cross-origin", //  "same-site" veya "cross-origin"
+  })
+);
 
-// Rate limiter middleware'ini ekle
+// Rate Limiter
 const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 dakika
-  max: 100, // Her IP'den 100 istek
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+  standardHeaders: true, // Geriye X-RateLimit-* başlıklarını ekler
+  legacyHeaders: false, // Geriye RateLimit-* başlıklarını eklemez
 });
+app.use(limiter);
 
-app.use(limiter); // Rate limit middleware'i
-
-// API Routes
+// Express Middleware
 app.use(express.json());
+app.use(express.urlencoded({ extended: true })); // Form verisi için
+
+// Statik Dosyalar (Resimler)
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
+// Routes
 app.use("/api/product", productRoutes);
 app.use("/api/category", categoryRoutes);
 app.use("/api/user", userRoutes);
@@ -60,33 +72,37 @@ app.use("/api/color-size", colorSizeRoutes);
 app.use("/api/payment", paymentRoutes);
 app.use("/api/cargo", cargoRoutes);
 app.use("/api/subscribe", subscribeRoutes);
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
+// Veritabanı Senkronizasyonu ve Admin Kullanıcı Oluşturma
 (async () => {
-  await sequelize.sync();  // Veritabanını sıfırlama
+  try {
+    await sequelize.sync();
+    console.log("Veritabanı senkronize edildi.");
 
-  // Tek bir admin kullanıcısını veritabanına ekleyin
-  const existingAdmin = await User.findOne({ where: { isAdmin: 1 } });
-
-  if (!existingAdmin) {
-    // Eğer admin yoksa, admin kullanıcısını ekleyelim
-    await User.create(
-      {
+    const [adminUser, created] = await User.findOrCreate({
+      where: { isAdmin: 1 },
+      defaults: {
         name: process.env.ADMIN_NAME,
         email: process.env.ADMIN_EMAIL,
         password: process.env.ADMIN_PASSWORD,
-        isAdmin: 1
-      }
-    );
+        isAdmin: 1,
+      },
+    });
 
-    console.log("Admin kullanıcısı başarıyla eklendi.");
-  } else {
-    console.log("Admin kullanıcısı zaten mevcut.");
+    if (created) {
+      console.log("Admin kullanıcısı başarıyla oluşturuldu.");
+    } else {
+      console.log("Admin kullanıcısı zaten mevcut.");
+    }
+  } catch (error) {
+    console.error("Veritabanı senkronizasyonu sırasında hata oluştu:", error);
+    // Uygulamanın başlamasını engellemek için burada bir işlem yapabilirsiniz (örneğin, süreci sonlandırmak).
+    // process.exit(1);
   }
 })();
 
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
-  console.log(`Listening on port ${PORT}`);
+  console.log(`Sunucu ${PORT} portunda çalışıyor.`);
 });
