@@ -23,7 +23,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav className="bg-white shadow-sm py-2" style={{ maxWidth: "100%" }}>
+    <nav className="bg-white shadow-sm py-1" style={{ maxWidth: "100%" }}>
       <div className="container d-flex flex-column flex-md-row align-items-center justify-content-between gap-3">
         {/* Sol Menü + Logo ve Sağ Menü */}
         <div className="d-flex align-items-center justify-content-between w-100">

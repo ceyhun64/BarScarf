@@ -4,7 +4,6 @@ import CategoryBar from "../layout/categoryBar";
 import Banner from "../layout/banner";
 import Heroes from "../layout/heroes";
 import Slider from "../components/home/slider";
-import PopularCategories from "../components/home/popularCategories";
 import FeaturedProducts from "../components/home/featuredProducts";
 import ServiceInfo from "../components/home/serviceInfo";
 import Subscribe from "../components/home/subscribe";
@@ -31,7 +30,6 @@ export default function HomePage() {
       >
 
         <Slider />
-        <PopularCategories />
         <FeaturedProducts />
         <ServiceInfo />
         <Subscribe />
