@@ -8,13 +8,11 @@ import ColorFilter from '../components/product/filterColor';
 import SizeFilter from '../components/product/filterSize';
 import Subscribe from '../components/home/subscribe';
 
-
 export default function ProductsPage() {
     return (
         <div>
             <Navbar />
             <CategoryBar />
-
             <div className=" mt-3">
                 {/* Responsive filtre ve sıralama */}
                 <div className="container">
