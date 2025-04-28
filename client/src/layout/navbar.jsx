@@ -80,13 +80,16 @@ export default function Navbar() {
               onClick={() => navigate("/search")}
               style={{
                 cursor: "pointer",
-                color: "#B0B0B0",
+                color: "#B0B0B0", // Placeholder yazısının rengini soluk yapma
                 border: "1px solid #D3AF37",
                 backgroundColor: "white",
                 borderRadius: "5px",
                 fontSize: "0.9rem",
+                paddingLeft: "20px", // Placeholder'ı sola kaydırma
+                opacity: 0.7, // Placeholder yazısını daha soluk yapma
               }}
             />
+
             <i
               className="bi bi-search position-absolute top-50 end-0 translate-middle-y me-3"
               style={{ pointerEvents: "none", color: "#D3AF37", fontSize: "1.1rem" }}
