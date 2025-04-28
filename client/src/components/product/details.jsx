@@ -83,7 +83,7 @@ export default function Details() {
                 )}
 
                 {/* Ürün Görseli ve Geçiş Okları */}
-                <div className="col-md-6 position-relative">
+                <div className="col-md-6 col-12 position-relative">
                     <img
                         src={product.images?.[currentImageIndex]?.imageUrl || product.mainImage}
                         alt={product.name}
@@ -130,53 +130,9 @@ export default function Details() {
                             </button>
                         </>
                     )}
-
-                    {/* Yeni ve Tükenmek Üzere Mesajları Alt Alta */}
-                    <div className="position-absolute top-0 end-0 p-3" style={{ zIndex: 1 }}>
-                        {/* Yeni Etiketi */}
-                        {isProductNew() && (
-                            <div
-                                className="d-flex align-items-center mb-2"
-                                style={{
-                                    fontSize: '13px',
-                                    fontWeight: '600',
-                                    backgroundColor: '#D3AF37', // Daha koyu yeşil tonu
-                                    color: 'white',
-                                    borderRadius: '5px', // Daha keskin köşeler
-                                    padding: '6px 12px',
-                                    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.2)',
-                                    transition: 'transform 0.3s ease',
-                                    transform: 'translate(15px, -10px)', // Hafif dışa taşma
-                                }}
-                            >
-                                Yeni
-                            </div>
-                        )}
-
-                        {/* Tükenmek Üzere Etiketi */}
-                        {product.stock && product.stock < 65 && (
-                            <div
-                                className="d-flex align-items-center"
-                                style={{
-                                    fontSize: '13px',
-                                    fontWeight: '600',
-                                    backgroundColor: '#964B00', // Koyu turuncu tonu
-                                    color: '#fff',
-                                    borderRadius: '5px', // Daha keskin köşeler
-                                    padding: '6px 12px',
-                                    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.2)',
-                                    transition: 'transform 0.3s ease',
-                                    transform: 'translate(15px, -10px)', // Hafif dışa taşma
-                                }}
-                            >
-                                Tükenmek Üzere!
-                            </div>
-                        )}
-                    </div>
-
                 </div>
 
-                <div className="col-md-5 mt-3 ms-5">
+                <div className="col-md-5 mt-3 ms-md-5 ms-0">
                     <h2 className="text-dark mb-2" style={{ fontSize: '1.8rem' }}>{product.name}</h2>
                     <div className="border-top mb-3" style={{ borderTop: '1px solid #dee2e6' }}></div>
 
@@ -191,7 +147,7 @@ export default function Details() {
                                     <div
                                         key={variant.id}
                                         onClick={() => navigate(`/product/${variant.id}`)}
-                                        className="p-1" // Sadece padding bıraktım, istersen onu da silebiliriz
+                                        className="p-1"
                                         style={{
                                             cursor: "pointer",
                                             width: "100px",
@@ -210,7 +166,6 @@ export default function Details() {
                             </div>
                         </div>
                     )}
-
 
                     {/* Beden Seçimi */}
                     <div className="pt-4 mt-4 border-top" style={{ borderTop: '1px solid #dee2e6' }}>
@@ -287,8 +242,6 @@ export default function Details() {
                         </Link>
                     </div>
                 </div>
-
-
             </div>
 
             {/* Modal */}
@@ -296,32 +249,18 @@ export default function Details() {
                 <div className="modal fade show" style={{
                     display: 'block',
                     position: 'fixed',
-                    top: '0', left: '0', right: '0', bottom: '0',
-                    zIndex: '1050', backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                }} onClick={closeModal}>
-                    <div className="modal-dialog modal-dialog-centered" style={{
-                        maxWidth: '100%',
-                        height: '100%',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        margin: 0, padding: 0
-                    }}>
-                        <div className="modal-content border-0 bg-transparent" style={{ boxShadow: 'none' }}>
-                            <div className="modal-header" style={{ borderBottom: 'none' }}>
-                                <button type="button" className="btn-close" onClick={closeModal} aria-label="Close" style={{ color: 'white' }}></button>
+                    top: '0', left: '0', width: '100%', height: '100%', zIndex: '9999'
+                }} role="dialog" onClick={closeModal}>
+                    <div className="modal-dialog modal-dialog-centered" role="document" onClick={e => e.stopPropagation()}>
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <button type="button" className="btn-close" onClick={closeModal}></button>
                             </div>
-                            <div className="modal-body p-0">
+                            <div className="modal-body">
                                 <img
                                     src={product.images?.[currentImageIndex]?.imageUrl || product.mainImage}
                                     alt={product.name}
                                     className="img-fluid"
-                                    style={{
-                                        width: '100%',
-                                        height: '100%',
-                                        objectFit: 'contain',
-                                        objectPosition: 'top',
-                                    }}
                                 />
                             </div>
                         </div>

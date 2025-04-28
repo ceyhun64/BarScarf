@@ -13,7 +13,9 @@ export default function ProductDetail() {
             <Navbar />
             <CategoryBar />
             <Details />
+            
             <FeaturedProducts />
+
             <ServiceInfo />
             <Subscribe />
             <Footer />
