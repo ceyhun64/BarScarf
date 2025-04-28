@@ -1,8 +1,7 @@
 /* Mobil ekranlar için logo boyutunu küçültme */
 @media (max-width: 767px) {
   .navbar img {
-    width: 150px;
-    /* Logo boyutunu mobilde küçültme */
+    width: 150px; /* Logo boyutunu mobilde küçültme */
   }
 
   .navbar .d-flex {
@@ -16,13 +15,22 @@
     font-size: 0.9rem;
   }
 
-  /* Arama kutusunun üst kısmına daha fazla boşluk eklemek */
+  /* Arama kutusunun üst kısmına daha az boşluk eklemek */
   .navbar .d-block.mt-3 {
-    margin-top: 0.5rem;
+    margin-top: 0.25rem; /* Arama kutusunun üst kısmındaki boşluğu azaltma */
+  }
+
+  /* Arama butonuyla arama kutusu arasındaki boşluğu azaltmak */
+  .navbar .search-bar .form-control {
+    margin-bottom: 0.25rem; /* Arama kutusu ile buton arasındaki mesafeyi kısaltma */
+  }
+
+  .navbar .bi-search {
+    margin-right: 10px; /* Arama ikonunun sağındaki boşluğu azaltma */
   }
 }
 
-/* Masaüstü cihazlar için ek stil ayarları */
+/* Masaüstü cihazlar için stil ayarları */
 @media (min-width: 768px) {
   .navbar .d-flex {
     display: flex;
