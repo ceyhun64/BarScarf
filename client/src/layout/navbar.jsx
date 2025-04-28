@@ -71,7 +71,7 @@ export default function Navbar() {
 
         {/* Arama Kutusu */}
         <div className="search-bar w-100">
-          <div className="flex-grow-1 position-relative" style={{ maxWidth: "300px" }}>
+          <div className="flex-grow-1 position-relative" style={{ maxWidth: "500px" }}>
             <input
               type="text"
               className="form-control ps-5 py-2"
