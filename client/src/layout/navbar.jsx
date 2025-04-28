@@ -74,7 +74,7 @@ export default function Navbar() {
           <div className="flex-grow-1 position-relative" style={{ maxWidth: "500px" }}>
             <input
               type="text"
-              className="form-control ps-5 py-2"
+              className="form-control py-2"
               placeholder="Aradığınız ürün , kategori veya markayı yazın"
               readOnly
               onClick={() => navigate("/search")}
@@ -85,7 +85,6 @@ export default function Navbar() {
                 backgroundColor: "white",
                 borderRadius: "5px",
                 fontSize: "0.9rem",
-                paddingLeft: "20px", // Placeholder'ı sola kaydırma
                 opacity: 0.7, // Placeholder yazısını daha soluk yapma
                 textAlign: "left", // Yazıyı sola hizala
               }}
