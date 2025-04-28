@@ -6,7 +6,6 @@ import { useSelector, useDispatch } from 'react-redux'; // useSelector hook'unu 
 export default function ProductList() {
     const dispatch = useDispatch(); // useDispatch hook'unu kullanarak dispatch fonksiyonunu alıyoruz
     const { products, loading, error } = useSelector(state => state.product); // products dizisini ve loading durumunu alıyoruz
-    console.log("productlist :", products); // products dizisini konsola yazdırıyoruz
 
     useEffect(() => {
         const fetchData = async () => {
