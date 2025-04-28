@@ -75,7 +75,7 @@ export default function Navbar() {
             <input
               type="text"
               className="form-control ps-5 py-2"
-              placeholder="Ürün Ara"
+              placeholder="Aradığınız ürün , kategori veya markayı yazın"
               readOnly
               onClick={() => navigate("/search")}
               style={{
