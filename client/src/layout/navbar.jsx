@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import image from "../../public/favicon/f8f539a0-6734-42b3-aabe-c35eb4378771.png";
 import Menu from "./menu"; // Menü bileşeni eklendi
+import "./navbar.css"
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -22,42 +23,45 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav className="bg-white shadow-sm py-3" style={{maxWidth: "100%"}}>
+    <nav className="bg-white shadow-sm py-3" style={{ maxWidth: "100%" }}>
       <div className="container d-flex flex-column flex-md-row align-items-center justify-content-between gap-3">
         {/* Sol Menü + Logo */}
-        <div className="d-flex align-items-center gap-2">
-          <Menu />
-          <Link to="/" className="d-flex align-items-center">
-            <img src={image} alt="Logo" width="200" height="60" />
-          </Link>
-        </div>
-
-        {/* Arama ve Sağ Menü */}
-        <div className="d-flex align-items-center justify-content-between w-100 flex-wrap gap-3">
-          {/* Arama Kutusu */}
-          <div className="flex-grow-1 position-relative" style={{ maxWidth: "300px" }}>
-            <input
-              type="text"
-              className="form-control ps-5 py-2"
-              placeholder="Ürün Ara"
-              readOnly
-              onClick={() => navigate("/search")}
-              style={{
-                cursor: "pointer",
-                color: "#B0B0B0",
-                border: "1px solid #D3AF37",
-                backgroundColor: "white",
-                borderRadius: "5px",
-                fontSize: "0.9rem",
-              }}
-            />
-            <i
-              className="bi bi-search position-absolute top-50 start-0 translate-middle-y ms-3"
-              style={{ pointerEvents: "none", color: "#D3AF37", fontSize: "1.1rem" }}
-            ></i>
+        <div className="d-flex flex-column flex-md-row align-items-center gap-2 w-100">
+          <div className="d-flex align-items-center gap-2 w-100 justify-content-between">
+            <Menu />
+            <Link to="/" className="d-flex align-items-center">
+              <img src={image} alt="Logo" width="200" height="60" />
+            </Link>
           </div>
 
-          {/* İkonlar */}
+          {/* Arama Kutusu (Mobilde Altında) */}
+          <div className="d-block d-md-none mt-3 w-100">
+            <div className="flex-grow-1 position-relative" style={{ maxWidth: "300px" }}>
+              <input
+                type="text"
+                className="form-control ps-5 py-2"
+                placeholder="Ürün Ara"
+                readOnly
+                onClick={() => navigate("/search")}
+                style={{
+                  cursor: "pointer",
+                  color: "#B0B0B0",
+                  border: "1px solid #D3AF37",
+                  backgroundColor: "white",
+                  borderRadius: "5px",
+                  fontSize: "0.9rem",
+                }}
+              />
+              <i
+                className="bi bi-search position-absolute top-50 start-0 translate-middle-y ms-3"
+                style={{ pointerEvents: "none", color: "#D3AF37", fontSize: "1.1rem" }}
+              ></i>
+            </div>
+          </div>
+        </div>
+
+        {/* Sağ Menü ve İkonlar */}
+        <div className="d-flex align-items-center justify-content-between w-100 flex-wrap gap-3 mt-3 mt-md-0">
           <div className="d-flex align-items-center gap-3">
             <Link to="/favorites" className="text-decoration-none me-1" style={{ color: "#D3AF37", fontSize: "1.3rem" }}>
               <i className="bi bi-heart-fill"></i>
