@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import image from "../../public/favicon/f8f539a0-6734-42b3-aabe-c35eb4378771.png";
 import Menu from "./menu"; // Menü bileşeni eklendi
-import "./navbar.css"
+import "./navbar.css";
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -68,9 +68,9 @@ export default function Navbar() {
             </Link>
           </div>
         </div>
-        
-        {/* Arama Kutusu (Mobilde Altında) */}
-        <div className="d-block d-md-none mt-3 w-100">
+
+        {/* Arama Kutusu (Mobilde Altında, Masaüstünde Gözükecek) */}
+        <div className="d-none d-md-block w-100">
           <div className="flex-grow-1 position-relative" style={{ maxWidth: "300px" }}>
             <input
               type="text"
@@ -97,4 +97,3 @@ export default function Navbar() {
     </nav>
   );
 }
-

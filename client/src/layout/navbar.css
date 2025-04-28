@@ -3,17 +3,34 @@
     .navbar img {
       width: 150px; /* Logo boyutunu mobilde küçültme */
     }
+  
+    .navbar .d-flex {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  
+    /* Arama kutusu için stil (mobilde de uygun şekilde görünsün) */
+    .navbar .form-control {
+      font-size: 0.9rem;
+    }
+  
+    /* Arama kutusunun üst kısmına daha fazla boşluk eklemek */
+    .navbar .d-block.d-md-none.mt-3 {
+      margin-top: 1rem;
+    }
   }
   
-  /* Navbar'daki öğeleri hizalama */
-  .navbar .d-flex {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
+  /* Masaüstü cihazlar için ek stil ayarları */
+  @media (min-width: 768px) {
+    .navbar .d-flex {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
   
-  /* Arama kutusu için stil */
-  .navbar .form-control {
-    font-size: 0.9rem;
+    .navbar .form-control {
+      font-size: 1rem;
+    }
   }
   
