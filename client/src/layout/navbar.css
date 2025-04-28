@@ -1,36 +1,42 @@
 /* Mobil ekranlar için logo boyutunu küçültme */
 @media (max-width: 767px) {
     .navbar img {
-      width: 150px; /* Logo boyutunu mobilde küçültme */
+        width: 150px;
+        /* Logo boyutunu mobilde küçültme */
     }
-  
+
     .navbar .d-flex {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
     }
-  
-    /* Arama kutusu için stil (mobilde de uygun şekilde görünsün) */
+
+    /* Arama kutusunun font boyutunu küçültme */
     .navbar .form-control {
-      font-size: 0.9rem;
+        font-size: 0.9rem;
     }
-  
+
     /* Arama kutusunun üst kısmına daha fazla boşluk eklemek */
     .navbar .d-block.d-md-none.mt-3 {
-      margin-top: 1rem;
+        margin-top: 1rem;
     }
-  }
-  
-  /* Masaüstü cihazlar için ek stil ayarları */
-  @media (min-width: 768px) {
+}
+
+/* Masaüstü cihazlar için ek stil ayarları */
+@media (min-width: 768px) {
     .navbar .d-flex {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
     }
-  
+
     .navbar .form-control {
-      font-size: 1rem;
+        font-size: 1rem;
     }
-  }
-  
+
+    /* Arama kutusunu masaüstünde de göster */
+    .navbar .d-md-none {
+        display: block !important;
+        /* Masaüstünde de görünür yap */
+    }
+}
