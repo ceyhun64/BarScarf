@@ -4,7 +4,7 @@ import bannerImage from "../assets/images/banner.jpg";
 
 export default function Banner() {
     return (
-        <div className="banner" style={{ marginTop: "20px", marginBottom: "20px" }}>
+        <div className="banner" style={{ marginTop: "10px", marginBottom: "20px" }}>
             <Link to="/products" style={{ textDecoration: "none" }}>
                 <div
                     style={{
