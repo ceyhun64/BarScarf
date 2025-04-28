@@ -13,9 +13,8 @@ export default function ProductDetail() {
             <Navbar />
             <CategoryBar />
             <Details />
-            
+            <h4>Bunu alanlar şunları da aldı</h4>
             <FeaturedProducts />
-
             <ServiceInfo />
             <Subscribe />
             <Footer />
