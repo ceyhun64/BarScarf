@@ -1,0 +1,12 @@
+/* Büyük ekranlar için varsayılan boşluk */
+.product-image-spacing {
+    margin-bottom: 20px; /* Görsel ile ürün adı arasına büyük ekranlarda 20px boşluk ekler */
+  }
+  
+  /* Mobil ekranlar için özel stil */
+  @media (max-width: 767px) {
+    .product-image-spacing {
+      margin-bottom: 30px; /* Mobil cihazlarda görsel ile ürün adı arasına 30px boşluk ekler */
+    }
+  }
+  

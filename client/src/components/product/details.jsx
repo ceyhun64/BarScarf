@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getProductByIdThunk, getProductsThunk } from '../../features/thunks/productThunk';
 import { addToCartThunk } from '../../features/thunks/cartThunk';
 import { clearAlert } from '../../features/slices/cartSlice';
+import './details.css'
 
 export default function Details() {
     const [selectedSize, setSelectedSize] = useState(null);
@@ -83,11 +84,11 @@ export default function Details() {
                 )}
 
                 {/* Ürün Görseli ve Geçiş Okları */}
-                <div className="col-md-6 col-12 position-relative">
+                <div className="col-md-6 col-12 position-relative product-image-spacing">
                     <img
                         src={product.images?.[currentImageIndex]?.imageUrl || product.mainImage}
                         alt={product.name}
-                        className="img-fluid rounded-3 shadow-lg"
+                        className="img-fluid rounded-3 shadow-sm"
                         style={{ cursor: 'pointer' }}
                         onClick={handleImageClick}
                     />
