@@ -2,6 +2,7 @@ import React from "react";
 import Topbar from "../components/home/topbar";
 import Navbar from "../layout/navbar";
 import CategoryBar from "../layout/categoryBar";
+import Banner from "../layout/banner";
 import Slider from "../components/home/slider";
 import PopularCategories from "../components/home/popularCategories";
 import FeaturedProducts from "../components/home/featuredProducts";
@@ -20,8 +21,9 @@ export default function HomePage() {
       <div>
         <Topbar />
         <Navbar />
-
         <CategoryBar />
+        <Banner />
+
       </div>
       <div
         style={{
