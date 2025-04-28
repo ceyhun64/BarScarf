@@ -69,8 +69,8 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* Arama Kutusu (Mobilde Altında, Masaüstünde Gözükecek) */}
-        <div className="d-none d-md-block w-100">
+        {/* Arama Kutusu */}
+        <div className="search-bar w-100">
           <div className="flex-grow-1 position-relative" style={{ maxWidth: "300px" }}>
             <input
               type="text"

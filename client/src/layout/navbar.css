@@ -33,9 +33,9 @@
       font-size: 1rem;
     }
   
-    /* Mobildeki gizli arama kutusunu masaüstünde de göster */
-    .navbar .d-md-none {
-      display: block !important; /* Mobilde gizli olan arama kutusunu masaüstünde göster */
+    /* Arama kutusunu her cihazda görünür yapmak */
+    .navbar .search-bar {
+      display: block;
     }
   }
   
