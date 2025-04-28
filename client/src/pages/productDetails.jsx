@@ -13,7 +13,7 @@ export default function ProductDetail() {
             <Navbar />
             <CategoryBar />
             <Details />
-            <h4>Bunu alanlar şunları da aldı</h4>
+            <h4 className="text-center">Bunu alanlar şunları da aldı</h4>
             <FeaturedProducts />
             <ServiceInfo />
             <Subscribe />
@@ -21,3 +21,4 @@ export default function ProductDetail() {
         </>
     );
 }
+
