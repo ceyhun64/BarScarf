@@ -30,7 +30,6 @@ export default function CategoryBar() {
                 background: "linear-gradient(45deg, #ffffff, rgba(194, 134, 5, 0.26))",
                 padding: "4px 0", // daha az boşluk
                 position: "relative",
-                marginBottom: "10px", // daha az boşluk
             }}
         >
             <div className="container">
