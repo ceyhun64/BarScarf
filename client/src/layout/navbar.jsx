@@ -87,15 +87,16 @@ export default function Navbar() {
                 fontSize: "0.9rem",
                 paddingLeft: "20px", // Placeholder'ı sola kaydırma
                 opacity: 0.7, // Placeholder yazısını daha soluk yapma
+                textAlign: "left", // Yazıyı sola hizala
               }}
             />
-
             <i
               className="bi bi-search position-absolute top-50 end-0 translate-middle-y me-3"
               style={{ pointerEvents: "none", color: "#D3AF37", fontSize: "1.1rem" }}
             ></i>
           </div>
         </div>
+
       </div>
     </nav>
   );
