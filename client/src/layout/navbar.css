@@ -1,24 +1,19 @@
+/* Mobil ekranlar için logo boyutunu küçültme */
 @media (max-width: 767px) {
-    .navbar .container {
-      padding-left: 15px;
-      padding-right: 15px;
-    }
-  
     .navbar img {
-      width: 150px;  /* Mobilde logo boyutunu küçültme */
+      width: 150px; /* Logo boyutunu mobilde küçültme */
     }
+  }
   
-    .navbar .d-flex {
-      flex-direction: column !important;
-      align-items: flex-start;
-    }
+  /* Navbar'daki öğeleri hizalama */
+  .navbar .d-flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
   
-    .navbar .form-control {
-      width: 100%;
-    }
-  
-    .navbar .d-flex.align-items-center {
-      margin-top: 10px;
-    }
+  /* Arama kutusu için stil */
+  .navbar .form-control {
+    font-size: 0.9rem;
   }
   
