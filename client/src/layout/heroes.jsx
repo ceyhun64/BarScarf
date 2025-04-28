@@ -27,7 +27,6 @@ export default function Heroes() {
                 position: "relative",
                 borderRadius: "10px",
                 marginBottom: "20px",
-                margi
             }}
         >
             <Link to="/products" style={{ textDecoration: "none" }}>
