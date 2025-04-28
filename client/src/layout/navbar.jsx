@@ -88,7 +88,7 @@ export default function Navbar() {
               }}
             />
             <i
-              className="bi bi-search position-absolute top-50 start-0 translate-middle-y ms-3"
+              className="bi bi-search position-absolute top-50 end-0 translate-middle-y me-3"
               style={{ pointerEvents: "none", color: "#D3AF37", fontSize: "1.1rem" }}
             ></i>
           </div>
