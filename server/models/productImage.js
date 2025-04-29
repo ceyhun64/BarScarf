@@ -11,12 +11,12 @@ const ProductImage = sequelize.define("productImages", {
     get() {
       const rawValue = this.getDataValue("imageUrl");
       if (!rawValue) return null;
-      
+
       // Eğer zaten tam URL değilse başına BASE_URL ekle
       if (rawValue.startsWith("http")) {
         return rawValue;
       }
-      
+
       return `${BASE_URL}${rawValue.startsWith("/") ? "" : "/"}${rawValue}`;
     },
   },

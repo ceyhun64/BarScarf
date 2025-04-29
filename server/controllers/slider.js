@@ -38,4 +38,3 @@ exports.get_slider = async (req, res) => {
         res.status(500).json({ error: "Slider'lar çekilirken hata oluştu." });
     }
 }
-

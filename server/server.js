@@ -60,6 +60,7 @@ const colorSizeRoutes = require("./routes/color-size");
 const paymentRoutes = require("./routes/payment");
 const cargoRoutes = require("./routes/cargo");
 const subscribeRoutes = require("./routes/subscribe");
+const sliderRoutes = require("./routes/slider");
 
 // Statik Dosyalar (Resimler)
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
@@ -82,6 +83,7 @@ app.use("/api/color-size", colorSizeRoutes);
 app.use("/api/payment", paymentRoutes);
 app.use("/api/cargo", cargoRoutes);
 app.use("/api/subscribe", subscribeRoutes);
+app.use("/api/slider", sliderRoutes);
 
 // Veritabanı Senkronizasyonu ve Admin Kullanıcı Oluşturma
 (async () => {

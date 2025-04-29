@@ -4,7 +4,7 @@ require('dotenv').config();
 
 const BASE_URL = process.env.BASE_URL || "https://barscarf-11.onrender.com";  // BASE_URL'yi environment'dan al
 
-const Slider = sequelize.define('sliders', {
+const Banner = sequelize.define('banners', {
     imageUrl: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -19,17 +19,9 @@ const Slider = sequelize.define('sliders', {
             
             return `${BASE_URL}${rawValue.startsWith("/") ? "" : "/"}${rawValue}`;  // Başına BASE_URL ekle
         },
-    },
-    title: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    description: {
-        type: DataTypes.STRING,
-        allowNull: false
     }
 }, {
     timestamps: false,  // Zaman damgası istemiyorsak
 });
 
-module.exports = Slider;
+module.exports = Banner;
