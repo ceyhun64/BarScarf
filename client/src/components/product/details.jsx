@@ -33,8 +33,9 @@ export default function Details() {
     }, []);
 
     const otherColorVariants = allProducts.filter(
-        (p) => p.name === product.name && p.id !== product.id
+        (p) => p.group === product.group && p.id !== product.id
     );
+
 
     const handleAddToCart = () => {
         dispatch(addToCartThunk({ productId: id, quantity }));
@@ -163,7 +164,7 @@ export default function Details() {
                         </div>
                     )}
 
-                   
+
 
                     {/* Adet Seçimi */}
                     <div className="pt-4 mt-4 border-top" style={{ borderTop: '1px solid #dee2e6' }}>

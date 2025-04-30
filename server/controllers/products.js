@@ -209,7 +209,7 @@ exports.add_product = async (req, res) => {
         console.log("Kullanıcı verileri:", req.body); // Verilerin doğru geldiğini kontrol et
         console.log("Kullanıcı resimleri:", req.files); // Dosyaların doğru şekilde geldiğini kontrol et
 
-        const { subCategoryId, categoryId, name, price, stock, color, description, groupCode } = req.body;
+        const { subCategoryId, categoryId, name, price, stock, color, description, group } = req.body;
         const images = req.files ? req.files.map(file => `/uploads/${file.filename}`) : [];
 
 
@@ -219,7 +219,7 @@ exports.add_product = async (req, res) => {
         }
 
         // Ürünü veritabanına ekleyin
-        const product = await Product.create({ name, price, stock, color, description, groupCode }); // 'image' alanı yok, sadece diğer alanlar
+        const product = await Product.create({ name, price, stock, color, description, group }); // 'image' alanı yok, sadece diğer alanlar
 
         // Ürünü kategoriyle ilişkilendirin
         await ProductCategory.create({ categoryId, productId: product.id });
@@ -261,7 +261,7 @@ exports.update_product = async (req, res) => {
             return res.status(404).json({ error: "Ürün bulunamadı." });
         }
 
-        const { subCategoryId, categoryId, name, price, stock, color, description, groupCode } = req.body;
+        const { subCategoryId, categoryId, name, price, stock, color, description, group } = req.body;
         let imageUrls = [];
 
         // Eski resimleri sil
@@ -298,7 +298,7 @@ exports.update_product = async (req, res) => {
             stock,
             color,
             description,// Eğer renk Product tablosunda tutuluyorsa, burada doğrudan güncellenir
-            groupCode
+            group
         });
 
         // Ürünün kategorisini güncelle

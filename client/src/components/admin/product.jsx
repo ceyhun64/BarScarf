@@ -87,6 +87,7 @@ export default function Products() {
                                             <th>Fiyat</th>
                                             <th>Renk</th>
                                             <th>Stok</th>
+                                            <th>Grup</th>
                                             <th>İşlemler</th>
                                         </tr>
                                     </thead>
@@ -105,6 +106,7 @@ export default function Products() {
                                                 <td>{product.price} TL</td>
                                                 <td>{product.color}</td>
                                                 <td>{product.stock}</td>
+                                                <td>{product.group}</td>
                                                 <td>
                                                     <button
                                                         className="btn btn-sm me-2"

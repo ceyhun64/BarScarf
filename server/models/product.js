@@ -24,7 +24,7 @@ const Product = sequelize.define("products", {
     type: DataTypes.TEXT,
     allowNull: false,
   },
-  groupCode: {
+  group: {
     type: DataTypes.STRING,
     allowNull: true,
   },
