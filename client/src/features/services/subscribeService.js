@@ -1,7 +1,7 @@
 import axios from "axios";
 import axiosInstance from "./axiosInstance";
 
-const API_URL = `${import.meta.env.VITE_API_PRODUCTION_URL}/subscribe`;
+const API_URL = `${import.meta.env.VITE_API_URL}/subscribe`;
 
 export const createSubscribe = async (email) => {
     try {

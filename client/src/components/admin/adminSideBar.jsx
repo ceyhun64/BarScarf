@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import image from '../../../public/favicon/f8f539a0-6734-42b3-aabe-c35eb4378771.png';
 
 export default function AdminSidebar() {
     const navigate = useNavigate();
@@ -52,6 +51,9 @@ export default function AdminSidebar() {
                             </Link>
                             <Link to="/admin/subscribe" className="list-group-item list-group-item-action d-flex align-items-center">
                                 <i className="bi bi-envelope-plus me-3 fs-5"></i> Aboneler
+                            </Link>
+                            <Link to="/admin/home" className="list-group-item list-group-item-action d-flex align-items-center">
+                                <i className="bi bi-house me-3 fs-5"></i>Anasayfa
                             </Link>
                         </div>
                         <div className="card-footer bg-white text-center">

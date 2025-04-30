@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import './App.css'; // Veya stil dosyanın adı neyse
-import { BrowserRouter  as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LoginPage from './pages/login';
 import HomePage from './pages/home';
 import RegisterPage from './pages/register';
@@ -19,6 +19,8 @@ import PaymentPage from './pages/payment';
 import SearchPage from './components/product/search';
 import AboutPage from './pages/about';
 import AdminLoginPage from './pages/admin/loginPage';
+import AdminHome from './pages/admin/adminHome';
+import AdminHomeCreate from './pages/admin/adminHomeCreate';
 import AdminProducts from './pages/admin/products';
 import AdminUsers from './pages/admin/users';
 import AdminOrders from './pages/admin/orders';
@@ -70,6 +72,8 @@ export default function App() {
           <Route path="/search" element={<SearchPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/admin" element={<AdminLoginPage />} />
+          <Route path="/admin/home" element={<AdminHome />} />
+          <Route path="/admin/home/create" element={<AdminHomeCreate />} />
           <Route path="/admin/products" element={<AdminProducts />} />
           <Route path="/admin/users" element={<AdminUsers />} />
           <Route path="/admin/userdetail/:id" element={<AdminUserDetails />} />

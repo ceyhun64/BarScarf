@@ -1,39 +1,25 @@
-import React from "react";
+import React,{useEffect} from "react";
 import { useNavigate } from "react-router-dom";  // useNavigate importu
-import banner1 from "../../assets/images/11.jpg";
-import banner2 from "../../assets/images/12.jpg";
-import banner3 from "../../assets/images/14.jpg";
+import { getSlidersThunk } from "../../features/thunks/sliderThunk";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function HomeSlider() {
   const navigate = useNavigate();  // useNavigate hook'unu kullanıyoruz
+  const dispatch = useDispatch();
+  const { sliders } = useSelector((state) => state.slider);
 
-  const slides = [
-    {
-      img: banner1,
-      title: "Şıklığın Yeni Adresi",
-      subtitle: "Yeni sezon ürünlerle tarzını yansıt!",
-    },
-    {
-      img: banner2,
-      title: "Moda Tutkunları İçin",
-      subtitle: "Her tarza uygun şıklık burada.",
-    },
-    {
-      img: banner3,
-      title: "BARSCARF ile Işılda",
-      subtitle: "Altın dokunuşlarla stilini tamamla.",
-    },
-  ];
+   useEffect(() => {
+        dispatch(getSlidersThunk());
+    }, [dispatch]);
 
   const handleSlideClick = () => {
-    // Yönlendirme işlemi, /products sayfasına yönlendirir
     navigate("/products");
   };
 
   return (
     <div id="homeCarousel" className="carousel slide" data-bs-ride="carousel">
       <div className="carousel-inner">
-        {slides.map((slide, index) => (
+        {sliders.map((slide, index) => (
           <div
             key={index}
             className={`carousel-item ${index === 0 ? "active" : ""}`}
@@ -57,7 +43,7 @@ export default function HomeSlider() {
                 <h1 className="display-3 fw-bold" style={{ color: "#D3AF37" }}>
                   {slide.title}
                 </h1>
-                <p className="lead fs-5">{slide.subtitle}</p>
+                <p className="lead fs-5">{slide.description}</p>
               </div>
             </div>
           </div>

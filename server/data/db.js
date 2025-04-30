@@ -2,6 +2,7 @@
 require("dotenv").config(); //.env dosyasını dahil ettik
 const Sequelize = require("sequelize"); //sequelize kütüphanesini dahil ettik
 
+
 //sequelize nesnesi oluşturuyoruz
 const sequelize = new Sequelize(process.env.DB_URL, {
   dialect: "mysql", //veritabanının dilini belirtiyoruz

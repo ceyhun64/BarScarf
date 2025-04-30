@@ -29,7 +29,7 @@ const fileFilter = (req, file, cb) => {
 const upload = multer({
     storage: storage,
     fileFilter: fileFilter,
-    limits: { fileSize: 20 * 1024 * 1024  } // Maksimum dosya boyutunu 5MB ile sınırlıyoruz
+    limits: { fileSize: 5 * 1024 * 1024  } // Maksimum dosya boyutunu 5MB ile sınırlıyoruz
 });
 
 const uploadMultiple = upload.array('images', 5); // Burada 'images[]' key'i kullanılacak ve maksimum 5 dosya yüklenebilir

@@ -10,7 +10,7 @@ const User = require("./models/user");
 
 // Middlewares
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'https://www.barscarf.com'); // Frontend'inizin domain'ini buraya ekleyin
+  res.header('Access-Control-Allow-Origin', process.env.FRONTEND_URL); // Frontend'inizin domain'ini buraya ekleyin
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE'); // İzin verilen HTTP metotları
   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization'); // İzin verilen başlıklar
   next(); // Bir sonraki middleware'e geçiş
@@ -21,7 +21,8 @@ const corsOptions = {
   origin: [
     "https://www.barscarf.com",
     "https://barscarf-11.onrender.com",
-    "https://bar-scarf-iqzh.vercel.app"
+    "https://bar-scarf-iqzh.vercel.app",
+    "http://localhost:5173"
   ],
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
   credentials: true, // Çerezler için
@@ -112,6 +113,15 @@ app.use("/api/slider", sliderRoutes);
     // process.exit(1);
   }
 })();
+
+if (process.env.NODE_ENV === 'production') {
+  console.log('Uygulama üretim (production) modunda çalışıyor');
+} else if (process.env.NODE_ENV === 'development') {
+  console.log('Uygulama geliştirme (development) modunda çalışıyor');
+} else {
+  console.log('Uygulama belirli bir ortamda çalışmıyor');
+}
+
 
 const PORT = process.env.PORT || 3000;
 

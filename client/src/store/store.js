@@ -10,6 +10,7 @@ import userReducer from '../features/slices/userSlice'
 import paymentReducer from '../features/slices/paymentSlice'
 import orderReducer from '../features/slices/orderSlice'
 import subscribeReducer from '../features/slices/subscribeSlice'
+import sliderReducer from '../features/slices/sliderSlice'
 
 export const store = configureStore({
   reducer: {
@@ -24,5 +25,6 @@ export const store = configureStore({
     payment: paymentReducer,
     order: orderReducer,
     subscribe: subscribeReducer,
+    slider: sliderReducer
   },
 })
