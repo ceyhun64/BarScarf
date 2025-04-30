@@ -34,6 +34,7 @@ import AdminProductEdit from './pages/admin/productEdit';
 import AdminUserDetails from './pages/admin/userDetail';
 import AdminSubscribe from './pages/admin/subscribe';
 import ScrollToTopButton from './layout/scrollButton';
+import ScrollToTop from './layout/scrollToTop';
 import WhatsApp from './layout/whatsapp';
 import NotFound from './pages/notFound';
 
@@ -50,6 +51,7 @@ export default function App() {
 
   return (
     <Router>
+      <ScrollToTop />
       <ScrollToTopButton />
       <div>
         <Routes>

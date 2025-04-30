@@ -13,17 +13,17 @@ export default function ProductsPageByCategory() {
             <Navbar />
             <CategoryBar />
 
-            <div className=" mt-3">
+            <div className="mt-3">
                 {/* Responsive filtre ve sıralama */}
                 <div className="container">
-                    <div className="row g-3 align-items-start">
-                        <div className="col-md-10">
-                            <div className="d-flex flex-wrap gap-3 ms-2">
+                    <div className="row g-3 align-items-center">
+                        <div className="col-6 col-md-10">
+                            <div className="d-flex flex-wrap gap-2">
                                 <ColorFilter />
                             </div>
                         </div>
-                        <div className='col-md-2'>
-                            <div className="d-flex flex-wrap gap-3 ms-2">
+                        <div className="col-6 col-md-2">
+                            <div className="d-flex justify-content-md-end justify-content-start">
                                 <Sort />
                             </div>
                         </div>
@@ -32,7 +32,7 @@ export default function ProductsPageByCategory() {
             </div>
 
             {/* Ürün listesi */}
-            <div className="my-4 me-3 ms-3">
+            <div className="my-1 me-3 ms-3">
                 <ListBySubCategory />
             </div>
 

@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
-import Card from '../product/card'; // Card bileşenini import et
-import { getProductsThunk } from '../../features/thunks/productThunk'; // getProductsThunk fonksiyonunu import ediyoruz
-import { useSelector, useDispatch } from 'react-redux'; // useSelector hook'unu import ediyoruz
+import Card from '../product/card';
+import { getProductsThunk } from '../../features/thunks/productThunk';
+import { useSelector, useDispatch } from 'react-redux';
 
 export default function FeaturedProducts() {
-    const dispatch = useDispatch(); // useDispatch hook'unu kullanarak dispatch fonksiyonunu alıyoruz
-    const { products, loading, error } = useSelector(state => state.product); // products dizisini ve loading durumunu alıyoruz
+    const dispatch = useDispatch();
+    const { products, loading, error } = useSelector(state => state.product);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -15,37 +15,32 @@ export default function FeaturedProducts() {
                 console.error("Ürünler alınırken bir hata oluştu:", error);
             }
         };
-        fetchData(); // Async fonksiyonu çağır
-    }, [dispatch]); // `dispatch` bağımlılığı eklenmeli!
+        fetchData();
+    }, [dispatch]);
 
-    // Eğer loading durumu varsa, yükleniyor mesajı göster
     if (loading) {
         return <div>Yükleniyor...</div>;
     }
 
-    // Eğer bir hata oluştuysa, hata mesajı göster
     if (error) {
         return <div>Bir hata oluştu: {error.message}</div>;
     }
 
-    // Eğer products dizisi boş veya undefined ise, boş bir dizi atayın
-    const productList = products || [];
+    const productList = (products || []).slice(0, 10); // 🔥 İlk 10 ürünü al
 
-    // Eğer ürünler yoksa, "Ürün Bulunamadı" mesajı göster
     if (productList.length === 0) {
         return <div>Ürün Bulunamadı</div>;
     }
 
-    // products dizisini map ile render ediyoruz
     return (
         <div className="container" style={{ marginTop: "10px", marginBottom: "20px" }}>
             <div
                 className="product-list d-flex overflow-auto"
                 style={{
                     display: "flex",
-                    overflowX: "auto",  // Yatay kaydırma için
-                    gap: "15px", // Ürünler arasına boşluk ekledik
-                    padding: "20px 0", // Üst ve alt boşluk
+                    overflowX: "auto",
+                    gap: "15px",
+                    padding: "20px 0",
                 }}
             >
                 {productList.map((product) => (

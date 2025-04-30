@@ -94,6 +94,7 @@ export default function Card({ product }) {
                 style={{
                     background: "linear-gradient(45deg, #ffffff, rgba(223, 154, 6, 0.26))",
                     padding: "8px 0",
+                    maxHeight:"60px"
                 }}
             >
                 <div className="text-start" style={{ maxWidth: '70%' }}>

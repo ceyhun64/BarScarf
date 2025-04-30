@@ -36,10 +36,11 @@ exports.createPayment = (req, res) => {
         if (result.status == 'success') {
             // Ödeme başarılıysa, siparişi tamamla
             try {
-                const id=basketId-1
+                const basketId = parseInt(req.body.basketId);  // basketId'yi doğru bir şekilde alıyoruz
                 console.log("basketId:", basketId);
-                console.log("id:", id);
-                const order = await complete_order_after_payment(id); // basketId burada orderId olarak geliyor olmalı
+
+                // Sepet kimliği ile siparişin doğru bir şekilde ilişkilendirildiğinden emin olun
+                const order = await complete_order_after_payment(basketId);  // orderId'yi doğru şekilde geçiriyoruz
 
                 return res.status(200).json({
                     message: "Ödeme başarılı ve sipariş tamamlandı.",
