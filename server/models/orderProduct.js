@@ -2,7 +2,6 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../data/db');
 const Order = require('./order');
 const Product = require('./product');
-const Size = require('./size');
 
 const OrderProduct = sequelize.define('orderProducts', {
     orderId: {
@@ -21,14 +20,6 @@ const OrderProduct = sequelize.define('orderProducts', {
             key: 'id'
         }
     },
-    sizeId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: 'sizes',
-            key: 'id'
-        }
-    },
     quantity: {
         type: DataTypes.INTEGER,
         allowNull: false
@@ -44,6 +35,5 @@ const OrderProduct = sequelize.define('orderProducts', {
 // İlişkiler
 OrderProduct.belongsTo(Order, { foreignKey: "orderId", as: "order", onDelete: 'CASCADE' });
 OrderProduct.belongsTo(Product, { foreignKey: "productId", as: "product" });
-OrderProduct.belongsTo(Size, { foreignKey: "sizeId", as: "size" });
 
 module.exports = OrderProduct;

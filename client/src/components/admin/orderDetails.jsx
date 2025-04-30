@@ -99,7 +99,6 @@ export default function OrderDetails() {
                                         <tr>
                                             <th>Ürün Adı</th>
                                             <th>Renk</th>
-                                            <th>Beden</th>
                                             <th>Adet</th>
                                             <th>Birim Fiyat</th>
                                             <th>Ara Toplam</th>
@@ -110,7 +109,6 @@ export default function OrderDetails() {
                                             <tr key={item.id}>
                                                 <td>{item.product.name}</td>
                                                 <td>{item.product.color}</td>
-                                                <td>{item.size.name}</td>
                                                 <td>{item.quantity}</td>
                                                 <td>{parseFloat(item.priceAtPurchase).toFixed(2)} ₺</td>
                                                 <td>{(item.quantity * parseFloat(item.priceAtPurchase)).toFixed(2)} ₺</td>

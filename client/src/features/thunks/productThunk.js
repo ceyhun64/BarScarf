@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { getProducts, getProductById, getProductsByCategory, getProductsBySubcategory, getProductsBySize, getProductsByName, getProductsByColor, createProduct, updateProduct, deleteProduct } from "../services/productService";
+import { getProducts, getProductById, getProductsByCategory, getProductsBySubcategory, getProductsByName, getProductsByColor, createProduct, updateProduct, deleteProduct } from "../services/productService";
 
 export const getProductsThunk = createAsyncThunk(
     "products/getProducts",
@@ -50,18 +50,6 @@ export const getProductsBySubcategoryThunk = createAsyncThunk(
     }
 );
 
-
-export const getProductsBySizeThunk = createAsyncThunk(
-    "products/getProductsBySize",
-    async (size, thunkAPI) => {
-        try {
-            const response = await getProductsBySize(size);
-            return response.data;
-        } catch (error) {
-            return thunkAPI.rejectWithValue(error.response.data);
-        }
-    }
-);
 
 export const getProductsByNameThunk = createAsyncThunk(
     "products/getProductsByName",

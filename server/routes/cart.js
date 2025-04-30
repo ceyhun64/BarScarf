@@ -15,10 +15,10 @@ router.get("/", verifyToken, cartController.get_cart);
 router.get("/:productId", verifyToken, cartController.get_product);
 
 // Sepetteki ürün sayısını artırma
-router.put("/increase/:productId/:sizeId/:colorId", verifyToken, cartController.increase_product);
+router.put("/increase/:productId/:colorId", verifyToken, cartController.increase_product);
 
 // Sepetteki ürün sayısını azaltma
-router.put("/decrease/:productId/:sizeId/:colorId", verifyToken, cartController.decrease_product)
+router.put("/decrease/:productId/:colorId", verifyToken, cartController.decrease_product)
 
 //sepeti temizleme
 router.delete("/clear", verifyToken, cartController.clear_cart);

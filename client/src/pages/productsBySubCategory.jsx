@@ -4,7 +4,6 @@ import CategoryBar from '../layout/categoryBar'
 import ListBySubCategory from '../components/product/listBySubCategory'
 import Sort from '../components/product/sort'
 import ColorFilter from '../components/product/filterColor'
-import SizeFilter from '../components/product/filterSize'
 import Subscribe from '../components/home/subscribe'
 import Footer from '../layout/footer'
 
@@ -21,7 +20,6 @@ export default function ProductsPageByCategory() {
                         <div className="col-md-10">
                             <div className="d-flex flex-wrap gap-3 ms-2">
                                 <ColorFilter />
-                                <SizeFilter />
                             </div>
                         </div>
                         <div className='col-md-2'>

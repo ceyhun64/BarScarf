@@ -2,7 +2,6 @@ const fs = require("fs");
 const path = require('path');  // path modülünü içe aktar
 const { Op } = require("sequelize");
 const Product = require("../models/product");
-const Size = require("../models/size");
 const Favorite = require("../models/favorite");
 const CartProduct = require("../models/cartProduct");
 const ProductImage = require("../models/productImage");
@@ -12,7 +11,6 @@ const ProductSubCategory = require("../models/productSubCategory");
 const SubCategory = require("../models/subCategory");
 const Review = require("../models/review");
 const Category = require("../models/category");
-const ProductSize = require("../models/productSize");
 
 exports.get_product = async (req, res) => {
     try {
@@ -118,48 +116,6 @@ exports.get_product_by_subcategory = async (req, res) => {
     }
 }
 
-// Ürün listeleme(bedene göre)
-exports.get_product_by_size = async (req, res) => {
-    try {
-        const sizeId = req.params.sizeId;
-
-        if (!sizeId) {
-            return res.status(400).json({ error: "Geçersiz sizeId" });
-        }
-
-        const productSizes = await ProductSize.findAll({
-            where: { sizeId: sizeId }
-        });
-
-        // Eğer bu renk ile eşleşen ürün yoksa boş bir liste döndür
-        if (!productSizes.length) {
-            return res.status(404).json({ error: "Bu bedende ürün bulunamadı" });
-        }
-
-        // Eşleşen ürünlerin productId'lerini al
-        const productIds = productSizes.map(p => p.productId);
-
-        // Bu productId'lere sahip ürünleri getir
-        const products = await Product.findAll({
-            where: {
-                id: productIds
-            },
-            include: [
-                {
-                    model: ProductImage,
-                    as: 'images', // images alias'ı kullanıyoruz
-                    attributes: ["imageUrl"], // Sadece 'imageUrl' alanını çekiyoruz
-                }
-            ]
-
-        });
-        res.json({ message: "Ürünler başarıyla çekildi.", products });
-    } catch (error) {
-        console.error("Hata oluştu:", error);
-        res.status(500).json({ error: "Sunucu hatası" });
-    }
-}
-
 // Ürün listeleme(isme göre)
 exports.get_product_by_name = async (req, res) => {
     try {
@@ -229,11 +185,6 @@ exports.get_product_by_id = async (req, res) => {
         const product = await Product.findByPk(req.params.id, {
             include: [
                 {
-                    model: Size, //  Ara tablo yerine Size modelini ekle
-                    through: { attributes: [] }, // Ara tabloyu dahil etme
-                    attributes: ['id', 'name'] // Sadece beden adını getir
-                },
-                {
                     model: ProductImage, // Görselleri ekleyelim
                     as: 'images', // İlişkili görselleri 'images' adıyla alacağız
                     attributes: ['id', 'imageUrl'] // Görsellerin id'si, URL'si ve ana olup olmadığı
@@ -258,7 +209,7 @@ exports.add_product = async (req, res) => {
         console.log("Kullanıcı verileri:", req.body); // Verilerin doğru geldiğini kontrol et
         console.log("Kullanıcı resimleri:", req.files); // Dosyaların doğru şekilde geldiğini kontrol et
 
-        const { subCategoryId, categoryId, name, price, stock, color, sizeIds, description } = req.body;
+        const { subCategoryId, categoryId, name, price, stock, color, description } = req.body;
         const images = req.files ? req.files.map(file => `/uploads/${file.filename}`) : [];
 
 
@@ -275,12 +226,7 @@ exports.add_product = async (req, res) => {
 
         await ProductSubCategory.create({ subCategoryId, productId: product.id });
 
-        // Ürünü bedenle ilişkilendirin (sizeIds boş değilse)
-        if (sizeIds && sizeIds.length > 0) {
-            const sizes = await Size.findAll({ where: { id: sizeIds } });
-            await product.addSizes(sizes);
-        }
-
+      
         // Ürün resimlerini 'ProductImage' tablosuna ekleyin
         const imageRecords = []; // Resim kayıtlarını tutmak için bir dizi
         for (const image of images) {
@@ -315,7 +261,7 @@ exports.update_product = async (req, res) => {
             return res.status(404).json({ error: "Ürün bulunamadı." });
         }
 
-        const { subCategoryId, categoryId, name, price, stock, color, sizeIds, description } = req.body;
+        const { subCategoryId, categoryId, name, price, stock, color, description } = req.body;
         let imageUrls = [];
 
         // Eski resimleri sil
@@ -375,12 +321,7 @@ exports.update_product = async (req, res) => {
             await product.save(); // Kaydet
         }
 
-        // Bedeni varsa, güncelle
-        if (sizeIds && sizeIds.length > 0) {
-            const sizes = await Size.findAll({ where: { id: sizeIds } });
-            await product.setSizes(sizes); // Product-Sizes ilişkilendirmesi
-        }
-
+      
         // Başarıyla güncellenmiş ürünü döndür
         res.json({
             message: "Ürün başarıyla güncellendi.",
@@ -422,8 +363,6 @@ exports.delete_product = async (req, res) => {
 
         // Diğer ilişkileri sil
         await OrderProduct.destroy({ where: { productId: product.id } });
-        await product.setSizes([]);
-        await ProductSize.destroy({ where: { productId: product.id } });
         await Favorite.destroy({ where: { productId: product.id } });
         await ProductCategory.destroy({ where: { productId: product.id } });
         await ProductSubCategory.destroy({ where: { productId: product.id } });

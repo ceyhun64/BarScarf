@@ -2,7 +2,6 @@ import { configureStore } from '@reduxjs/toolkit'
 import authReducer from '../features/slices/authSlice'
 import productReducer from '../features/slices/productSlice'
 import categoryReducer from '../features/slices/categorySlice'
-import colorsizeReducer from '../features/slices/colorsizeSlice'
 import favoriteReducer from '../features/slices/favoriteSlice'
 import cartReducer from '../features/slices/cartSlice'
 import userDetailsReducer from '../features/slices/userDetailsSlice'
@@ -17,7 +16,6 @@ export const store = configureStore({
     auth: authReducer,
     product: productReducer,
     category: categoryReducer,
-    colorSize: colorsizeReducer,
     favorite: favoriteReducer,
     cart: cartReducer,
     userDetails: userDetailsReducer,

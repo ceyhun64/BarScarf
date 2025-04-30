@@ -5,7 +5,6 @@ import List from '../components/product/list';
 import Footer from '../layout/footer';
 import Sort from '../components/product/sort';
 import ColorFilter from '../components/product/filterColor';
-import SizeFilter from '../components/product/filterSize';
 import Subscribe from '../components/home/subscribe';
 
 export default function ProductsPage() {
@@ -20,7 +19,6 @@ export default function ProductsPage() {
                         <div className="col-md-10">
                             <div className="d-flex flex-wrap gap-3 ms-2">
                                 <ColorFilter />
-                                <SizeFilter />
                             </div>
                         </div>
                         <div className='col-md-2'>

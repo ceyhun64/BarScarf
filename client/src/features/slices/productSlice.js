@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getProductsThunk, getProductByIdThunk, getProductsByCategoryThunk, getProductsBySubcategoryThunk, getProductsBySizeThunk, getProductsByNameThunk, getProductsByColorThunk, createProductThunk, updateProductThunk, deleteProductThunk } from '../thunks/productThunk';
+import { getProductsThunk, getProductByIdThunk, getProductsByCategoryThunk, getProductsBySubcategoryThunk, getProductsByNameThunk, getProductsByColorThunk, createProductThunk, updateProductThunk, deleteProductThunk } from '../thunks/productThunk';
 
 const initialState = {
     products: [],
@@ -85,18 +85,6 @@ const productSlice = createSlice({
             })
 
 
-            //getProductsBySizeThunk
-            .addCase(getProductsBySizeThunk.pending, (state) => {
-                state.loading = true;
-            })
-            .addCase(getProductsBySizeThunk.fulfilled, (state, action) => {
-                state.loading = false;
-                state.products = action.payload.products;
-            })
-            .addCase(getProductsBySizeThunk.rejected, (state, action) => {
-                state.loading = false;
-                state.error = action.payload.error;
-            })
 
             .addCase(getProductsByNameThunk.pending, (state) => {
                 state.loading = true;

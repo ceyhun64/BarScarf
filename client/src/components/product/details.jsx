@@ -7,7 +7,6 @@ import { clearAlert } from '../../features/slices/cartSlice';
 import './details.css'
 
 export default function Details() {
-    const [selectedSize, setSelectedSize] = useState(null);
     const [isFavorite, setIsFavorite] = useState(false);
     const [quantity, setQuantity] = useState(1);
     const [allProducts, setAllProducts] = useState([]);
@@ -38,12 +37,8 @@ export default function Details() {
     );
 
     const handleAddToCart = () => {
-        if (selectedSize) {
-            dispatch(addToCartThunk({ productId: id, size: selectedSize, quantity }));
-            setTimeout(() => dispatch(clearAlert()), 1000);
-        } else {
-            console.error("Lütfen beden seçin.");
-        }
+        dispatch(addToCartThunk({ productId: id, quantity }));
+        setTimeout(() => dispatch(clearAlert()), 1000);
     };
 
     const handleNextImage = () => {
@@ -168,26 +163,7 @@ export default function Details() {
                         </div>
                     )}
 
-                    {/* Beden Seçimi */}
-                    <div className="pt-4 mt-4 border-top" style={{ borderTop: '1px solid #dee2e6' }}>
-                        <h5 className="fw-semibold">Beden Seçin</h5>
-                        <div className="d-flex gap-2 flex-wrap">
-                            {product.sizes?.map((size) => (
-                                <div
-                                    key={size.id}
-                                    onClick={() => setSelectedSize(size.name)}
-                                    className={`px-3 py-2 rounded-pill border fw-medium shadow-sm ${selectedSize === size.name ? 'bg-dark text-white' : 'bg-light text-dark'}`}
-                                    style={{
-                                        cursor: 'pointer',
-                                        transition: 'all 0.2s ease-in-out',
-                                        transform: selectedSize === size.name ? 'scale(1.05)' : 'scale(1)',
-                                    }}
-                                >
-                                    {size.name}
-                                </div>
-                            ))}
-                        </div>
-                    </div>
+                   
 
                     {/* Adet Seçimi */}
                     <div className="pt-4 mt-4 border-top" style={{ borderTop: '1px solid #dee2e6' }}>

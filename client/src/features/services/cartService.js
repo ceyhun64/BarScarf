@@ -20,9 +20,9 @@ export const getProductCart = async (productId) => {
     }
 }
 
-export const addProductCart = async (productId, size, quantity) => {
+export const addProductCart = async (productId, quantity) => {
     try {
-        const res = await axiosInstance.post("/cart/add", { productId, size, quantity });
+        const res = await axiosInstance.post("/cart/add", { productId, quantity });
         return res;
     } catch (error) {
         console.error("API'den veri çekerken hata oluştu:", error);
@@ -50,9 +50,9 @@ export const clearCart = async () => {
     }
 }
 
-export const updateProductCart = async (productId, quantity, sizeId) => {
+export const updateProductCart = async (productId, quantity) => {
     try {
-        const res = await axiosInstance.put(`/cart/update/${productId}`, { quantity, sizeId });
+        const res = await axiosInstance.put(`/cart/update/${productId}`, { quantity });
         return res;
     } catch (error) {
         console.error("API'den veri çekerken hata oluştu:", error);

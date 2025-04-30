@@ -110,7 +110,6 @@ export default function Cart() {
                     />
                     <div className="ms-3 flex-grow-1">
                       <h6 className="fw-bold ms-3">{item.products?.name || "Ürün Adı"}</h6>
-                      <p className="mb-1 text-muted ms-3">Beden: {item.sizes?.name || "Beden Bilgisi Yok"}</p>
                       <p className="mb-1 text-muted ms-3">
                         Fiyat: {item.products?.price}₺
                       </p>

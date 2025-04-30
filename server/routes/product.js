@@ -16,9 +16,6 @@ router.get("/category/:categoryId", productController.get_product_by_category);
 // Ürün listeleme (alt kategoriye göre)
 router.get("/sub/:subCategoryId", productController.get_product_by_subcategory);
 
-// Ürün listeleme (bedene göre)
-router.get("/size/:sizeId", productController.get_product_by_size);
-
 // Ürün listeleme (isme göre)
 router.get("/name/:name", productController.get_product_by_name);
 

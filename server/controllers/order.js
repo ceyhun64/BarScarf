@@ -2,7 +2,6 @@ const Order = require('../models/order');
 const OrderProduct = require('../models/orderProduct');
 const CartProduct = require('../models/cartProduct');
 const Product = require('../models/product');
-const Size = require('../models/size');
 const Cart = require('../models/cart');
 
 //kişisel sipariş detayı getirme
@@ -28,10 +27,7 @@ exports.get_my_order_details = async (req, res) => {
                     model: Product,
                     as: 'product'
                 },
-                {
-                    model: Size,
-                    as: 'size'
-                }
+                
             ]
         });
 
@@ -122,10 +118,7 @@ exports.get_order_details = async (req, res) => {
                     model: Product,
                     as: 'product',
                 },
-                {
-                    model: Size,
-                    as: 'size',
-                },
+               
 
             ]
         });
@@ -167,7 +160,6 @@ exports.create_order = async (req, res) => {
             const orderProduct = await OrderProduct.create({
                 quantity: cartProduct.quantity,
                 priceAtPurchase: cartProduct.price,
-                sizeId: cartProduct.sizeId, // Sepetteki ürünün sizeId'si
                 productId: cartProduct.productId, // Ürün ID'si
                 orderId: order.id // Oluşturduğumuz siparişin ID'si
             });

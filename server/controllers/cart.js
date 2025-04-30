@@ -1,42 +1,23 @@
 const Cart = require("../models/cart");
 const CartProduct = require("../models/cartProduct");
-const ProductSize = require("../models/productSize");
 const Product = require("../models/product");
-const Size = require("../models/size");
 const ProductImage = require("../models/productImage");
 
 // Sepete ürün ekleme
 exports.add_product = async (req, res) => {
     const cartId = req.user.id;//cartId yi linkten çekiyoruz
-    const { productId, size, quantity } = req.body;//productId,sizeId,quantity yi kullnıcıdan alıyoruz
+    const { productId, quantity } = req.body;//productId,sizeId,quantity yi kullnıcıdan alıyoruz
     try {
-        const sizee = await Size.findOne({//sizeId yi size'a göre buluyoruz    
-            where: {
-                name: size
-            }
-        })
         const product = await Product.findOne({
             where: {
                 id: productId
             }
         })
         const price = product.price;
-        const sizeId = sizee.id;//sizeId'yi sizeID'ye atıyoruz
-
-        const productSize = await ProductSize.findOne({//productId ve sizeId'ye göre productSize'ı buluyoruz
-            where: {
-                productId,
-                sizeId
-            }
-        })
-        if (!productSize) {//productSize yoksa hata döndürüyoruz (beden ve ürün eşleşmesi yok)
-            return res.status(404).json({ message: "Ürün bulunamadı" });
-        }
         const cartProduct = await CartProduct.findOne({//cartId productId ve sizeId'ye göre cartProduct'ı buluyoruz
             where: {
                 cartId: cartId,
                 productId: productId,
-                sizeId: sizeId,
             }
         })
         if (cartProduct) {//cartProduct varsa quantity'u arttırıyoruz
@@ -47,7 +28,6 @@ exports.add_product = async (req, res) => {
             await CartProduct.create({
                 cartId: cartId,
                 productId: productId,
-                sizeId: sizeId,
                 quantity: quantity,
                 price: quantity * price
             })
@@ -77,10 +57,6 @@ exports.get_cart = async (req, res) => {
                             attributes: ["imageUrl"],
                         },
                     ]
-                },
-                {
-                    model: Size,//sizeId'ye göre size tablosunu çekiyoruz
-                    as: "sizes",
                 },
             ]
         });
@@ -128,12 +104,10 @@ exports.get_product = async (req, res) => {
 exports.increase_product = async (req, res) => {
     const cartId = req.user.id;//cartId yi linkten çekiyoruz
     const productId = req.params.productId;//productId yi linkten çekiyoruz
-    const sizeId = req.params.sizeId;//sizeId yi linkten çekiyoruz
     const cartProduct = await CartProduct.findOne({//cartId productId ve sizeId'ye göre cartProduct'ı buluyoruz
         where: {
             cartId: cartId,
             productId: productId,
-            sizeId: sizeId,
         }
     });
     if (!cartProduct) {//cartProduct yoksa hata döndürüyoruz
@@ -148,12 +122,10 @@ exports.increase_product = async (req, res) => {
 exports.decrease_product = async (req, res) => {
     const cartId = req.user.id;//cartId yi linkten çekiyoruz
     const productId = req.params.productId;//productId yi linkten çekiyoruz
-    const sizeId = req.params.sizeId;//sizeId yi linkten çekiyoruz
     const cartProduct = await CartProduct.findOne({//cartId productId ve sizeId'ye göre cartProduct'ı buluyoruz
         where: {
             cartId: cartId,
             productId: productId,
-            sizeId: sizeId,
         }
     });
     if (!cartProduct) {///cartProduct yoksa hata döndürüyoruz
@@ -198,7 +170,7 @@ exports.update_product = async (req, res) => {
     try {
         const cartId = req.user.id; // cartId'yi linkten çekiyoruz
         const productId = req.params.productId; // productId'yi linkten çekiyoruz
-        const { quantity, sizeId } = req.body; // quantity, sizeId 'ı kullanıcıdan çekiyoruz
+        const { quantity } = req.body; // quantity, sizeId 'ı kullanıcıdan çekiyoruz
 
         // Sepetteki ilgili ürünü bul
         const cartProduct = await CartProduct.findOne({
@@ -217,7 +189,6 @@ exports.update_product = async (req, res) => {
 
         // Güncellenmesi gereken değerleri atama
         cartProduct.quantity = quantity;
-        cartProduct.sizeId = sizeId;
         await cartProduct.save(); // Sepetteki ürünü güncelle ve kaydet
 
         res.status(200).json({ message: "Ürün başarıyla güncellendi", cartProduct });

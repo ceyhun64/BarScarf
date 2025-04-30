@@ -3,9 +3,7 @@ const { DataTypes } = require("sequelize");
 const sequelize = require("../data/db");
 
 const Product = require("./product");
-const Size = require("./size");
 const Cart = require("./cart");
-const ProductSize = require("./productSize");
 
 const CartProduct = sequelize.define("cartProducts", {
     cartId: {
@@ -24,14 +22,6 @@ const CartProduct = sequelize.define("cartProducts", {
             key: "id",
         },
     },
-    sizeId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: "sizes", // Size tablosuna dış anahtar
-            key: "id",
-        },
-    },
     quantity: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -47,15 +37,5 @@ const CartProduct = sequelize.define("cartProducts", {
 
 CartProduct.belongsTo(Cart, { foreignKey: "cartId", as: "carts" });//cart idsni alıyoruz
 CartProduct.belongsTo(Product, { foreignKey: "productId", as: "products" });//product idsni alıyoruz
-CartProduct.belongsTo(Size, { foreignKey: "sizeId", as: "sizes" });//size idsni alıyoruz
-
-CartProduct.belongsTo(ProductSize, {
-    foreignKey: "productId",  // productId üzerinden ilişki
-    as: "productById"  // Benzersiz alias
-});
-CartProduct.belongsTo(ProductSize, {
-    foreignKey: "sizeId",  // sizeId üzerinden ilişki
-    as: "productBySize"  // Benzersiz alias
-});
 
 module.exports = CartProduct;

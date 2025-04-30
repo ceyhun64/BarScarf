@@ -70,8 +70,7 @@ const cartSlice = createSlice({
                 }
                 const existingProduct = state.cart.find(
                     (item) =>
-                        item.productId === action.payload.productId &&
-                        item.sizeId === action.payload.sizeId
+                        item.productId === action.payload.productId
                 );
 
                 if (existingProduct) {
@@ -99,11 +98,10 @@ const cartSlice = createSlice({
                     type: "danger"
                 }
                 // Silinen ürünün sepetteki kopyasını kaldır
-                const { productId, sizeId } = action.payload;
+                const { productId } = action.payload;
                 state.cart = state.cart.filter(
                     (item) =>
-                        item.productId !== productId ||
-                        item.sizeId !== sizeId
+                        item.productId !== productId
                 );
             })
             .addCase(deleteProductCartThunk.rejected, (state, action) => {
@@ -119,11 +117,10 @@ const cartSlice = createSlice({
                 state.cartLoading = false;
 
                 // Güncellenen ürünün quantity'sini güncelle
-                const { productId, sizeId, newQuantity } = action.payload;
+                const { productId, newQuantity } = action.payload;
                 const product = state.cart.find(
                     (item) =>
-                        item.productId === productId &&
-                        item.sizeId === sizeId
+                        item.productId === productId
                 );
                 state.alert = {
                     message: "Sepetteki ürün güncellendi",

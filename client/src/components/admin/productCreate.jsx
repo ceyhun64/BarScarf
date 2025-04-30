@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
 import { createProductThunk } from '../../features/thunks/productThunk';
 import { getCategoriesThunk, getSubCategoryThunk } from '../../features/thunks/categoryThunk';
-import { getSizesThunk } from '../../features/thunks/colorsizeThunk';
 import { clearAlert } from '../../features/slices/productSlice';
 import AdminSidebar from './adminSideBar';
 import image from '../../../public/favicon/f8f539a0-6734-42b3-aabe-c35eb4378771.png';
@@ -12,13 +11,12 @@ export default function ProductCreateForm() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { categories, subCategories } = useSelector((state) => state.category);
-    const { sizes } = useSelector((state) => state.colorSize);
     const { alert } = useSelector((state) => state.product);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                await Promise.all([dispatch(getCategoriesThunk()).unwrap(), dispatch(getSizesThunk()).unwrap()]);
+                await Promise.all([dispatch(getCategoriesThunk()).unwrap()]);
             } catch (error) {
                 console.error('Veri alınırken bir hata oluştu:', error);
             }
@@ -34,7 +32,6 @@ export default function ProductCreateForm() {
         price: '',
         stock: '',
         color: '',
-        sizeIds: [],
         description: '',
     });
 
@@ -101,10 +98,10 @@ export default function ProductCreateForm() {
     };
 
     const validateFormData = () => {
-        const { categoryId, subCategoryId, name, price, stock, color, sizeIds, description, images } = formData;
+        const { categoryId, subCategoryId, name, price, stock, color, description, images } = formData;
 
         // Boş alan kontrolleri
-        if (!categoryId || !subCategoryId || !name || !price || !stock || !color || sizeIds.length === 0 || !description || images.length === 0) {
+        if (!categoryId || !subCategoryId || !name || !price || !stock || !color || !description || images.length === 0) {
             setErrorMessage('Lütfen tüm alanları doldurun ve bir görsel seçin.');
             return false;
         }
@@ -317,39 +314,7 @@ export default function ProductCreateForm() {
                                     </div>
                                 </div>
 
-                                {/* Beden Seçimi */}
-                                <div className="col-md-6 mb-3">
-                                    <label className="form-label fw-bold">Bedenler</label>
-                                    <div className="d-flex gap-2 flex-wrap">
-                                        {sizes.map((size) => (
-                                            <div key={size.id} style={{ position: 'relative' }}>
-                                                <input
-                                                    type="checkbox"
-                                                    value={size.id}
-                                                    checked={formData.sizeIds.includes(size.id)}
-                                                    onChange={(e) => handleSelectionChange(e, 'sizeIds')}
-                                                    id={`size-${size.id}`}
-                                                    style={{ position: 'absolute', opacity: 0 }}
-                                                />
-                                                <label
-                                                    htmlFor={`size-${size.id}`}
-                                                    className={`px-3 py-2 rounded-pill border fw-medium shadow-sm ${formData.sizeIds.includes(size.id) ? 'bg-dark text-white' : 'bg-light text-dark'
-                                                        }`}
-                                                    style={{
-                                                        cursor: 'pointer',
-                                                        transition: 'all 0.2s ease-in-out',
-                                                        transform: formData.sizeIds.includes(size.id) ? 'scale(1.05)' : 'scale(1)',
-                                                        userSelect: 'none',
-                                                    }}
-                                                >
-                                                    {size.name}
-                                                </label>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-
-
+                            
 
                                 {/* Görsel Yükleme */}
                                 <div className="col-md-6 mb-3">

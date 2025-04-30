@@ -58,7 +58,6 @@ export default function Order() {
                                         />
                                         <div>
                                             <h6 className='fw-bold mb-1'>{item.products.name}</h6>
-                                            <p className='mb-1 text-muted'>Beden: {item.sizes.name}</p>
                                             <p className='mb-1 text-muted'>Adet: {item.quantity}</p>
                                             <p className='mb-1 text-muted'>Fiyat: {item.products?.price}₺</p>
                                             <p className='mb-0 fw-bold text-dark'>Toplam: {(item.products?.price * item.quantity).toFixed(2)}₺</p>

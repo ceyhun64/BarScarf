@@ -43,17 +43,6 @@ export const getProductsBySubcategory = async (subCategoryId) => {
   }
 };
 
-
-export const getProductsBySize = async (sizeId) => {
-  try {
-    const res = await axios.get(`${API_URL}/size/${sizeId}`);
-    return res;
-  } catch (error) {
-    console.error("Ürün verisi çekilemedi: ", error);
-    throw error;
-  }
-};
-
 export const getProductsByName = async (name) => {
   try {
     const res = await axios.get(`${API_URL}/name/${name}`)

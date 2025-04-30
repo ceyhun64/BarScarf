@@ -6,7 +6,6 @@ import {
     getProductByIdThunk
 } from '../../features/thunks/productThunk';
 import { getCategoriesThunk, getSubCategoryThunk } from '../../features/thunks/categoryThunk';
-import { getSizesThunk } from '../../features/thunks/colorsizeThunk';
 import { clearAlert } from '../../features/slices/productSlice';
 import AdminSidebar from './adminSideBar';
 import image from '../../../public/favicon/f8f539a0-6734-42b3-aabe-c35eb4378771.png';
@@ -17,7 +16,6 @@ export default function ProductEditForm() {
     const { id } = useParams();
 
     const { categories, subCategories } = useSelector((state) => state.category);
-    const { sizes } = useSelector((state) => state.colorSize);
     const { alert, product } = useSelector((state) => state.product);
 
     const [formData, setFormData] = useState({
@@ -28,7 +26,6 @@ export default function ProductEditForm() {
         price: '',
         stock: '',
         color: '',
-        sizeIds: [],
         description: '',
     });
 
@@ -37,7 +34,6 @@ export default function ProductEditForm() {
             try {
                 await Promise.all([
                     dispatch(getCategoriesThunk()).unwrap(),
-                    dispatch(getSizesThunk()).unwrap(),
                     dispatch(getProductByIdThunk(id)).unwrap(),
                 ]);
             } catch (error) {
@@ -56,7 +52,6 @@ export default function ProductEditForm() {
                 price: product.price || '',
                 stock: product.stock || '',
                 color: product.color || '',
-                sizeIds: product.sizes ? product.sizes.map(size => size.id) : [],
                 description: product.description || '',
                 images: [],  // Mevcut görselleri burada alıp, kullanıcı yeni resim ekleyecek
             });
@@ -311,37 +306,6 @@ export default function ProductEditForm() {
                                     </div>
                                 </div>
 
-                                {/* Beden Seçimi */}
-                                <div className="col-md-6 mb-3">
-                                    <label className="form-label fw-bold">Bedenler</label>
-                                    <div className="d-flex flex-wrap">
-                                        {sizes.map((size) => (
-                                            <div key={size.id} style={{ position: 'relative' }}>
-                                                <input
-                                                    type="checkbox"
-                                                    value={size.id}
-                                                    checked={formData.sizeIds.includes(size.id)}
-                                                    onChange={(e) => handleSelectionChange(e, 'sizeIds')}
-                                                    id={`size-${size.id}`}
-                                                    style={{ position: 'absolute', opacity: 0 }}
-                                                />
-                                                <label
-                                                    htmlFor={`size-${size.id}`}
-                                                    className={`px-3 py-2 rounded-pill border fw-medium shadow-sm ${formData.sizeIds.includes(size.id) ? 'bg-dark text-white' : 'bg-light text-dark'
-                                                        }`}
-                                                    style={{
-                                                        cursor: 'pointer',
-                                                        transition: 'all 0.2s ease-in-out',
-                                                        transform: formData.sizeIds.includes(size.id) ? 'scale(1.05)' : 'scale(1)',
-                                                        userSelect: 'none',
-                                                    }}
-                                                >
-                                                    {size.name}
-                                                </label>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
 
                                 {/* Görsel Seçimi */}
                                 <div className="col-md-12 mb-3">

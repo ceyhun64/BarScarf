@@ -5,7 +5,6 @@ import { updateProductCartThunk, getProductCartThunk } from "../../features/thun
 import { clearAlert } from "../../features/slices/cartSlice";
 
 export default function CartEdit() {
-    const [selectedSize, setSize] = useState(null);
     const [quantity, setQuantity] = useState(1);
 
     const dispatch = useDispatch();
@@ -20,13 +19,12 @@ export default function CartEdit() {
 
     useEffect(() => {
         if (productCart) {
-            setSize(productCart.sizeId);
             setQuantity(productCart.quantity);
         }
     }, [productCart]);
 
     const handleUpdate = () => {
-        dispatch(updateProductCartThunk({ productId, quantity, sizeId: selectedSize }))
+        dispatch(updateProductCartThunk({ productId, quantity, }))
         setTimeout(() => {
             dispatch(clearAlert());
             navigate("/cart");
@@ -52,14 +50,6 @@ export default function CartEdit() {
                         <div className="flex-grow-1">
 
                             <h2>{productCart?.products?.name || "Sepet Ürününü Düzenle"}</h2>
-                            <div className="mb-3">
-                                <label>Beden Seçin:</label>
-                                <select className="form-select" value={selectedSize} onChange={(e) => setSize(e.target.value)}>
-                                    {product?.sizes?.map((size) => (
-                                        <option key={size.id} value={size.id}>{size.name}</option>
-                                    ))}
-                                </select>
-                            </div>
                             <div className="mb-3">
                                 <label>Miktar:</label>
                                 <div className="d-flex align-items-center">
