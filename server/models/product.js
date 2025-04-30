@@ -24,7 +24,12 @@ const Product = sequelize.define("products", {
     type: DataTypes.TEXT,
     allowNull: false,
   },
-}, );
+  groupCode: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+});
+
 
 // Resim ilişkisi
 Product.hasMany(ProductImage, {

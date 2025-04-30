@@ -27,6 +27,7 @@ export default function ProductCreateForm() {
     const [formData, setFormData] = useState({
         subCategoryId: '',
         categoryId: '',
+        group: '', // Yeni eklenen alan
         name: '',
         images: [],
         price: '',
@@ -34,6 +35,7 @@ export default function ProductCreateForm() {
         color: '',
         description: '',
     });
+
 
     const [errorMessage, setErrorMessage] = useState('');
 
@@ -314,7 +316,21 @@ export default function ProductCreateForm() {
                                     </div>
                                 </div>
 
-                            
+                                <div className="col-md-6 mb-3">
+                                    <label htmlFor="group" className="form-label fw-bold">
+                                        Grup Adı
+                                    </label>
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        id="group"
+                                        name="group"
+                                        value={formData.group}
+                                        onChange={handleInputChange}
+                                        placeholder="Grup adını yazın"
+                                    />
+                                </div>
+
 
                                 {/* Görsel Yükleme */}
                                 <div className="col-md-6 mb-3">

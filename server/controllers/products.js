@@ -209,7 +209,7 @@ exports.add_product = async (req, res) => {
         console.log("Kullanıcı verileri:", req.body); // Verilerin doğru geldiğini kontrol et
         console.log("Kullanıcı resimleri:", req.files); // Dosyaların doğru şekilde geldiğini kontrol et
 
-        const { subCategoryId, categoryId, name, price, stock, color, description } = req.body;
+        const { subCategoryId, categoryId, name, price, stock, color, description, groupCode } = req.body;
         const images = req.files ? req.files.map(file => `/uploads/${file.filename}`) : [];
 
 
@@ -219,14 +219,14 @@ exports.add_product = async (req, res) => {
         }
 
         // Ürünü veritabanına ekleyin
-        const product = await Product.create({ name, price, stock, color, description }); // 'image' alanı yok, sadece diğer alanlar
+        const product = await Product.create({ name, price, stock, color, description, groupCode }); // 'image' alanı yok, sadece diğer alanlar
 
         // Ürünü kategoriyle ilişkilendirin
         await ProductCategory.create({ categoryId, productId: product.id });
 
         await ProductSubCategory.create({ subCategoryId, productId: product.id });
 
-      
+
         // Ürün resimlerini 'ProductImage' tablosuna ekleyin
         const imageRecords = []; // Resim kayıtlarını tutmak için bir dizi
         for (const image of images) {
@@ -261,7 +261,7 @@ exports.update_product = async (req, res) => {
             return res.status(404).json({ error: "Ürün bulunamadı." });
         }
 
-        const { subCategoryId, categoryId, name, price, stock, color, description } = req.body;
+        const { subCategoryId, categoryId, name, price, stock, color, description, groupCode } = req.body;
         let imageUrls = [];
 
         // Eski resimleri sil
@@ -297,7 +297,8 @@ exports.update_product = async (req, res) => {
             price,
             stock,
             color,
-            description // Eğer renk Product tablosunda tutuluyorsa, burada doğrudan güncellenir
+            description,// Eğer renk Product tablosunda tutuluyorsa, burada doğrudan güncellenir
+            groupCode
         });
 
         // Ürünün kategorisini güncelle
@@ -321,7 +322,7 @@ exports.update_product = async (req, res) => {
             await product.save(); // Kaydet
         }
 
-      
+
         // Başarıyla güncellenmiş ürünü döndür
         res.json({
             message: "Ürün başarıyla güncellendi.",

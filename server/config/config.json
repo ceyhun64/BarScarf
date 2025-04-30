@@ -1,0 +1,25 @@
+{
+  "development": {
+    "username": "root",
+    "password": "Ceycey.123",
+    "database": "esarpsite",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "root",
+    "password": "Ceycey.123",
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": "FlxNpCdwbjDxKQgTTMQSmJqRuitvkcys",
+    "database": "railway",
+    "host": "switchback.proxy.rlwy.net",
+    "dialect": "mysql",
+    "port": 47005, 
+    "url": "mysql://root:FlxNpCdwbjDxKQgTTMQSmJqRuitvkcys@switchback.proxy.rlwy.net:47005/railway"
+  }
+}
