@@ -149,7 +149,7 @@ export default function AdminHome() {
                                             heroes.map((hero) => (
                                                 <tr key={hero.id}>
                                                     <td>{hero.id}</td>
-                                                    <td><img src={hero.image} alt={hero.id} style={{height: '60px', objectFit: 'cover' }} /></td>
+                                                    <td><img src={hero.imageUrl} alt={hero.id} style={{height: '60px', objectFit: 'cover'}} /></td>
                                                     <td>
                                                         <button
                                                             className="btn btn-sm ms-3"
@@ -190,7 +190,7 @@ export default function AdminHome() {
                                             sliders.map((slider) => (
                                                 <tr key={slider.id}>
                                                     <td>{slider.id}</td>
-                                                    <td><img src={slider.image} alt={slider.id} style={{ height: '60px', objectFit: 'cover' }} /></td>
+                                                    <td><img src={slider.imageUrl} alt={slider.id} style={{height: '60px', objectFit: 'cover'}} /></td>
                                                     <td>{slider.title}</td>
                                                     <td>{slider.description}</td>
                                                     <td>
