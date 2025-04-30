@@ -109,8 +109,7 @@ export default function AdminHome() {
                                             banners.map((banner) => (
                                                 <tr key={banner.id}>
                                                     <td>{banner.id}</td>
-                                                    <td><img src={banner.image} alt={banner.id} style={{height: '60px', objectFit: 'cover' }}
-                                                    /></td>
+                                                    <td><img src={banner.imageUrl} alt={banner.id} style={{height: '60px', objectFit: 'cover'}} /></td>
                                                     <td>
                                                         <button
                                                             className="btn btn-sm ms-3"
