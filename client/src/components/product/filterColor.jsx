@@ -31,7 +31,7 @@ export default function Filter() {
     const selectedLabel = options.find(opt => opt.value === color)?.label || "Tüm Renkler";
 
     return (
-        <div className="position-relative mb-3" style={{ minWidth: "180px" }}>
+        <div className="position-relative mb-3" style={{ minWidth: "150px" }}>
             <label className="form-label mb-1 fw-semibold">RENK</label>
 
             <div

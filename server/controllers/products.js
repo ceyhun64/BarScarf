@@ -232,7 +232,7 @@ exports.add_product = async (req, res) => {
         for (const image of images) {
             imageRecords.push({
                 productId: product.id,    // Ürünün id'si
-                imageUrl: image           // Resim URL'si
+                imageUrl: image,           // Resim URL'si
             });
         }
 

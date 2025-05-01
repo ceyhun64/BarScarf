@@ -1,4 +1,13 @@
 require("dotenv").config();
+
+if (process.env.NODE_ENV === 'development') {
+  console.log('Uygulama geliştirme (development) modunda çalışıyor');
+} else if (process.env.NODE_ENV === 'production') {
+  console.log('Uygulama üretim (production) modunda çalışıyor');
+} else {
+  console.log('Uygulama belirli bir ortamda çalışmıyor');
+}
+
 const express = require("express");
 const app = express();
 const cors = require("cors");
@@ -111,15 +120,6 @@ app.use("/api/slider", sliderRoutes);
     // process.exit(1);
   }
 })();
-
-if (process.env.NODE_ENV === 'production') {
-  console.log('Uygulama üretim (production) modunda çalışıyor');
-} else if (process.env.NODE_ENV === 'development') {
-  console.log('Uygulama geliştirme (development) modunda çalışıyor');
-} else {
-  console.log('Uygulama belirli bir ortamda çalışmıyor');
-}
-
 
 const PORT = process.env.PORT || 3000;
 

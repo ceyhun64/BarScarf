@@ -1,4 +1,4 @@
-import React, { useState ,useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createCategoryThunk, createSubCategoryThunk, getCategoriesThunk, getAllSubCategoriesThunk } from '../../features/thunks/categoryThunk';
 import { Link } from 'react-router-dom';
@@ -31,6 +31,8 @@ export default function CategoryAndSubCategoryAddPage() {
         await dispatch(createCategoryThunk(categoryData)).unwrap();
         setTimeout(() => {
             dispatch(clearAlert());
+            dispatch(getCategoriesThunk());
+            dispatch(getAllSubCategoriesThunk());
             setCategoryName('');
         }, 1000);
     };
@@ -48,6 +50,8 @@ export default function CategoryAndSubCategoryAddPage() {
             await dispatch(createSubCategoryThunk(subCategoryData)).unwrap();
             setTimeout(() => {
                 dispatch(clearAlert());
+                dispatch(getCategoriesThunk());
+                dispatch(getAllSubCategoriesThunk());
                 setSubCategoryName('');
                 setSelectedCategoryId('');
             }, 1000);

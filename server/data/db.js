@@ -1,23 +1,43 @@
-//veritabanı bağlantısı
-require("dotenv").config(); //.env dosyasını dahil ettik
-const Sequelize = require("sequelize"); //sequelize kütüphanesini dahil ettik
+require("dotenv").config(); // Öncelikle .env dosyasını yükle
 
+const Sequelize = require("sequelize");
 
-//sequelize nesnesi oluşturuyoruz
-const sequelize = new Sequelize(process.env.DB_URL, {
-  dialect: "mysql", //veritabanının dilini belirtiyoruz
-  logging: false
-});
+// .env dosyasından veritabanı bağlantısı bilgilerini al
+if (process.env.NODE_ENV === "development") {
+  require("dotenv").config({ path: ".env.development" });
+}
+
+let sequelize;
+
+if (process.env.NODE_ENV === "production") {
+  // Railway veya diğer uzak sunucu için
+  sequelize = new Sequelize(process.env.DB_URL, {
+    dialect: "mysql",
+    logging: false,
+  });
+} else {
+  // Geliştirme ortamı (localhost)
+  sequelize = new Sequelize(
+    process.env.DB_NAME,
+    process.env.DB_USER,
+    process.env.DB_PASSWORD, // BURASI DB_PASS değil
+    {
+      host: process.env.DB_HOST,
+      dialect: "mysql",
+      logging: false,
+    }
+  );
+}
 
 async function connect() {
   try {
-    await sequelize.authenticate(); //veritabanı bağlantısını test eder(true ise bir şey olmaz false ise hata fırlatılır)
+    await sequelize.authenticate();
     console.log("Veritabanı bağlantısı kuruldu");
   } catch (error) {
-    console.log("Veritabanı bağlantısı kurulamadı", error);
+    console.error("Veritabanı bağlantısı kurulamadı", error);
   }
 }
 
-connect(); //veritabanı bağlantı fonksiyonunu çağırıyoruz
+connect();
 
-module.exports = sequelize; //sequelize nesnesini dışarı aktarıyoruz
+module.exports = sequelize;
