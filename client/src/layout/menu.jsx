@@ -50,43 +50,47 @@ export default function Menu() {
     const handleCategoryClick = (categoryId) => {
         setActiveCategory(categoryId);
     };
-  
 
     return (
         <>
             <Button
-                variant="light"
+                variant="white"
                 onClick={() => setShowMenu(true)}
                 className="border-0 bg-transparent p-0 d-flex align-items-center"
-                style={{ color: '#D3AF37', fontSize: '1.5rem', transition: 'color 0.3s' }}
+                style={{
+                    color: '#D3AF37',
+                    fontSize: '2rem', // Buton yazı boyutunu büyüttük
+                    transition: 'color 0.3s',
+                }}
             >
-                <i className="bi bi-list text-dark"></i>
+                <i className="bi bi-list text-dark" style={{ fontSize: '2rem' }}></i> {/* İkonu büyüttük */}
             </Button>
 
             <Offcanvas
                 show={showMenu}
                 onHide={() => setShowMenu(false)}
                 placement="start"
-                style={{ width: '350px', backgroundColor: '#f8f9fa', borderRight: '1px solid #e0e0e0', zIndex: 9999 }}
+                style={{ width: '350px', backgroundColor: '#f8f9fa', borderRight: '1px solidrgb(255, 255, 255)', zIndex: 9999 }}
             >
                 <Offcanvas.Header closeButton className="border-bottom">
-                    <Offcanvas.Title className="fw-bold fs-4" style={{ color: '#964B00' }}>Menü</Offcanvas.Title>
+                    <Offcanvas.Title className="fw-bold fs-4" style={{ color: '#964B00', fontSize: '2rem' }}>Menü</Offcanvas.Title> {/* Başlık büyütüldü */}
                 </Offcanvas.Header>
-                <Offcanvas.Body className="bg-light">
+                <Offcanvas.Body className="bg-white">
                     <Accordion flush>
                         {categoriesWithSubs.map((category, index) => (
                             <Accordion.Item key={category.id} eventKey={index.toString()} className="border-0">
                                 <Accordion.Header
                                     style={{
-                                        backgroundColor: '#f7f7f7',
+                                        backgroundColor: 'white',
                                         color: activeCategory === category.id ? '#D3AF37' : '#964B00', // Aktif kategoriye renk ekle
-                                        fontSize: '1.1rem',
-                                        fontWeight: '500',
+                                        fontSize: '1.5rem', // Kategori başlık font boyutunu büyüttük
+                                        fontWeight: '600', // Yazı kalınlığını artırdık
                                         borderRadius: '8px',
                                         transition: 'background-color 0.3s',
                                         cursor: 'pointer',
                                         boxShadow: 'none', // focus ve active görünümünü kaldırır
                                         outline: 'none',   // focus durumunda oluşan mavi çizgiyi kaldırır
+                                        padding: '10px 15px', // Başlık etrafındaki boşluğu artırdık
                                     }}
                                     onClick={() => handleCategoryClick(category.id)}
                                     onFocus={(e) => e.target.style.outline = 'none'} // Focus olduğunda outline'ı kaldır
@@ -95,9 +99,6 @@ export default function Menu() {
                                 >
                                     {category.name}
                                 </Accordion.Header>
-
-
-
 
                                 <Accordion.Body className="py-2">
                                     <ListGroup variant="flush">
@@ -108,7 +109,7 @@ export default function Menu() {
                                                 style={{
                                                     backgroundColor: 'transparent',
                                                     color: '#555',
-                                                    fontSize: '1rem',
+                                                    fontSize: '1.2rem', // Alt kategori yazı boyutunu büyüttük
                                                     paddingLeft: '30px',
                                                     transition: 'background-color 0.3s',
                                                 }}
@@ -122,7 +123,7 @@ export default function Menu() {
                                                         fontWeight: '500',
                                                     }}
                                                 >
-                                                    <i className="bi bi-chevron-right text-muted me-2" style={{ fontSize: '1.2rem' }}></i>
+                                                    <i className="bi bi-chevron-right text-muted me-2" style={{ fontSize: '1.5rem' }}></i> {/* İkonu büyüttük */}
                                                     {sub.name}
                                                 </Link>
                                             </ListGroup.Item>
