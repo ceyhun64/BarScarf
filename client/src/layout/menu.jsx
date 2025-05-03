@@ -83,14 +83,13 @@ export default function Menu() {
                                     style={{
                                         backgroundColor: 'white',
                                         color: activeCategory === category.id ? '#D3AF37' : '#964B00', // Aktif kategoriye renk ekle
-                                        fontSize: '1.5rem', // Kategori başlık font boyutunu büyüttük
-                                        fontWeight: '600', // Yazı kalınlığını artırdık
+                                        fontSize: '2rem', // Kategori başlık font boyutunu büyüttük
+                                        fontWeight: '900', // Yazı kalınlığını artırdık
                                         borderRadius: '8px',
                                         transition: 'background-color 0.3s',
                                         cursor: 'pointer',
                                         boxShadow: 'none', // focus ve active görünümünü kaldırır
                                         outline: 'none',   // focus durumunda oluşan mavi çizgiyi kaldırır
-                                        padding: '10px 15px', // Başlık etrafındaki boşluğu artırdık
                                     }}
                                     onClick={() => handleCategoryClick(category.id)}
                                     onFocus={(e) => e.target.style.outline = 'none'} // Focus olduğunda outline'ı kaldır

@@ -1,37 +1,32 @@
 const multer = require("multer");
-const path = require("path");
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
+const cloudinary = require("cloudinary").v2;
+require("dotenv").config();
 
-// Dosyaların kaydedileceği dizini ve dosya adlarını ayarlayalım
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        // Dosyaları "uploads" klasörüne kaydet
-        cb(null, "./uploads");
-    },
-    filename: function (req, file, cb) {
-        // Dosya adını benzersiz yapmak için timestamp ekleyelim
-        cb(null, Date.now() + path.extname(file.originalname));
-    }
+// Cloudinary yapılandırması
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-// Sadece resim formatlarını kabul etmek için fileFilter fonksiyonu
-const fileFilter = (req, file, cb) => {
-    const allowedTypes = ["image/jpeg", "image/png", "image/webp", "image/jpg"];
-    // Eğer dosya uygun formatta ise, kabul et
-    if (allowedTypes.includes(file.mimetype)) {
-        cb(null, true);
-    } else {
-        // Hatalı formatta dosya gelirse hata döndür
-        cb(new Error("Geçersiz dosya türü! Sadece JPEG, PNG, WEBP kabul edilir."), false);
-    }
-};
+// Cloudinary storage ayarı
+const storage = new CloudinaryStorage({
+    cloudinary: cloudinary,
+    params: {
+        folder: "uploads", // Cloudinary'de klasör ismi
+        allowed_formats: ["jpg", "jpeg", "png", "webp"],
+        transformation: [{ width: 800, height: 800, crop: "limit" }],
+    },
+});
 
-// Multer middleware'ini doğru ayarlıyoruz
+// Multer + Cloudinary birleşimi
 const upload = multer({
     storage: storage,
-    fileFilter: fileFilter,
-    limits: { fileSize: 5 * 1024 * 1024  } // Maksimum dosya boyutunu 5MB ile sınırlıyoruz
+    limits: { fileSize: 5 * 1024 * 1024 },
 });
 
-const uploadMultiple = upload.array('images', 5); // Burada 'images[]' key'i kullanılacak ve maksimum 5 dosya yüklenebilir
+// Çoklu upload için middleware
+const uploadMultiple = upload.array("images", 5); // images[] olarak göndereceksin
 
 module.exports = uploadMultiple;

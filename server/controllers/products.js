@@ -203,14 +203,13 @@ exports.get_product_by_id = async (req, res) => {
     }
 };
 
-// Ürün ekleme
 exports.add_product = async (req, res) => {
     try {
         console.log("Kullanıcı verileri:", req.body); // Verilerin doğru geldiğini kontrol et
         console.log("Kullanıcı resimleri:", req.files); // Dosyaların doğru şekilde geldiğini kontrol et
 
         const { subCategoryId, categoryId, name, price, stock, color, description, group } = req.body;
-        const images = req.files ? req.files.map(file => `/uploads/${file.filename}`) : [];
+        const images = req.files ? req.files.map(file => file.path) : [];
 
 
         // Zorunlu alanların kontrolü
@@ -228,15 +227,11 @@ exports.add_product = async (req, res) => {
 
 
         // Ürün resimlerini 'ProductImage' tablosuna ekleyin
-        const imageRecords = []; // Resim kayıtlarını tutmak için bir dizi
-        for (const image of images) {
-            imageRecords.push({
-                productId: product.id,    // Ürünün id'si
-                imageUrl: image,           // Resim URL'si
-            });
-        }
+        const imageRecords = images.map(imageUrl => ({
+            productId: product.id,
+            imageUrl
+        }));
 
-        // Birden fazla resmi 'ProductImage' tablosuna ekle
         await ProductImage.bulkCreate(imageRecords);
 
         // Ana görsel olarak ilk resmi seçmek (ProductImage tablosundan)

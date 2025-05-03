@@ -66,7 +66,7 @@ export const getProductsByColor = async (color) => {
 
 //admin
 export const createProduct = async (productData) => {
-  try {
+  try {    
     const res = await axiosInstance.post("/product", productData);
     return res;
   } catch (error) {
