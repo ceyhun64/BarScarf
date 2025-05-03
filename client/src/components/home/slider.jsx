@@ -1,16 +1,17 @@
-import React,{useEffect} from "react";
-import { useNavigate } from "react-router-dom";  // useNavigate importu
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom"; // useNavigate importu
 import { getSlidersThunk } from "../../features/thunks/sliderThunk";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function HomeSlider() {
-  const navigate = useNavigate();  // useNavigate hook'unu kullanıyoruz
+  const navigate = useNavigate(); // useNavigate hook'unu kullanıyoruz
   const dispatch = useDispatch();
   const { sliders } = useSelector((state) => state.slider);
+  console.log("sliders:", sliders);
 
-   useEffect(() => {
-        dispatch(getSlidersThunk());
-    }, [dispatch]);
+  useEffect(() => {
+    dispatch(getSlidersThunk());
+  }, [dispatch]);
 
   const handleSlideClick = () => {
     navigate("/products");
@@ -25,7 +26,7 @@ export default function HomeSlider() {
             className={`carousel-item ${index === 0 ? "active" : ""}`}
             style={{
               height: "80vh",
-              backgroundImage: `url(${slide.img})`,
+              backgroundImage: `url(${slide.imageUrl})`, // imageUrl kullanılıyor
               backgroundSize: "cover",
               backgroundPosition: "center",
               cursor: "pointer",

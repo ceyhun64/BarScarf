@@ -28,6 +28,8 @@ export const getSlidersThunk = createAsyncThunk(
     async (_, thunkAPI) => {
         try {
             const response = await getSliders();
+            console.log("response.data thunk:", response.data);   
+            console.log("response.data.sliders thunk:", response.data.sliders);   
             return response.data.sliders;
         } catch (error) {
             return thunkAPI.rejectWithValue(error.response.data);
