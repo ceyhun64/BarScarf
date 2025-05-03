@@ -7,7 +7,7 @@ const path = require('path');  //
 exports.add_slider = async (req, res) => {
     try {
         const { title, description } = req.body;
-        const images = req.files ? req.files.map(file => `/uploads/${file.filename}`) : [];
+        const images = req.files ? req.files.map(file => file.path) : [];
 
         if (!title || !description || images.length === 0) {
             return res.status(400).json({ error: "Lütfen tüm alanları doldurun." });
@@ -72,7 +72,7 @@ exports.delete_slider = async (req, res) => {
 
 exports.add_banner = async (req, res) => {
     try {
-        const images = req.files ? req.files.map(file => `/uploads/${file.filename}`) : [];
+        const images = req.files ? req.files.map(file => file.path) : [];
 
         if (images.length === 0) {
             return res.status(400).json({ error: "Lütfen tüm alanları doldurun." });
@@ -126,7 +126,7 @@ exports.delete_banner = async (req, res) => {
 
 exports.add_heroes = async (req, res) => {
     try {
-        const images = req.files ? req.files.map(file => `/uploads/${file.filename}`) : [];
+        const images = req.files ? req.files.map(file => file.path) : [];
 
         if (images.length === 0) {
             return res.status(400).json({ error: "Lütfen tüm alanları doldurun." });
