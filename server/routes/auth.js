@@ -1,9 +1,9 @@
 //auth apisi
-const express = require('express');
-const router = express.Router();
+const express = require('express');//express kütüphanesini dahil ettik
+const router = express.Router();//express kütüphanesini kullanarak bir router oluşturduk
 
-const verifyToken = require("../middlewares/verifyToken");
-const authController = require("../controllers/auth");
+const verifyToken = require("../middlewares/verifyToken");//verifyToken middleware'ini dahil ettik
+const authController = require("../controllers/auth");//auth controller'ını dahil ettik
 
 //kullanıcı kayıt
 router.post("/register", authController.register);
@@ -22,4 +22,4 @@ router.put("/update-password/:token", authController.updatePassword);
 
 
 
-module.exports = router;
+module.exports = router;//router'ı dışarı aktarıyoruz

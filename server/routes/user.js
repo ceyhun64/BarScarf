@@ -1,9 +1,10 @@
-const express = require('express');
-const router = express.Router();
+//user apisi
+const express = require('express');//express kütüphanesini dahil ettik
+const router = express.Router();//express kütüphanesini kullanarak bir router oluşturduk
 
-const verifyToken = require("../middlewares/verifyToken");
-const isAdmin = require("../middlewares/isAdmin");
-const userController = require("../controllers/user");
+const verifyToken = require("../middlewares/verifyToken");//verifyToken middleware'ini dahil ettik
+const isAdmin = require("../middlewares/isAdmin");//isAdmin middleware'ini dahil ettik
+const userController = require("../controllers/user");//user controller'ını dahil ettik
 
 //kullanıcı listeleme
 router.get("/", verifyToken, isAdmin, userController.get_users)
@@ -21,4 +22,4 @@ router.put("/:id", verifyToken, isAdmin, userController.update_user)
 router.delete("/:id", verifyToken, isAdmin, userController.delete_user)
 
 
-module.exports = router;
+module.exports = router;//router ı dışarı aktarıyoruz

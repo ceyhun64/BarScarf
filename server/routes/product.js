@@ -1,11 +1,11 @@
-const express = require('express');
-const router = express.Router();
+//product apisi
+const express = require('express');//express kütüphanesini dahil ettik
+const router = express.Router();//express kütüphanesini kullanarak bir router oluşturduk
 
-const verifyToken = require("../middlewares/verifyToken");
-const isAdmin = require("../middlewares/isAdmin");
-const uploadMultiple = require("../middlewares/upload");
-
-const productController = require("../controllers/products");
+const verifyToken = require("../middlewares/verifyToken");//verifyToken middleware'ini dahil ettik
+const isAdmin = require("../middlewares/isAdmin");//isAdmin middleware'ini dahil ettik
+const uploadMultiple = require("../middlewares/upload");//uploadMultiple middleware'ini dahil ettik
+const productController = require("../controllers/products");//product controller'ını dahil ettik
 
 // Ürün listeleme (bedenlere gerek yok)
 router.get("/", productController.get_product);
@@ -35,4 +35,4 @@ router.put("/:id", verifyToken, isAdmin, uploadMultiple, productController.updat
 router.delete("/:id", verifyToken, isAdmin, productController.delete_product);
 
 
-module.exports = router;
+module.exports = router;//router ı dışarı aktarıyoruz

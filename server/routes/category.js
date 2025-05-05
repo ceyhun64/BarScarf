@@ -1,10 +1,10 @@
 //category apisi
-const express = require('express');
-const router = express.Router();
+const express = require('express');//express kütüphanesini dahil ettik
+const router = express.Router();//express kütüphanesini kullanarak bir router oluşturduk
 
-const verifyToken = require("../middlewares/verifyToken");
-const isAdmin = require("../middlewares/isAdmin");
-const categoryController = require("../controllers/category");
+const verifyToken = require("../middlewares/verifyToken");//verifyToken middleware'ini dahil ettik
+const isAdmin = require("../middlewares/isAdmin");//isAdmin middleware'ini dahil ettik
+const categoryController = require("../controllers/category");//category controller'ını dahil ettik
 
 //kategorileri listeleme
 router.get("/", categoryController.get_category);
@@ -43,4 +43,4 @@ router.put("/sub/:id", verifyToken, isAdmin, categoryController.update_sub_categ
 router.delete("/sub/:id", verifyToken, isAdmin, categoryController.delete_sub_category);
 
 
-module.exports = router;
+module.exports = router;//router ı dışarı aktarıyoruz

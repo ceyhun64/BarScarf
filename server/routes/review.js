@@ -1,10 +1,10 @@
-const express = require('express');
-const router = express.Router();
+//review apisi
+const express = require('express');//express kütüphanesini dahil ettik
+const router = express.Router();//express kütüphanesini kullanarak bir router oluşturduk
 
-const verifyToken = require('../middlewares/verifyToken');
-const isAdmin = require('../middlewares/isAdmin');
-
-const reviewController = require('../controllers/review');
+const verifyToken = require('../middlewares/verifyToken');//verifyToken middleware'ini dahil ettik
+const isAdmin = require('../middlewares/isAdmin');//isAdmin middleware'ini dahil ettik
+const reviewController = require('../controllers/review');//review controller'ını dahil ettik
 
 //yorum ekleme
 router.post('/:productId', verifyToken, reviewController.create_review);
@@ -22,4 +22,4 @@ router.delete("/admin/:reviewId", verifyToken, isAdmin,reviewController.delete_r
 router.put("/:reviewId", verifyToken,reviewController.update_review);
 
 
-module.exports = router;
+module.exports = router;//router ı dışarı aktarıyoruz

@@ -1,9 +1,9 @@
 //sepet apisi
-const express = require("express");
-const router = express.Router();
+const express = require("express");//express kütüphanesini dahil ettik
+const router = express.Router();//express kütüphanesini kullanarak bir router oluşturduk
 
-const verifyToken = require("../middlewares/verifyToken");
-const cartController = require("../controllers/cart");
+const verifyToken = require("../middlewares/verifyToken");//verifyToken middleware'ini dahil ettik
+const cartController = require("../controllers/cart");//cart controller'ını dahil ettik
 
 // Sepete ürün ekleme(login olan herkesin sepeti var)
 router.post("/add", verifyToken, cartController.add_product)
@@ -33,4 +33,4 @@ router.put("/update/:productId", verifyToken, cartController.update_product);
 router.get("/total", verifyToken, cartController.get_total_price);
 
 
-module.exports = router;
+module.exports = router;//router ı dışarı aktarıyoruz

@@ -1,9 +1,11 @@
-const express = require('express');
-const verifyToken = require('../middlewares/verifyToken');
-const router = express.Router();
+//payment apisi
+const express = require('express');//express kütüphanesini dahil ettik
+const router = express.Router();//express kütüphanesini kullanarak bir router oluşturduk
 
-const paymentController = require('../controllers/payment');
+const verifyToken = require('../middlewares/verifyToken');//verifyToken middleware'ini dahil ettik
+const paymentController = require('../controllers/payment');//payment controller'ını dahil ettik
 
+//ödeme oluşturma
 router.post('/', verifyToken, paymentController.createPayment);
 
-module.exports = router;
+module.exports = router;//router ı dışarı aktarıyoruz

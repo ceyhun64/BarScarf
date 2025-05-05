@@ -1,29 +1,37 @@
-const express = require('express');
-const router = express.Router();
-const sliderController = require('../controllers/slider');
-const verifyToken = require('../middlewares/verifyToken');
-const isAdmin = require('../middlewares/isAdmin');
-const uploadMultiple = require('../middlewares/upload');
+//slider apisi
+const express = require('express');//express kütüphanesini dahil ettik
+const router = express.Router();//express kütüphanesini kullanarak bir router oluşturduk
 
-// Slider işlemleri
-router.get('/', sliderController.get_slider);  // Slider'ları getir
+const verifyToken = require('../middlewares/verifyToken');//verifyToken middleware'ini dahil ettik
+const isAdmin = require('../middlewares/isAdmin');//isAdmin middleware'ini dahil ettik
+const uploadMultiple = require('../middlewares/upload');//uploadMultiple middleware'ini dahil ettik
+const sliderController = require('../controllers/slider');//slider controller'ını dahil ettik
 
-router.post("/", verifyToken, isAdmin, uploadMultiple, sliderController.add_slider);  // Slider ekle
+//slider getirme
+router.get('/', sliderController.get_slider);
 
-router.delete("/:id", verifyToken, isAdmin, sliderController.delete_slider);  // Slider sil
+//slider ekleme
+router.post("/", verifyToken, isAdmin, uploadMultiple, sliderController.add_slider);
 
-// Banner işlemleri
-router.get("/banner", sliderController.get_banner);  // Banner'ları getir
+//slider silme
+router.delete("/:id", verifyToken, isAdmin, sliderController.delete_slider);
 
-router.post("/banner", verifyToken, isAdmin, uploadMultiple, sliderController.add_banner);  // Banner ekle
+//banner getirme
+router.get("/banner", sliderController.get_banner);
 
-router.delete("/banner/:id", verifyToken, isAdmin, sliderController.delete_banner);  // Banner sil
+//banner ekleme
+router.post("/banner", verifyToken, isAdmin, uploadMultiple, sliderController.add_banner);
 
-// Heroes işlemleri
-router.get("/heroes", sliderController.get_heroes);  // Heroes'ları getir
+//banner silme
+router.delete("/banner/:id", verifyToken, isAdmin, sliderController.delete_banner);
 
-router.post("/heroes", verifyToken, isAdmin, uploadMultiple, sliderController.add_heroes);  // Heroes ekle
+//heroes getirme
+router.get("/heroes", sliderController.get_heroes);
 
-router.delete("/heroes/:id", verifyToken, isAdmin, sliderController.delete_heroes);  // Heroes sil
+//heroes ekleme
+router.post("/heroes", verifyToken, isAdmin, uploadMultiple, sliderController.add_heroes);
 
-module.exports = router;
+//heroes silme
+router.delete("/heroes/:id", verifyToken, isAdmin, sliderController.delete_heroes);
+
+module.exports = router;//router ı dışarı aktarıyoruz
