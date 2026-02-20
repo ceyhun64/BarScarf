@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';//react ve useEffect
 import { useDispatch, useSelector } from 'react-redux';
 import { getBannersThunk, getSlidersThunk, getHeroesThunk, deleteBannerThunk, deleteHeroesThunk, deleteSliderThunk } from '../../features/thunks/sliderThunk';
 import AdminSidebar from './adminSideBar';
@@ -7,18 +7,18 @@ import { clearAlert } from '../../features/slices/sliderSlice';
 import image from '../../../public/favicon/f8f539a0-6734-42b3-aabe-c35eb4378771.png';
 
 export default function AdminHome() {
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const { banners, heroes, sliders, alert } = useSelector((state) => state.slider);
+    const dispatch = useDispatch();//useDispatch hook'unu kullanarak Redux store'a erişim sağlıyoruz
+    const navigate = useNavigate();//useNavigate hook'unu kullanarak sayfalar arası gezinmeyi sağlıyoruz
+    const { banners, heroes, sliders, alert } = useSelector((state) => state.slider);//useSelector hook'unu kullanarak Redux store'dan verileri çekiyoruz
     const [isLoading, setIsLoading] = useState(true); // Veri yüklenip yüklenmediğini kontrol etmek için
-    console.log("banners:", banners);
 
+    // useEffect hook'unu kullanarak sayfa yüklendiğinde verileri çekiyoruz
     useEffect(() => {
         const fetchData = async () => {
             try {
-                await dispatch(getBannersThunk()).unwrap();
-                await dispatch(getHeroesThunk()).unwrap();
-                await dispatch(getSlidersThunk()).unwrap();
+                await dispatch(getBannersThunk()).unwrap();//getBannersThunk fonksiyonunu çağırıyoruz ve sonucu unwrap() metodu ile çözüyoruz
+                await dispatch(getHeroesThunk()).unwrap();//getHeroesThunk fonksiyonunu çağırıyoruz ve sonucu unwrap() metodu ile çözüyoruz
+                await dispatch(getSlidersThunk()).unwrap();//getSlidersThunk fonksiyonunu çağırıyoruz ve sonucu unwrap() metodu ile çözüyoruz
                 setIsLoading(false); // Veriler başarıyla yüklendiğinde loading'i false yapıyoruz
             } catch (error) {
                 console.error("Veri yüklenirken hata oluştu:", error);
@@ -26,21 +26,21 @@ export default function AdminHome() {
             }
         };
         fetchData();
-    }, [dispatch]);
+    }, [dispatch]);//useEffect hook'unu kullanarak component ilk render edildiğinde veya bağımlılıklar değiştiğinde çalışacak fonksiyonu tanımlıyoruz
 
-    const handleDeleteBanner = (id) => {
-        dispatch(deleteBannerThunk(id));
-        setTimeout(() => {
-            dispatch(clearAlert());
-            dispatch(getBannersThunk());
-            dispatch(getHeroesThunk());
-            dispatch(getSlidersThunk());
+    const handleDeleteBanner = (id) => {//handleDeleteBanner fonksiyonu, banner silme işlemini yapıyor
+        dispatch(deleteBannerThunk(id));//deleteBannerThunk fonksiyonunu çağırıyoruz ve sonucu unwrap() metodu ile çözüyoruz
+        setTimeout(() => {//1 sn sonra ne yapılacağını belirtiyoruz
+            dispatch(clearAlert());//clearAlert fonksiyonunu çağırıyoruz ve sonucu unwrap() metodu ile çözüyoruz
+            dispatch(getBannersThunk());//getBannersThunk fonksiyonunu çağırıyoruz ve sonucu unwrap() metodu ile çözüyoruz
+            dispatch(getHeroesThunk());//getHeroesThunk fonksiyonunu çağırıyoruz ve sonucu unwrap() metodu ile çözüyoruz
+            dispatch(getSlidersThunk());//getSlidersThunk fonksiyonunu çağırıyoruz ve sonucu unwrap() metodu ile çözüyoruz
         }, 1000);
     };
 
-    const handleDeleteHeroes = (id) => {
-        dispatch(deleteHeroesThunk(id));
-        setTimeout(() => {
+    const handleDeleteHeroes = (id) => {//handleDeleteHeroes fonksiyonu, hero silme işlemini yapıyor
+        dispatch(deleteHeroesThunk(id));//deleteHeroesThunk fonksiyonunu çağırıyoruz ve sonucu unwrap() metodu ile çözüyoruz
+        setTimeout(() => {//1 sn sonra ne yapılacağını belirtiyoruz
             dispatch(clearAlert());
             dispatch(getBannersThunk());
             dispatch(getHeroesThunk());
@@ -58,7 +58,7 @@ export default function AdminHome() {
         }, 1000);
     };
 
-    const handleNavigateToCreatePage = () => {
+    const handleNavigateToCreatePage = () => {//handleNavigateToCreatePage fonksiyonu, create sayfasına yönlendirme işlemini yapıyor
         navigate('/admin/home/create');
     };
 

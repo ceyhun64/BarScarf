@@ -1,14 +1,15 @@
-const Cart = require("../models/cart");
+//cart controller
+const Cart = require("../models/cart");//cart modelini dahil ettik
 const CartProduct = require("../models/cartProduct");
 const Product = require("../models/product");
-const ProductImage = require("../models/productImage");
+const ProductImage = require("../models/productImage");//productImage modelini dahil ettik
 
 // Sepete ürün ekleme
 exports.add_product = async (req, res) => {
     const cartId = req.user.id;//cartId yi linkten çekiyoruz
     const { productId, quantity } = req.body;//productId,sizeId,quantity yi kullnıcıdan alıyoruz
     try {
-        const product = await Product.findOne({
+        const product = await Product.findOne({//productId'ye göre product tablosunu çekiyoruz
             where: {
                 id: productId
             }

@@ -1,22 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';//react ve useEffect dahil ettik
+import { useDispatch, useSelector } from 'react-redux';//useDispatch ve useSelector hook'larını dahil ettik
 import { getCategoriesThunk, deleteCategoryThunk, getAllSubCategoriesThunk, deleteSubCategoryThunk } from '../../features/thunks/categoryThunk';
-import AdminSidebar from './adminSideBar';
-import { Link, useNavigate } from 'react-router-dom';
-import { clearAlert } from '../../features/slices/categorySlice';
-import image from '../../../public/favicon/f8f539a0-6734-42b3-aabe-c35eb4378771.png';
+import AdminSidebar from './adminSideBar';//AdminSidebar bileşenini dahil ettik
+import { Link, useNavigate } from 'react-router-dom';//Link ve useNavigate hook'larını dahil ettik
+import { clearAlert } from '../../features/slices/categorySlice';//clearAlert fonksiyonunu dahil ettik
+import image from '../../../public/favicon/f8f539a0-6734-42b3-aabe-c35eb4378771.png';//image dosyasını dahil ettik
 
 export default function Categories() {
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const { categories, subCategories, alert } = useSelector((state) => state.category);
+    const dispatch = useDispatch();//useDispatch hook'unu kullanarak dispatch fonksiyonunu oluşturduk
+    const navigate = useNavigate();//useNavigate hook'unu kullanarak navigate fonksiyonunu oluşturduk
+    const { categories, subCategories, alert } = useSelector((state) => state.category);//category state'ini kullanarak kategorileri ve alt kategorileri çektik
     const [isLoading, setIsLoading] = useState(true); // Veri yüklenip yüklenmediğini kontrol etmek için
 
+    //bileşen yenilendiğinde ve güncellendiğinde çalışır
     useEffect(() => {
         const fetchData = async () => {
             try {
-                await dispatch(getCategoriesThunk()).unwrap();
-                await dispatch(getAllSubCategoriesThunk()).unwrap();
+                await dispatch(getCategoriesThunk()).unwrap();//getCategoriesThunk fonksiyonunu kullanarak kategorileri çektik
+                await dispatch(getAllSubCategoriesThunk()).unwrap();//getAllSubCategoriesThunk fonksiyonunu kullanarak alt kategorileri çektik
                 setIsLoading(false); // Veriler başarıyla yüklendiğinde loading'i false yapıyoruz
             } catch (error) {
                 console.error("Veri yüklenirken hata oluştu:", error);
@@ -24,46 +25,49 @@ export default function Categories() {
             }
         };
         fetchData();
-    }, [dispatch]);
+    }, [dispatch]);//dispatch ve category state'i değiştiğinde useEffect hook'u çalışacak
 
-    const handleDelete = (id) => {
-        dispatch(deleteCategoryThunk(id));
-        setTimeout(() => {
-            dispatch(clearAlert());
-            dispatch(getCategoriesThunk());
-            dispatch(getAllSubCategoriesThunk());
+    const handleDelete = (id) => {//deleteCategoryThunk fonksiyonunu kullanarak kategoriyi siler
+        dispatch(deleteCategoryThunk(id));//id parametresi ile kategoriyi siler
+        setTimeout(() => {//1 sn sonra yapılacaklar
+            dispatch(clearAlert());//clearAlert fonksiyonunu kullanarak alert'i temizler
+            dispatch(getCategoriesThunk());//getCategoriesThunk fonksiyonunu kullanarak kategorileri çeker
+            dispatch(getAllSubCategoriesThunk());//getAllSubCategoriesThunk fonksiyonunu kullanarak alt kategorileri çeker
         }, 1000);
     };
 
-    const handleDeleteSubCategory = (id) => {
-        dispatch(deleteSubCategoryThunk(id));
-        setTimeout(() => {
-            dispatch(clearAlert());
-            dispatch(getCategoriesThunk());
-            dispatch(getAllSubCategoriesThunk());
+    const handleDeleteSubCategory = (id) => {//deleteSubCategoryThunk fonksiyonunu kullanarak alt kategoriyi siler
+        dispatch(deleteSubCategoryThunk(id));//id parametresi ile alt kategoriyi siler
+        setTimeout(() => {//1 sn sonra yapılacaklar
+            dispatch(clearAlert());//clearAlert fonksiyonunu kullanarak alert'i temizler
+            dispatch(getCategoriesThunk());//getCategoriesThunk fonksiyonunu kullanarak kategorileri çeker
+            dispatch(getAllSubCategoriesThunk());//getAllSubCategoriesThunk fonksiyonunu kullanarak alt kategorileri çeker
         }, 1000);
     };
 
-    const handleNavigateToCreatePage = () => {
+    const handleNavigateToCreatePage = () => {//createPage'a yönlendirir(category/create)
         navigate('/admin/category/create');
     };
 
-    if (isLoading) {
+    if (isLoading) {//Veriler yüklenirken gösterilecek
         return <div className="container mt-5 mb-5 text-center"><h3>Yükleniyor...</h3></div>;
     }
 
     return (
         <div className="container mt-5 mb-5">
+            {/* Üst Kısım */}
             <div className="row">
+                {/* Logo */}
                 <Link className="fs-2 mb-4 d-block text-decoration-none text-dark" to="/admin/products">
                     <img src={image} alt="Logo" width="200" height="60" className="mb-2" />
                 </Link>
-
                 <AdminSidebar />
 
+                {/* sağ kısım */}
                 <div className="col-md-9">
                     <h2 className="text-center mb-4">Kategori Yönetimi</h2>
 
+                    {/* Alert */}
                     {alert?.message && (
                         <div className={`alert alert-${alert?.type}`} role="alert">
                             {alert?.message}

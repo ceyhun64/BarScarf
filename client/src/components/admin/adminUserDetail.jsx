@@ -1,30 +1,35 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from "react-redux";
-import { useParams, Link } from "react-router-dom";
-import { getUserDetailsByIdThunk } from "../../features/thunks/userDetailsThunk";
-import AdminSidebar from './adminSideBar';
+import React, { useEffect } from 'react';//react ve useffect dahil ettik
+import { useDispatch, useSelector } from "react-redux";//useDispatch ve useSelector hook'larını dahil ettik
+import { useParams, Link } from "react-router-dom";//useParams ve Link bileşenlerini dahil ettik
+import { getUserDetailsByIdThunk } from "../../features/thunks/userDetailsThunk";//getUserDetailsByIdThunk fonksiyonunu dahil ettik
+import AdminSidebar from './adminSideBar';//AdminSidebar bileşenini dahil ettik
 import image from '../../../public/favicon/f8f539a0-6734-42b3-aabe-c35eb4378771.png';
 
 
 export default function AdminUserDetail() {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch();//useDispatch hook'unu kullanarak dispatch fonksiyonunu oluşturduk
     const { id } = useParams();
 
     // Kullanıcı detaylarını store'dan çekiyoruz
-    const { userDetails } = useSelector((state) => state.userDetails);
+    const { userDetails } = useSelector((state) => state.userDetails);//userDetails state'ini kullanarak kullanıcı detaylarını çektik
 
+    //useEffect hook'unu kullanarak kullanıcı detaylarını çektik
     useEffect(() => {
-        dispatch(getUserDetailsByIdThunk(id));
-    }, [dispatch, id]);
+        dispatch(getUserDetailsByIdThunk(id));//getUserDetailsByIdThunk fonksiyonunu kullanarak kullanıcı detaylarını çektik
+    }, [dispatch, id]);//dispatch ve id'ydeğiştiğinde useEffect hook'u çalışacak
 
     return (
+        
         <div className="container mt-5 mb-5">
+            {/* Row */}
             <div className="row">
+                {/* logo */}
                 <Link className="fs-2 d-block text-decoration-none text-dark" to="/admin/products">
                     <img src={image} alt="Logo" width="200" height="60" className="mb-2" />
                 </Link>
                 <AdminSidebar />
                 <div className="col-md-9">
+                    {/* Kullanıcı Detayları */}
                     <h2 className="text-center mb-4 text-dark font-weight-bold">Kullanıcı Detayları</h2>
                     <div className="card shadow-lg p-4">
                         {/* Close Button */}

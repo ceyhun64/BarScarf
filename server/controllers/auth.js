@@ -1,10 +1,11 @@
-require("dotenv").config();
+//auth controller
+require("dotenv").config();//.env dosyasını kullanabilmek için dotenv kütüphanesini dahil ettik
 const User = require("../models/user");
 const Cart = require("../models/cart");
 const bcrypt = require("bcrypt");
-const redis = require("redis");
-const jwt = require("jsonwebtoken");
-const sendMail = require("../helpers/sendMail");
+const redis = require("redis");//redis kütüphanesini dahil ettik(kara liste)
+const jwt = require("jsonwebtoken");//jsonwebtoken kütüphanesini dahil ettik
+const sendMail = require("../helpers/sendMail");//mail gönderebilmek için
 
 // Kullanıcı kayıt
 exports.register = async (req, res) => {
@@ -50,19 +51,19 @@ exports.login = async (req, res) => {
     if (!isMatch) {//email varsa şifre doğru mu?
         return res.status(400).json({ message: "Hatalı şifre." });
     }
-    let cart = await Cart.findOne({ where: { id: user.id } });
-    if (!cart) {
+    let cart = await Cart.findOne({ where: { id: user.id } });// yeni sepet oluşturuyor yeni kullanıcı için
+    if (!cart) {//cart yoksa yeni sepet oluştur
         cart = await Cart.create({ id: user.id });
     }
-    const token = user.createAuthToken();
+    const token = user.createAuthToken();//token oluşturuyoruz
 
-    const mailOptions = {
+    const mailOptions = {//mail gönderme ayarları
         to: email,
         subject: "Giriş Başarılı",
         text: "Giriş başarılı. Hoşgeldiniz!"
     };
-    await sendMail(mailOptions);
-    res.status(200).header("x-auth-token", token).json({ message: "Giriş işlemi başarılı , anasayfaya yönlendiriliyorsunuz", token: token, username: user.name });
+    await sendMail(mailOptions);//mail gönderiyoruz
+    res.status(200).header("x-auth-token", token).json({ message: "Giriş işlemi başarılı , anasayfaya yönlendiriliyorsunuz", token: token, username: user.name });//frontende token gönderiyoruz
 }
 
 // Kullanıcı çıkışı
@@ -72,7 +73,7 @@ exports.logout = async (req, res) => {
     const token = req.header("x-auth-token"); // "x-auth-token" header'ını alıyoruz
 
     if (!token) {
-        return res.status(400).json({ message: "Token bulunamadı!" });
+        return res.status(400).json({ message: "Token bulunamadı!" });//token yoksa hata döndürüyoruz(çıkış yapamıyor)
     }
 
     try {
@@ -100,7 +101,7 @@ exports.passwordEmail = async (req, res) => {
     const token = jwt.sign({ id: user.id, email: user.email }, process.env.JWT_PRIVATE_KEY, { expiresIn: '1h' });
 
     // Şifre sıfırlama linki
-    const resetLink = `http://localhost:5173/update-password/${token}`;
+    const resetLink = `https://www.barscarf.com/update-password/${token}`;
 
     // Mail gönderme
     const mailOptions = {
@@ -121,7 +122,7 @@ exports.passwordEmail = async (req, res) => {
 // Şifre güncelleme (şifre değiştir butonuna tıklandığında mail gönderir , maildeki link buraya yönlendirir)
 exports.updatePassword = async (req, res) => {
     const { token } = req.params; // URL'den gelen token
-    const { password, newPassword, againNewPassword } = req.body;
+    const { password, newPassword, againNewPassword } = req.body;//kullanıcıdan verilerl alınıyor
 
     if (!password || !newPassword || !againNewPassword) {
         return res.status(400).json({ message: "Lütfen tüm alanları doldurun." });
@@ -129,13 +130,13 @@ exports.updatePassword = async (req, res) => {
 
     // Token'ı doğrula
     try {
-        const decoded = jwt.verify(token, process.env.JWT_PRIVATE_KEY);
+        const decoded = jwt.verify(token, process.env.JWT_PRIVATE_KEY);//token doğrulanıyor
 
         // Token'dan kullanıcıyı bul
         const user = await User.findOne({ where: { id: decoded.id } });
 
         if (!user) {
-            return res.status(404).json({ message: "Kullanıcı bulunamadı." });
+            return res.status(404).json({ message: "Kullanıcı bulunamadı." });//kullanıcı yoksa hata döndür
         }
 
         // Eski şifreyi kontrol et

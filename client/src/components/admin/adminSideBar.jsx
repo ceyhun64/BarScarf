@@ -1,26 +1,27 @@
-import React, { useState } from "react";
+import React, { useState } from "react";//react ve useState eklendi
 import { Link, useNavigate } from "react-router-dom";
 
 export default function AdminSidebar() {
-    const navigate = useNavigate();
-    const username = localStorage.getItem("username");
-    const [menuOpen, setMenuOpen] = useState(false);
+    const navigate = useNavigate();//useNavigate hook'unu kullanarak navigate fonksiyonunu oluşturduk
+    const username = localStorage.getItem("username");//username'i localStorage'dan aldık
+    const [menuOpen, setMenuOpen] = useState(false);//menuOpen'u useState ile oluşturduk ve başlangıçta false olarak ayarladık
 
-    const handleLogout = () => {
-        localStorage.removeItem("token");
-        localStorage.removeItem("username");
-        localStorage.removeItem("favorites");
-        navigate("/admin");
+    const handleLogout = () => {//logout fonksiyonu oluşturduk
+        localStorage.removeItem("token");//token'ı localStorage'dan kaldırdık
+        localStorage.removeItem("username");//username'ı localStorage'dan kaldırdık
+        localStorage.removeItem("favorites");//favorites'ı localStorage'dan kaldırdık
+        navigate("/admin");//admin sayfasına yönlendirdik
     };
 
-    const toggleMenu = () => {
-        setMenuOpen(!menuOpen);
+    const toggleMenu = () => {//menuOpen'u toggle etmek için fonksiyon oluşturduk
+        setMenuOpen(!menuOpen);//menuOpen'u tersine çeviriyoruz
     };
 
     return (
         <>
             {/* Mobile Menu Button */}
             <div className="d-md-none mb-3">
+                {/* menuOpen'u toggle etmek için fonksiyonu çağırdık */}
                 <button
                     className="btn btn-dark w-100"
                     onClick={toggleMenu}
@@ -56,6 +57,7 @@ export default function AdminSidebar() {
                                 <i className="bi bi-house me-3 fs-5"></i>Anasayfa
                             </Link>
                         </div>
+                        {/* Logout button */}
                         <div className="card-footer bg-white text-center">
                             <button
                                 onClick={handleLogout}

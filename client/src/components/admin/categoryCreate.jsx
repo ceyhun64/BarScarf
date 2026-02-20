@@ -1,59 +1,63 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState, useEffect } from 'react';//react ve useState ve useEffect hook'larını dahil ettik
+import { useDispatch, useSelector } from 'react-redux';//useDispatch ve useSelector hook'larını dahil ettik
 import { createCategoryThunk, createSubCategoryThunk, getCategoriesThunk, getAllSubCategoriesThunk } from '../../features/thunks/categoryThunk';
-import { Link } from 'react-router-dom';
-import AdminSidebar from './adminSideBar';
-import { clearAlert } from '../../features/slices/categorySlice';
+import { Link } from 'react-router-dom';//Link bileşenini dahil ettik
+import AdminSidebar from './adminSideBar';//AdminSidebar bileşenini dahil ettik
+import { clearAlert } from '../../features/slices/categorySlice';//clearAlert fonksiyonunu dahil ettik
 import image from '../../../public/favicon/f8f539a0-6734-42b3-aabe-c35eb4378771.png';
 
 
 export default function CategoryAndSubCategoryAddPage() {
-    const dispatch = useDispatch();
-    const { categories, subCategories, alert } = useSelector((state) => state.category);
-    const [categoryName, setCategoryName] = useState('');
-    const [subCategoryName, setSubCategoryName] = useState('');
-    const [selectedCategoryId, setSelectedCategoryId] = useState('');
+    const dispatch = useDispatch();//useDispatch hook'unu kullanarak dispatch fonksiyonunu oluşturduk
+    const { categories, subCategories, alert } = useSelector((state) => state.category);//category state'ini kullanarak kategorileri ve alt kategorileri çektik
+    const [categoryName, setCategoryName] = useState('');//categoryName state'ini oluşturduk
+    const [subCategoryName, setSubCategoryName] = useState('');//subCategoryName state'ini oluşturduk
+    const [selectedCategoryId, setSelectedCategoryId] = useState('');//selectedCategoryId state'ini oluşturduk
 
+    //bileşen yenilendiğinde ve güncellendiğinde çalışır    
     useEffect(() => {
-        const fetchData = async () => {
-            await dispatch(getCategoriesThunk()).unwrap();
-            await dispatch(getAllSubCategoriesThunk()).unwrap();
+        const fetchData = async () => {//getCategoriesThunk fonksiyonunu kullanarak kategorileri çektik
+            await dispatch(getCategoriesThunk()).unwrap();//getCategoriesThunk fonksiyonunu kullanarak kategorileri çektik
+            await dispatch(getAllSubCategoriesThunk()).unwrap();//getAllSubCategoriesThunk fonksiyonunu kullanarak alt kategorileri çektik
         };
         fetchData();
-    }, [dispatch]);
+    }, [dispatch]);//dispatch ve category state'i değiştiğinde useEffect hook'u çalışacak
 
     // Yeni Kategori Ekle
     const handleAddCategory = async () => {
+        //aynı kategori adı varsa ekleme yapma  
+        //categoryName'i boşlukları kaldırıp küçük harfe çeviriyoruz
+
         const isDuplicate = categories.some(cat => cat.name.toLowerCase() === categoryName.toLowerCase());
         if (isDuplicate || !categoryName.trim()) return;
 
-        const categoryData = { name: categoryName };
-        await dispatch(createCategoryThunk(categoryData)).unwrap();
-        setTimeout(() => {
-            dispatch(clearAlert());
-            dispatch(getCategoriesThunk());
-            dispatch(getAllSubCategoriesThunk());
-            setCategoryName('');
+        const categoryData = { name: categoryName };//name değerine categoryName'i atıyoruz
+        await dispatch(createCategoryThunk(categoryData)).unwrap();//createCategoryThunk fonksiyonunu kullanarak kategori ekliyoruz
+        setTimeout(() => {//1 saniye sonra ne olacağını yazıyoruz
+            dispatch(clearAlert());//clearAlert fonksiyonunu kullanarak alert'i temizliyoruz
+            dispatch(getCategoriesThunk());//getCategoriesThunk fonksiyonunu kullanarak kategorileri çekiyoruz
+            dispatch(getAllSubCategoriesThunk());//getAllSubCategoriesThunk fonksiyonunu kullanarak alt kategorileri çekiyoruz
+            setCategoryName('');//categoryName'i temizliyoruz
         }, 1000);
     };
 
     // Yeni Alt Kategori Ekle
     const handleAddSubCategory = async (e) => {
-        e.preventDefault();
+        e.preventDefault();//formun submit edilmesini engelliyoruz
 
-        const subCategoryData = {
-            name: subCategoryName.trim(),
-            categoryId: Number(selectedCategoryId),
+        const subCategoryData = {//subCategoryName'i trim() ile boşlukları kaldırıyoruz
+            name: subCategoryName.trim(),//subCategoryName'i trim() ile boşlukları kaldırıyoruz
+            categoryId: Number(selectedCategoryId),//selectedCategoryId'i Number() ile sayıya çeviriyoruz
         };
 
         try {
-            await dispatch(createSubCategoryThunk(subCategoryData)).unwrap();
-            setTimeout(() => {
-                dispatch(clearAlert());
-                dispatch(getCategoriesThunk());
-                dispatch(getAllSubCategoriesThunk());
-                setSubCategoryName('');
-                setSelectedCategoryId('');
+            await dispatch(createSubCategoryThunk(subCategoryData)).unwrap();//createSubCategoryThunk fonksiyonunu kullanarak alt kategori ekliyoruz
+            setTimeout(() => {//1 saniye sonra ne olacağını yazıyoruz
+                dispatch(clearAlert());//clearAlert fonksiyonunu kullanarak alert'i temizliyoruz
+                dispatch(getCategoriesThunk());//getCategoriesThunk fonksiyonunu kullanarak kategorileri çekiyoruz
+                dispatch(getAllSubCategoriesThunk());//getAllSubCategoriesThunk fonksiyonunu kullanarak alt kategorileri çekiyoruz
+                setSubCategoryName('');//subCategoryName'i temizliyoruz
+                setSelectedCategoryId('');//selectedCategoryId'i temizliyoruz
             }, 1000);
         } catch (error) {
             console.error("Alt kategori eklenirken hata:", error);
@@ -62,7 +66,9 @@ export default function CategoryAndSubCategoryAddPage() {
 
     return (
         <div className="container mt-5 mb-5">
+            {/* Row */}
             <div className="row">
+                {/* Logo */}
                 <Link className="fs-2 mb-4 d-block text-decoration-none text-dark" to="/admin/products">
                     <img src={image} alt="Logo" width="200" height="60" className="mb-2" />
                 </Link>
@@ -70,7 +76,8 @@ export default function CategoryAndSubCategoryAddPage() {
                 <AdminSidebar />
                 <div className="col-md-9">
                     <h2 className="text-center mb-4">Kategori ve Alt Kategori Ekle</h2>
-
+                    
+                    {/* Alert */}
                     {alert?.message && (
                         <div className={`alert alert-${alert?.type}`} role="alert">
                             {alert?.message}
